@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -7,13 +7,15 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-  @Input() error: string | null | undefined;
+  // @Input() error: string | null | undefined;
 
   @Output() loginEv = new EventEmitter();
 
+  public error = '';
+
   form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
   });
 
   constructor() { }
@@ -24,6 +26,8 @@ export class LoginFormComponent implements OnInit {
   login() {
     if (this.form.valid) {
       this.loginEv.emit(this.form.value);
+    } else {
+      this.error = "Incorrect Login Details";
     }
   }
 

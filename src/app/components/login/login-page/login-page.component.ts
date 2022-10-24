@@ -21,8 +21,6 @@ export class LoginPageComponent implements OnInit {
       this.router.navigateByUrl('tutor/0');
     } else if($event.username.includes('student')) {
       this.router.navigateByUrl('student/0');
-    } else {
-      
     }
   }
 
