@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'University of Manchester - Student Management & Engagement Systsem';
+  constructor(
+    private router: Router,
+  ) {
+  }
+
+  initializeApp() {
+    this.router.navigateByUrl('login');
+  }
+  
 }

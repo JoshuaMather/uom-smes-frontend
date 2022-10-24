@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
-import { StudentPageComponent } from './student/student-page/student-page.component';
+import { LoginPageComponent } from './components/login/login-page/login-page.component';
+import { StudentPageComponent } from './components/student/student-page/student-page.component';
+import { TutorPageComponent } from './components/tutor/tutor-page/tutor-page.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HeaderComponent,
-    children: [
-      { path: '', redirectTo: 'student/:id', pathMatch: 'full' },
-      { path: 'student/:id', component: StudentPageComponent },
-     ]
-     }
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'student/:id', component: StudentPageComponent },
+  { path: 'tutor/:id', component: TutorPageComponent },
+  { path: 'login', component: LoginPageComponent },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 // const routes: Routes = [
