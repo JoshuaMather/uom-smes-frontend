@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/services/api/api.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-login-form',
@@ -18,14 +20,23 @@ export class LoginFormComponent implements OnInit {
     password: new FormControl('', Validators.required),
   });
 
-  constructor() { }
+  constructor(
+    private api: ApiService,
+    private data: DataService,
+  ) { }
 
   ngOnInit(): void {
   }
 
   login() {
+    this.error='';
     if (this.form.valid) {
-      this.loginEv.emit(this.form.value);
+      this.api.post('login', this.form.value).subscribe(res => {
+        this.data.setUser(res.user);
+        this.data.setToken(res.token);
+        console.log('RES', res);
+        this.loginEv.emit(this.form.value);
+      });
     } else {
       this.error = "Incorrect Login Details";
     }

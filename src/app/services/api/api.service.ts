@@ -32,7 +32,8 @@ export class ApiService {
     return this.http.post<any>(`${this.url}/${request}`, data, this.httpOptions)
       .pipe(
         timeout(10000),
-        catchError(this.errorHandle)
+        catchError(this.errorHandle),
+        map(this.getData)
       );
   }
 
