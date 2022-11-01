@@ -27,10 +27,13 @@ export class ApiService {
       map(this.getData)
     );
   }
-  
 
-  public post() {
-
+  public post(request: string, data = {}): Observable<any> {
+    return this.http.post<any>(`${this.url}/${request}`, data, this.httpOptions)
+      .pipe(
+        timeout(10000),
+        catchError(this.errorHandle)
+      );
   }
 
   public errorHandle = (error: HttpErrorResponse) => {
