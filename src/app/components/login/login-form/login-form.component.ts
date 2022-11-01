@@ -36,6 +36,9 @@ export class LoginFormComponent implements OnInit {
         this.data.setToken(res.token);
         console.log('RES', res);
         this.loginEv.emit(this.form.value);
+      }, error => {
+        console.log(error);
+        this.error = "Incorrect Login Details";
       });
     } else {
       this.error = "Incorrect Login Details";
