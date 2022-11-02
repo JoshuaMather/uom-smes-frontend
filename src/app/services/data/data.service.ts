@@ -5,18 +5,16 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class DataService {
-  private user: any;
   
   constructor(
     private router: Router,
   ) { }
 
   public getUser() {
-    return this.user;
+    return JSON.parse(localStorage.getItem('user') || '');
   }
   public setUser(value: any) {
-    console.log(value);
-    this.user = value;
+    localStorage.setItem('user', JSON.stringify(value));
   }
 
   public logout() {
@@ -25,6 +23,6 @@ export class DataService {
   }
 
   public clearData() {
-    this.user = null;
+    localStorage.clear();
   }
 }

@@ -25,6 +25,7 @@ export class ApiService {
   }
 
   public setApiToken(token: string): void {
+    localStorage.setItem('api_token', token);
     if (token) {
       this.httpOptions.headers = new HttpHeaders({
         Authorization: 'Bearer ' + token
