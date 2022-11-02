@@ -33,7 +33,7 @@ export class LoginFormComponent implements OnInit {
     if (this.form.valid) {
       this.api.post('login', this.form.value).subscribe(res => {
         this.data.setUser(res.user);
-        this.data.setToken(res.token);
+        this.api.setApiToken(res.token);
         console.log('RES', res);
         this.loginEv.emit(this.form.value);
       }, error => {

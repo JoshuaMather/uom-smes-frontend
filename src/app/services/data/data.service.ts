@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
   private user: any;
-  private token: any;
   
   constructor() { }
 
@@ -15,13 +14,5 @@ export class DataService {
   public setUser(value: any) {
     console.log(value);
     this.user = value;
-  }
-
-  public getToken() {
-    return this.token;
-  }
-  public setToken(value: any) {
-    console.log(value);
-    this.token = value;
   }
 }

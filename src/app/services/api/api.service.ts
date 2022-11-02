@@ -23,8 +23,18 @@ export class ApiService {
     return body || {};
   }
 
+  public setApiToken(token: string): void {
+    if (token) {
+      this.httpOptions.headers = new HttpHeaders({
+        Authorization: 'Bearer ' + token
+      });
+    } else {
+      this.httpOptions.headers = new HttpHeaders();
+    }
+  }
+
   public get(request: string): Observable<any> {
-    return this.http.get<any>(`${this.url}/${request}?api_token=${this.data.getToken()}`, this.httpOptions)
+    return this.http.get<any>(`${this.url}/${request}`, this.httpOptions)
       .pipe(
         timeout(10000),
         catchError(this.errorHandle),
@@ -33,7 +43,7 @@ export class ApiService {
   }
 
   public post(request: string, data = {}): Observable<any> {
-    return this.http.post<any>(`${this.url}/${request}?api_token=${this.data.getToken()}`, data, this.httpOptions)
+    return this.http.post<any>(`${this.url}/${request}`, data, this.httpOptions)
       .pipe(
         timeout(10000),
         catchError(this.errorHandle),
