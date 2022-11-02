@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { catchError, map, Observable, throwError, timeout } from 'rxjs';
 import { DataService } from '../data/data.service';
 
@@ -53,6 +54,9 @@ export class ApiService {
 
   public errorHandle = (error: HttpErrorResponse) => {
     console.error('ERROR:', error);
+    if(error.status === 401) {
+      this.data.logout();
+    }
     // return an observable with a user-facing error message
     return throwError(error);
   }

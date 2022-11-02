@@ -20,9 +20,9 @@ export class LoginPageComponent implements OnInit {
   public login($event: any) {
     console.log(this.data.getUser());
     if(this.data.getUser().tutor) {
-      this.router.navigateByUrl('tutor/0');
+      this.router.navigateByUrl('tutor');
     } else if(this.data.getUser().student) {
-      this.router.navigateByUrl('student/0');
+      this.router.navigateByUrl('student');
     }
   }
 

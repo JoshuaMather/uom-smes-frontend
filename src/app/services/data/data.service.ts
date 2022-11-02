@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,9 @@ import { Injectable } from '@angular/core';
 export class DataService {
   private user: any;
   
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   public getUser() {
     return this.user;
@@ -14,5 +17,14 @@ export class DataService {
   public setUser(value: any) {
     console.log(value);
     this.user = value;
+  }
+
+  public logout() {
+    this.clearData();
+    this.router.navigateByUrl('login');
+  }
+
+  public clearData() {
+    this.user = null;
   }
 }

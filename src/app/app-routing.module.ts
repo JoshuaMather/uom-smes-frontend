@@ -6,18 +6,11 @@ import { TutorPageComponent } from './components/tutor/tutor-page/tutor-page.com
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'student/:id', component: StudentPageComponent },
-  { path: 'tutor/:id', component: TutorPageComponent },
+  { path: 'student', component: StudentPageComponent },
+  { path: 'tutor', component: TutorPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
-
-// const routes: Routes = [
-//   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-//   { path: 'dashboard', component: DashboardComponent },
-//   { path: 'detail/:id', component: HeroDetailComponent },
-//   { path: 'heroes', component: HeroesComponent }
-// ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
