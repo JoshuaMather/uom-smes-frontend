@@ -1,0 +1,28 @@
+:host {
+    margin: 2% 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.mat-column-name {
+    font-weight: bold;
+  }
+
+td, th {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding-left: 24px!important;
+}
+
+.mat-sort-header-container {
+    justify-content: center !important;
+}
+
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
+
+.red-text {
+    color: red;
+    font-weight: bold;
+}

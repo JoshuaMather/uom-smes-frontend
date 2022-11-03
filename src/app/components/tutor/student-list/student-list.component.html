@@ -1,0 +1,49 @@
+<div *ngIf="loading">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!loading">
+    <div>
+        <table mat-table [dataSource]="studentList">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let student"> {{student.user.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let student"> {{student.user.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="year">
+                <th mat-header-cell *matHeaderCellDef> Year </th>
+                <td mat-cell *matCellDef="let student"> {{student.year}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="personalTutor">
+                <th mat-header-cell *matHeaderCellDef> Personal Tutor </th>
+                <td mat-cell *matCellDef="let student"> {{student.personal_tutor.user.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="attendance">
+                <th mat-header-cell *matHeaderCellDef> Attendance </th>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.attendance < 0.5 ? 'red-text' : ''"> {{student.attendance}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="averageGrade">
+                <th mat-header-cell *matHeaderCellDef> Grade </th>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.average_grade < 0.5 ? 'red-text' : ''"> {{student.average_grade}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="concerns">
+                <th mat-header-cell *matHeaderCellDef> Concerns </th>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.concerns_count > 0 ? 'red-text' : ''"> {{student.concerns_count}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+            <tr mat-row (click)="studentClicked(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+
+    <!-- <mat-paginator [length]="resultsLength" [pageSize]="30" aria-label="Select page of GitHub search results"></mat-paginator> -->
+</div>
