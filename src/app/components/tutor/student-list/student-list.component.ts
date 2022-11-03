@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
@@ -9,11 +10,14 @@ import { ApiService } from 'src/app/services/api/api.service';
   styleUrls: ['./student-list.component.scss']
 })
 export class StudentListComponent implements OnInit {
-  @Input() tutor: any; 
-  displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'averageGrade', 'concerns'];
-
-  public studentList: any;
+  public studentList: any = [];
   public loading: Boolean = true;
+  
+  @Input() tutor: any; 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  
+  dataSource!: MatTableDataSource<any>;
+  displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'averageGrade', 'concerns'];
 
   constructor(
     private api: ApiService,
@@ -27,7 +31,9 @@ export class StudentListComponent implements OnInit {
   loadStudents() {
     this.api.get(`students/${this.tutor.id}`).subscribe(res => {
       console.log(res);
-      this.studentList = res.students;
+      this.dataSource = new MatTableDataSource(res.students);
+      this.dataSource.paginator = this.paginator;
+
       this.loading = false;
     });
   }

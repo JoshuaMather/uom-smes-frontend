@@ -15,6 +15,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { HeaderComponent } from './components/header/header.component';
 import { StudentPageComponent } from './components/student/student-page/student-page.component';
@@ -49,6 +50,7 @@ import { StudentListComponent } from './components/tutor/student-list/student-li
     ReactiveFormsModule, 
     MatProgressSpinnerModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [
