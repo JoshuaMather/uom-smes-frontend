@@ -16,6 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 import { HeaderComponent } from './components/header/header.component';
 import { StudentPageComponent } from './components/student/student-page/student-page.component';
@@ -51,6 +52,7 @@ import { StudentListComponent } from './components/tutor/student-list/student-li
     MatProgressSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [
