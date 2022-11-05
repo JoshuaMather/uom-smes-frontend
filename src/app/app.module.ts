@@ -23,7 +23,7 @@ import { StudentPageComponent } from './components/student/student-page/student-
 import { TutorPageComponent } from './components/tutor/tutor-page/tutor-page.component';
 import { LoginPageComponent } from './components/login/login-page/login-page.component';
 import { LoginFormComponent } from './components/login/login-form/login-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { StudentListComponent } from './components/tutor/student-list/student-list.component';
 
 @NgModule({
@@ -49,10 +49,11 @@ import { StudentListComponent } from './components/tutor/student-list/student-li
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule, 
+    FormsModule,
     MatProgressSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
   ],
   providers: [],
   bootstrap: [

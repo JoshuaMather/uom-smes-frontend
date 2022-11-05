@@ -4,6 +4,11 @@
 
 <div [hidden]="loading">
     <div>
+        <mat-form-field appearance="standard">
+            <mat-label>Search</mat-label>
+            <input matInput [(ngModel)]="searchValue" (keyup)="search($event)" placeholder="Search" #input>
+        </mat-form-field>
+
         <table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
