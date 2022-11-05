@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
@@ -32,6 +33,7 @@ export class StudentListComponent implements OnInit {
 
   constructor(
     private api: ApiService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -71,6 +73,7 @@ export class StudentListComponent implements OnInit {
 
   studentClicked(row: any) {
     console.log(row);
+    this.router.navigate(['/student', { studentId: row.id }]);
   }
   
 
