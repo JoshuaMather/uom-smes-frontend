@@ -58,17 +58,22 @@ export class StudentListComponent implements OnInit {
         }
       this.dataSource.sort = this.sort;
       this.dataSource.filterPredicate = (data: any, filter: string) => {
-        return data.user.name.toLowerCase().indexOf(filter) != -1 || 
-              data.user.email.toLowerCase().indexOf(filter) != -1 ||
-              data.personal_tutor.user.name.toLowerCase().indexOf(filter) != -1;
+        let searchFilter = (data.user.name.toLowerCase().indexOf(this.searchValue) != -1 ||
+                            data.user.email.toLowerCase().indexOf(filter) != -1 ||
+                            data.personal_tutor.user.name.toLowerCase().indexOf(filter) != -1);
+
+        let yearFilter = data.year == this.selectedYear;
+        if(this.selectedYear!==''){
+          return searchFilter && yearFilter;
+        }
+        return searchFilter ;
       }
       this.loading = false;
     });
   }
 
-  search(event: Event) {
-    const searchValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = searchValue.trim().toLowerCase();
+  filter() {
+    this.dataSource.filter = 'filter'; // trigger filter
   }
 
   studentClicked(row: any) {
