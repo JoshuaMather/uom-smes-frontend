@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from 'src/app/services/api/api.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-student-page',
@@ -8,15 +10,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StudentPageComponent implements OnInit {
   private studentId: number = 0;
+  public student: any;
 
   constructor(
-    private route: ActivatedRoute,
+    private data: DataService,
+    private api: ApiService,
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.studentId = params['studentId'];
-   });
+    this.studentId = this.data.getStudentId();
+    this.loadStudent();
+  }
+
+  loadStudent() {
+    this.api.get(`student/${this.studentId}`).subscribe(res => {
+      console.log(res.student);
+      this.student = res;
+      this.data.setStudentData(res.student);
+    });
   }
 
 }

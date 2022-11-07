@@ -4,6 +4,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-student-list',
@@ -34,6 +35,7 @@ export class StudentListComponent implements OnInit {
   constructor(
     private api: ApiService,
     private router: Router,
+    private data: DataService,
   ) { }
 
   ngOnInit(): void {
@@ -78,7 +80,8 @@ export class StudentListComponent implements OnInit {
 
   studentClicked(row: any) {
     console.log(row);
-    this.router.navigate(['/student', { studentId: row.id }]);
+    this.data.setStudentId(row.id);
+    this.router.navigate(['/student']);
   }
   
 
