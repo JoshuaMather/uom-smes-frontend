@@ -1,5 +1,17 @@
 <mat-toolbar class="title-toolbar">
   <mat-toolbar-row class="title-padding">
     <span class="title-center">Student Management & Engagement System</span>
+
+    <div *ngIf="showMenu">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span class="blackText">Logout</span>
+        </button>
+      </mat-menu>
+  </div>
   </mat-toolbar-row>
 </mat-toolbar>
