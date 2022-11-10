@@ -1,5 +1,11 @@
 <mat-toolbar class="title-toolbar">
   <mat-toolbar-row class="title-padding">
+    <div *ngIf="showBack">
+      <button mat-icon-button (click)="back()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+    </div>
+
     <span class="title-center">Student Management & Engagement System</span>
 
     <div *ngIf="showMenu">

@@ -11,6 +11,7 @@ import { DataService } from 'src/app/services/data/data.service';
 export class HeaderComponent implements OnInit {
   subscriptionRoute!: Subscription;
   public showMenu = false;
+  public showBack = false;
 
   constructor(
     private router: Router,
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.subscriptionRoute = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         console.log(event.url);
@@ -26,8 +28,17 @@ export class HeaderComponent implements OnInit {
         } else {
           this.showMenu = true;
         }
+        if(event.url === '/student' && this.data.getUser().tutor) {
+          this.showBack = true;
+        } else {
+          this.showBack = false;
+        }
       }
     });
+  }
+
+  back() {
+    this.router.navigateByUrl('/tutor');
   }
 
   logout() {
