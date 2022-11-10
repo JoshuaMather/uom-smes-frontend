@@ -11,6 +11,7 @@ import { DataService } from 'src/app/services/data/data.service';
 export class StudentPageComponent implements OnInit {
   private studentId: number = 0;
   public student: any;
+  public loading: Boolean = true;
 
   constructor(
     private data: DataService,
@@ -24,9 +25,10 @@ export class StudentPageComponent implements OnInit {
 
   loadStudent() {
     this.api.get(`student/${this.studentId}`).subscribe(res => {
-      console.log(res.student);
+      console.log('student data', res.student);
       this.student = res;
       this.data.setStudentData(res.student);
+      this.loading = false;
     });
   }
 

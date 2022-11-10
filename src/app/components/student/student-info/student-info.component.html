@@ -1,0 +1,28 @@
+<mat-card class="info-card">
+    <mat-card-content>
+        <mat-grid-list cols="4">
+            <mat-grid-tile>
+                <div>
+                    <p class="center"><strong>{{studentInfo.user.name}}</strong></p>
+                    <img src="../../assets/pngfind.com-placeholder-png-6104451.png" class="image"/>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <p>
+                    {{studentInfo.user.username}}<br>
+                    {{studentInfo.user.email}}<br>
+                    Year {{studentInfo.year}} <br>
+                    {{studentInfo.degree}}
+                </p> 
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                <p>
+                    <strong>Last Accessed</strong> <br>
+                    SPOT: {{lastSpot.datetime}}<br>
+                    Blackboard: {{lastBlackboard.datetime}}<br>
+                    Git Push: {{lastGit.datetime}}
+                </p> 
+            </mat-grid-tile>
+          </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
