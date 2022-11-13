@@ -1,7 +1,7 @@
 <mat-card class="info-card">
     <mat-card-content>
-        <mat-grid-list cols="4">
-            <mat-grid-tile>
+        <mat-grid-list cols="5">
+            <mat-grid-tile [colspan]="1">
                 <div>
                     <p class="center"><strong>{{studentInfo.user.name}}</strong></p>
                     <img src="../../assets/pngfind.com-placeholder-png-6104451.png" class="image"/>
@@ -15,7 +15,7 @@
                     {{studentInfo.degree}}
                 </p> 
             </mat-grid-tile>
-            <mat-grid-tile [colspan]="1">
+            <mat-grid-tile [colspan]="2">
                 <p>
                     <span class="center"><strong>Personal Tutor</strong></span>
                     <span class="center">{{studentInfo.personal_tutor.user.name}}</span>
