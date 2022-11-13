@@ -28,6 +28,7 @@ import { LoginFormComponent } from './components/login/login-form/login-form.com
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { StudentListComponent } from './components/tutor/student-list/student-list.component';
 import { StudentInfoComponent } from './components/student/student-info/student-info.component';
+import { EngagementInfoComponent } from './components/student/engagement-info/engagement-info.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { StudentInfoComponent } from './components/student/student-info/student-
     LoginFormComponent,
     StudentListComponent,
     StudentInfoComponent,
+    EngagementInfoComponent,
   ],
   imports: [
     BrowserModule,

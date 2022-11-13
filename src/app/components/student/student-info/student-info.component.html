@@ -7,7 +7,7 @@
                     <img src="../../assets/pngfind.com-placeholder-png-6104451.png" class="image"/>
                 </div>
             </mat-grid-tile>
-            <mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
                 <p>
                     {{studentInfo.user.username}}<br>
                     {{studentInfo.user.email}}<br>
@@ -15,12 +15,11 @@
                     {{studentInfo.degree}}
                 </p> 
             </mat-grid-tile>
-            <mat-grid-tile [colspan]="2">
+            <mat-grid-tile [colspan]="1">
                 <p>
-                    <strong>Last Accessed</strong> <br>
-                    SPOT: {{lastSpot.datetime}}<br>
-                    Blackboard: {{lastBlackboard.datetime}}<br>
-                    Git Push: {{lastGit.datetime}}
+                    <span class="center"><strong>Personal Tutor</strong></span>
+                    <span class="center">{{studentInfo.personal_tutor.user.name}}</span>
+                    <span class="center">{{studentInfo.personal_tutor.user.email}}</span>
                 </p> 
             </mat-grid-tile>
           </mat-grid-list>

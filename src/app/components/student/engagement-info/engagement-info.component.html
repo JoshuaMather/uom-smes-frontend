@@ -1,0 +1,28 @@
+<mat-card class="info-card">
+    <mat-card-content>
+        <mat-grid-list cols="4">
+            <mat-grid-tile [colspan]="1">
+                <p>
+                    <strong>Last Accessed</strong> <br>
+                    SPOT: {{lastSpot}}<br>
+                    Blackboard: {{lastBlackboard}}<br>
+                    Git Push: {{lastGit}}
+                </p> 
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1">
+                <p>
+                    <strong>Engagement Data</strong> <br>
+                    Attendance: <span [ngClass]="studentInfo.attendance < 0.5 ? 'red-text' : ''">{{studentInfo.attendance * 100}}%</span><br>
+                    Average Grade: <span [ngClass]="studentInfo.average_grade < 0.5 ? 'red-text' : ''">{{studentInfo.average_grade * 100}}%</span><br>
+                    Concerns: <span [ngClass]="studentInfo.concerns.length > 1 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span>
+                </p> 
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                <h3>
+                    <strong>Engagement Score</strong> <br>
+                    <span class="center" [ngClass]="0 > 1 ? 'red-text' : ''">0.72</span>
+                </h3> 
+            </mat-grid-tile>
+          </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
