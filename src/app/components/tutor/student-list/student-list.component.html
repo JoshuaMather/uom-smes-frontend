@@ -18,6 +18,15 @@
             </mat-select>
         </mat-form-field>
 
+        <mat-form-field appearance="standard">
+            <mat-label>Tutor</mat-label>
+            <mat-select [(ngModel)]="selectedTutor" name="tutor" (selectionChange)="filter()">
+              <mat-option *ngFor="let tutor of tutors" [value]="tutor.id">
+                {{tutor.user.name}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
         <table mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>

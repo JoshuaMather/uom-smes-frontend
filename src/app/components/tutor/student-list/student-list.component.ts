@@ -17,6 +17,7 @@ export class StudentListComponent implements OnInit {
 
   public searchValue: string = '';
   public selectedYear: string = '';
+  public selectedTutor: string = '';
   
   @Input() tutor: any; 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -26,11 +27,13 @@ export class StudentListComponent implements OnInit {
   displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'averageGrade', 'concerns'];
 
   years: any = [
-    {value: '', viewValue: ''},
+    {value: '', viewValue: 'All'},
     {value: '1', viewValue: '1'},
     {value: '2', viewValue: '2'},
     {value: '3', viewValue: '3'},
   ];
+
+  tutors: any;
 
   constructor(
     private api: ApiService,
@@ -44,6 +47,17 @@ export class StudentListComponent implements OnInit {
   }
 
   loadStudents() {
+    this.api.get(`tutors`).subscribe(res => {
+      console.log(res);
+      this.tutors = res.tutors;
+      this.tutors.unshift({
+        user: {
+          name: 'All'
+        },
+        id: ''
+      });
+    });
+
     this.api.get(`students/${this.tutor.id}`).subscribe(res => {
       console.log(res);
       this.dataSource = new MatTableDataSource(res.students);
@@ -65,10 +79,16 @@ export class StudentListComponent implements OnInit {
                             data.personal_tutor.user.name.toLowerCase().indexOf(filter) != -1);
 
         let yearFilter = data.year == this.selectedYear;
-        if(this.selectedYear!==''){
+
+        let tutorFilter = data.personal_tutor.id == this.selectedTutor;
+        if(this.selectedYear!=='' && this.selectedTutor!==''){
+          return searchFilter && yearFilter && tutorFilter;
+        } else if(this.selectedYear!=='') {
           return searchFilter && yearFilter;
+        } else if(this.selectedTutor!=='') {
+          return searchFilter && tutorFilter;
         }
-        return searchFilter ;
+        return searchFilter;
       }
       this.loading = false;
     });
