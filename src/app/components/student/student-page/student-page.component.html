@@ -5,4 +5,9 @@
 <div *ngIf="!loading">
     <app-student-info [studentInfo]="student.student" class="student-info"></app-student-info>
     <app-engagement-info [studentInfo]="student.student" class="engagement-info"></app-engagement-info>
+
+    <mat-tab-group mat-align-tabs="center" mat-stretch-tabs>
+        <mat-tab label="Attendance"><app-attendance-tab></app-attendance-tab></mat-tab>
+        <mat-tab label="Grades"><app-grades-tab></app-grades-tab></mat-tab>
+    </mat-tab-group>
 </div>

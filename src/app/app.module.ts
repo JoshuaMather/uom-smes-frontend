@@ -19,6 +19,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { HeaderComponent } from './components/header/header.component';
 import { StudentPageComponent } from './components/student/student-page/student-page.component';
@@ -29,6 +30,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { StudentListComponent } from './components/tutor/student-list/student-list.component';
 import { StudentInfoComponent } from './components/student/student-info/student-info.component';
 import { EngagementInfoComponent } from './components/student/engagement-info/engagement-info.component';
+import { AttendanceTabComponent } from './components/student/attendance-tab/attendance-tab.component';
+import { GradesTabComponent } from './components/student/grades-tab/grades-tab.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +44,8 @@ import { EngagementInfoComponent } from './components/student/engagement-info/en
     StudentListComponent,
     StudentInfoComponent,
     EngagementInfoComponent,
+    AttendanceTabComponent,
+    GradesTabComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +67,7 @@ import { EngagementInfoComponent } from './components/student/engagement-info/en
     MatSortModule,
     MatSelectModule,
     MatMenuModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [
