@@ -9,7 +9,7 @@ import { DataService } from 'src/app/services/data/data.service';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-  // @Input() error: string | null | undefined;
+  public loggingIn = false;
 
   @Output() loginEv = new EventEmitter();
 
@@ -30,6 +30,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
+    this.loggingIn = true;
     this.error='';
     if (this.form.valid) {
       this.api.post('login', this.form.value).subscribe(res => {
@@ -40,12 +41,15 @@ export class LoginFormComponent implements OnInit {
         this.api.setApiToken(res.token);
         console.log('RES', res);
         this.loginEv.emit(this.form.value);
+        this.loggingIn = true;
       }, error => {
         console.log(error);
         this.error = "Incorrect Login Details";
+        this.loggingIn = true;
       });
     } else {
       this.error = "Incorrect Login Details";
+      this.loggingIn = true;
     }
   }
 
