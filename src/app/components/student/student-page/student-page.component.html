@@ -7,7 +7,8 @@
     <app-engagement-info [studentInfo]="student.student" class="engagement-info"></app-engagement-info>
 
     <mat-tab-group mat-align-tabs="center" mat-stretch-tabs>
-        <mat-tab label="Attendance"><app-attendance-tab></app-attendance-tab></mat-tab>
+        <mat-tab label="Attendance"><app-attendance-tab [studentInfo]="student.student"></app-attendance-tab></mat-tab>
         <mat-tab label="Grades"><app-grades-tab></app-grades-tab></mat-tab>
+        <mat-tab label="History"><app-history-tab></app-history-tab></mat-tab>
     </mat-tab-group>
 </div>

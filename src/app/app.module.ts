@@ -32,6 +32,7 @@ import { StudentInfoComponent } from './components/student/student-info/student-
 import { EngagementInfoComponent } from './components/student/engagement-info/engagement-info.component';
 import { AttendanceTabComponent } from './components/student/attendance-tab/attendance-tab.component';
 import { GradesTabComponent } from './components/student/grades-tab/grades-tab.component';
+import { HistoryTabComponent } from './components/student/history-tab/history-tab.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { GradesTabComponent } from './components/student/grades-tab/grades-tab.c
     EngagementInfoComponent,
     AttendanceTabComponent,
     GradesTabComponent,
+    HistoryTabComponent,
   ],
   imports: [
     BrowserModule,

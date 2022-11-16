@@ -12,8 +12,6 @@ export class StudentInfoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.studentInfo);
-    
 
   }
 
