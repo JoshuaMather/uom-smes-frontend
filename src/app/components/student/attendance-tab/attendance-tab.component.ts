@@ -65,9 +65,15 @@ export class AttendanceTabComponent implements OnInit {
           return Number(activity.attendance);
         });
         let courseAttendanceValue = (attendances.reduce((a: any, b: any) => a + b) / attendances.length).toFixed(2);
-        console.log(attendances);
-        console.log(courseAttendanceValue);
-        courseActivityData.push({[course.course.course_name]: activityData});
+
+        // get data in required form
+        let courseActivityObject = {
+          courseName: course.course.course_name,
+          activity: activityData,
+          attendance: courseAttendanceValue
+        }
+
+        courseActivityData.push({courseData: courseActivityObject});
       })
       console.log('bbb', courseActivityData);
       this.courseAttendanceInfo = courseActivityData;
