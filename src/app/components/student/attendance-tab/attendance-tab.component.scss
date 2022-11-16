@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.line-graph-container {
+    width: 60%;
+}
+
+.attendance-data {
+    width: 40%;
+}
+
+.select {
+    display: flex;
+    justify-content: center;
+}
+
+.courses-expansion {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}

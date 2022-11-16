@@ -1,3 +1,40 @@
-<div class="graph-container">
-    <canvas #lineGraph></canvas>
+<div class="wrapper">
+    <div class="attendance-data">
+        <div class="select">
+            <mat-form-field appearance="fill">
+                <mat-label>Course</mat-label>
+                <mat-select [(ngModel)]='selectedCourse'>
+                  <mat-option [value]="course.course.id" *ngFor="let course of coursesLabelList">{{ course.course.course_name }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="courses-expansion" *ngFor="let course of courseAttendanceInfo">
+            <mat-expansion-panel >
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{course[0]]}}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Type 
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+            
+                <mat-form-field appearance="fill">
+                  <mat-label>First name</mat-label>
+                  <input matInput>
+                </mat-form-field>
+            
+                <mat-form-field appearance="fill">
+                  <mat-label>Age</mat-label>
+                  <input matInput type="number" min="1">
+                </mat-form-field>
+            
+              </mat-expansion-panel>
+        </div>
+    </div>
+
+    <div class="line-graph-container">
+        <canvas #lineGraph></canvas>
+    </div>
 </div>
