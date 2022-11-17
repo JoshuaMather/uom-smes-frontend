@@ -1,14 +1,7 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+
 <div class="wrapper">
     <div class="attendance-data">
-        <div class="select">
-            <mat-form-field appearance="fill">
-                <mat-label>Course</mat-label>
-                <mat-select [(ngModel)]='selectedCourse'>
-                  <mat-option [value]="course.course.id" *ngFor="let course of coursesLabelList">{{ course.course.course_name }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
         <div class="courses-expansion" *ngFor="let course of courseAttendanceInfo">
             <mat-expansion-panel >
                 <mat-expansion-panel-header>
@@ -16,19 +9,22 @@
                     {{course.courseData.courseName}}
                   </mat-panel-title>
                   <mat-panel-description>
-                    {{course.courseData.attendance}} 
+                    {{course.courseData.attendance*100}}% 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
             
-                <mat-form-field appearance="fill">
-                  <mat-label>First name</mat-label>
-                  <input matInput>
-                </mat-form-field>
-            
-                <mat-form-field appearance="fill">
-                  <mat-label>Age</mat-label>
-                  <input matInput type="number" min="1">
-                </mat-form-field>
+                <mat-list role="list" *ngFor="let activity of course.courseData.activity">
+                  <mat-list-item role="listitem"><strong>{{activity.activity}}: {{activity.attendance*100}}%</strong></mat-list-item>
+                  <mat-list-item role="listitem">	
+                    <p>Attended: <br>
+                    Week: </p>
+                    <div *ngFor="let week of activity.weeks; let i = index">
+                      <mat-icon class="green-icon" *ngIf="week.attended">square</mat-icon>
+                      <mat-icon class="material-icons-outlined red-icon" *ngIf="!week.attended">square</mat-icon>
+                      <p class="center">{{i+1}}</p>
+                    </div>
+                  </mat-list-item>
+                </mat-list>
             
               </mat-expansion-panel>
         </div>

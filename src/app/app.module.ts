@@ -21,6 +21,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatListModule} from '@angular/material/list';
 
 import { HeaderComponent } from './components/header/header.component';
 import { StudentPageComponent } from './components/student/student-page/student-page.component';
@@ -72,6 +73,7 @@ import { HistoryTabComponent } from './components/student/history-tab/history-ta
     MatMenuModule,
     MatTabsModule,
     MatExpansionModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [

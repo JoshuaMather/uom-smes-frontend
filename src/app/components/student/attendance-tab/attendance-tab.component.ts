@@ -10,7 +10,6 @@ export class AttendanceTabComponent implements OnInit {
   @Input() studentInfo : any;
   @ViewChild('lineGraph', {static: true}) lineGraph!: any;
 
-  selectedCourse = '';
   courseAttendanceInfo: any;
   coursesLabelList:any;
   chart: any;
@@ -32,7 +31,6 @@ export class AttendanceTabComponent implements OnInit {
   }
 
   courseAttendanceCalculate() {
-    if(this.selectedCourse===''){
       let courseActivityData: any = [];
       this.studentInfo.student_course.forEach((course: any) => {
         let courseAttendance = this.studentInfo.student_activity.filter((activity: { activity: { course: any; }; }) => activity.activity.course === course.course.id);
@@ -80,7 +78,6 @@ export class AttendanceTabComponent implements OnInit {
 
       // get format to use for display
 
-    }
   }
 
   createChart(){

@@ -9,15 +9,23 @@
 
 .attendance-data {
     width: 40%;
-}
-
-.select {
-    display: flex;
-    justify-content: center;
+    padding-top: 30px;
 }
 
 .courses-expansion {
-    display: flex;
-    justify-content: center;
+    display: flex!important;
+    justify-content: center!important;
     padding-bottom: 20px;
+}
+
+mat-expansion-panel {
+    width: 80%;
+}
+
+.red-icon {
+    color: red;
+}
+
+.green-icon {
+    color: lightgreen;
 }
