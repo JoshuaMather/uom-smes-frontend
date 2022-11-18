@@ -1,0 +1,22 @@
+td, th {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding-left: 24px!important;
+    padding-right: 24px!important;
+}
+
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    padding-left: 3%;
+    padding-top: 1%;
+}
+
+:host ::ng-deep .mat-paginator-container .mat-paginator-range-label{
+    padding: 0!important;
+    margin: 0 0 0 0;
+}

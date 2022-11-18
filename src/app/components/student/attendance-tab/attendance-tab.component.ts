@@ -11,23 +11,14 @@ export class AttendanceTabComponent implements OnInit {
   @ViewChild('lineGraph', {static: true}) lineGraph!: any;
 
   courseAttendanceInfo: any;
-  coursesLabelList:any;
   chart: any;
   
   constructor(
-    // private chart: Chart,
   ) { }
 
   ngOnInit(): void {
     this.courseAttendanceCalculate();
     this.createChart();
-    this.coursesLabelList = this.studentInfo.student_course;
-    this.coursesLabelList.unshift({
-      course: {
-        course_name: 'Overall',
-        id: ''
-      },
-    });
   }
 
   courseAttendanceCalculate() {
@@ -73,7 +64,6 @@ export class AttendanceTabComponent implements OnInit {
 
         courseActivityData.push({courseData: courseActivityObject});
       })
-      console.log('bbb', courseActivityData);
       this.courseAttendanceInfo = courseActivityData;
 
       // get format to use for display

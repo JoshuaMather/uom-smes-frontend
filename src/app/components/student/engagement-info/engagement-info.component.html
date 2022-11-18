@@ -4,9 +4,9 @@
             <mat-grid-tile [colspan]="2">
                 <p>
                     <strong>Last Accessed</strong> <br>
-                    SPOT: {{lastSpot}}<br>
-                    Blackboard: {{lastBlackboard}}<br>
-                    Git Push: {{lastGit}}
+                    SPOT: {{lastSpot | date:'d MMMM y, HH:mm'}}<br>
+                    Blackboard: {{lastBlackboard | date:'d MMMM y, HH:mm'}}<br>
+                    Git Push: {{lastGit | date:'d MMMM y, HH:mm'}}
                 </p> 
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1">
