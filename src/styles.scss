@@ -8,6 +8,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     justify-content: center;
 }
 
+.center-text {
+    text-align: center;
+}
+
 .mat-progress-spinner circle, .mat-spinner circle {
     stroke: #6b2c91!important;
 }

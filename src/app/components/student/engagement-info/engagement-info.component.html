@@ -14,7 +14,7 @@
                     <strong>Engagement Data</strong> <br>
                     Attendance: <span [ngClass]="studentInfo.attendance < 0.5 ? 'red-text' : ''">{{attendance}}%</span><br>
                     Average Grade: <span [ngClass]="studentInfo.average_grade < 0.5 ? 'red-text' : ''">{{averageGrade}}%</span><br>
-                    Concerns: <span [ngClass]="studentInfo.concerns.length > 1 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span>
+                    Concerns: <span [ngClass]="studentInfo.concerns.length > 0 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span>
                 </p> 
             </mat-grid-tile>
             <mat-grid-tile [colspan]="2">

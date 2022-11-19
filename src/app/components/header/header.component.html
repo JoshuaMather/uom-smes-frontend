@@ -1,6 +1,6 @@
 <mat-toolbar class="title-toolbar">
   <mat-toolbar-row class="title-padding">
-    <div *ngIf="showBack">
+    <div *ngIf="studentPageTutor">
       <button mat-icon-button (click)="back()">
         <mat-icon>arrow_back_ios</mat-icon>
       </button>
@@ -16,6 +16,10 @@
         <button mat-menu-item (click)="logout()">
           <mat-icon>exit_to_app</mat-icon>
           <span class="blackText">Logout</span>
+        </button>
+        <button mat-menu-item (click)="reportConcern()">
+          <mat-icon>report</mat-icon>
+          <span class="blackText">Report Concern</span>
         </button>
       </mat-menu>
   </div>

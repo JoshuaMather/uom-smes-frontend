@@ -22,6 +22,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { HeaderComponent } from './components/header/header.component';
 import { StudentPageComponent } from './components/student/student-page/student-page.component';
@@ -35,6 +36,7 @@ import { EngagementInfoComponent } from './components/student/engagement-info/en
 import { AttendanceTabComponent } from './components/student/attendance-tab/attendance-tab.component';
 import { GradesTabComponent } from './components/student/grades-tab/grades-tab.component';
 import { HistoryTabComponent } from './components/student/history-tab/history-tab.component';
+import { ConcernDialogComponent } from './components/concern-dialog/concern-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { HistoryTabComponent } from './components/student/history-tab/history-ta
     AttendanceTabComponent,
     GradesTabComponent,
     HistoryTabComponent,
+    ConcernDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +77,7 @@ import { HistoryTabComponent } from './components/student/history-tab/history-ta
     MatTabsModule,
     MatExpansionModule,
     MatListModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [
