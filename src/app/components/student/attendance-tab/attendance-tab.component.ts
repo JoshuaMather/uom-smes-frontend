@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js/auto';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-attendance-tab',
@@ -9,16 +10,24 @@ import { Chart } from 'chart.js/auto';
 export class AttendanceTabComponent implements OnInit {
   @Input() studentInfo : any;
   @ViewChild('lineGraph', {static: true}) lineGraph!: any;
+  @ViewChild('radarGraph', {static: true}) radarGraph!: any;
+
+  user: any;
 
   courseAttendanceInfo: any;
   chart: any;
   
   constructor(
+    private data: DataService,
   ) { }
 
   ngOnInit(): void {
+    this.user = this.data.getUser();
     this.courseAttendanceCalculate();
     this.createChart();
+    if(this.user.tutor){
+      this.createRadar();
+    }
   }
 
   courseAttendanceCalculate() {
@@ -59,7 +68,8 @@ export class AttendanceTabComponent implements OnInit {
         let courseActivityObject = {
           courseName: course.course.course_name,
           activity: activityData,
-          attendance: courseAttendanceValue
+          attendance: courseAttendanceValue,
+          averageAttendance: course.course.average_attendance
         }
 
         courseActivityData.push({courseData: courseActivityObject});
@@ -123,6 +133,49 @@ export class AttendanceTabComponent implements OnInit {
       }
       
     });
+  }
+
+  createRadar() {
+    // get course labels 
+    console.log(this.courseAttendanceInfo);
+    let labels: any[] = [];
+    let studentData: number[] = [];
+    let courseAverages: number[] = [];
+    this.courseAttendanceInfo.forEach((course: { courseData: { courseName: any; attendance: any; averageAttendance: any; }; }) => {
+      labels.push(course.courseData.courseName);
+
+      let courseAttendance = Number(course.courseData.attendance)*100;
+      studentData.push(courseAttendance);
+
+      let courseAverage = Number(course.courseData.averageAttendance)*100;
+      courseAverages.push(courseAverage);
+    });
+
+    this.chart = new Chart(this.radarGraph.nativeElement, {
+      type: 'radar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Student Attendance',
+            data: studentData,
+          },
+          {
+            label: 'Average Attendance',
+            data: courseAverages,
+          }
+        ]
+      },
+      options: {
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 100,
+            min: 0,
+        }
+        },
+      }
+    }); 
   }
 
 }

@@ -32,5 +32,11 @@
 
     <div class="line-graph-container">
         <canvas #lineGraph></canvas>
+        <div class="radar-container" *ngIf="user.tutor">
+          <canvas #radarGraph></canvas>
+        </div>
     </div>
+
+    <!-- <div class="line-graph-container">
+  </div> -->
 </div>
