@@ -4,9 +4,9 @@
             <mat-grid-tile [colspan]="2">
                 <p>
                     <strong>Last Accessed</strong> <br>
-                    SPOT: {{lastSpot | date:'d MMMM y, HH:mm'}}<br>
-                    Blackboard: {{lastBlackboard | date:'d MMMM y, HH:mm'}}<br>
-                    Git Push: {{lastGit | date:'d MMMM y, HH:mm'}}
+                    SPOT: <span *ngIf="lastSpot!='Null'">{{lastSpot | date:'d MMMM y, HH:mm'}}</span><span *ngIf="lastSpot=='Null'">Null</span><br>
+                    Blackboard: <span *ngIf="lastBlackboard!='Null'">{{lastBlackboard | date:'d MMMM y, HH:mm'}}</span><span *ngIf="lastBlackboard=='Null'">Null</span><br>
+                    Git Push: <span *ngIf="lastGit!='Null'">{{lastGit | date:'d MMMM y, HH:mm'}}</span><span *ngIf="lastGit=='Null'">Null</span>
                 </p> 
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1">
@@ -14,7 +14,7 @@
                     <strong>Engagement Data</strong> <br>
                     Attendance: <span [ngClass]="studentInfo.attendance < 0.5 ? 'red-text' : ''">{{attendance}}%</span><br>
                     Average Grade: <span [ngClass]="studentInfo.average_grade < 0.5 ? 'red-text' : ''">{{averageGrade}}%</span><br>
-                    Concerns: <span [ngClass]="studentInfo.concerns.length > 0 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span>
+                    <span *ngIf="this.user.tutor" >Concerns: <span [ngClass]="studentInfo.concerns.length > 0 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span></span>
                 </p> 
             </mat-grid-tile>
             <mat-grid-tile [colspan]="2">

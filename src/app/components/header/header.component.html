@@ -13,13 +13,13 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>exit_to_app</mat-icon>
-          <span class="blackText">Logout</span>
-        </button>
         <button mat-menu-item (click)="reportConcern()">
           <mat-icon>report</mat-icon>
           <span class="blackText">Report Concern</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span class="blackText">Logout</span>
         </button>
       </mat-menu>
   </div>

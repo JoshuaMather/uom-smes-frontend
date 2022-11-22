@@ -9,6 +9,8 @@ import { DataService } from 'src/app/services/data/data.service';
 export class EngagementInfoComponent implements OnInit {
   @Input() studentInfo : any;
 
+  public user: any;
+
   public lastSpot: any = 'Null';
   public lastBlackboard: any = 'Null';
   public lastGit: any = 'Null';
@@ -21,6 +23,8 @@ export class EngagementInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.user = this.data.getUser();
+
     this.attendance = Math.round(this.studentInfo.attendance * 100);
     this.averageGrade = Math.round(this.studentInfo.average_grade * 100);
     // get last logins: SPOT, Blackboard, Git push

@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div>
+    <div *ngIf="history.blackboard">
         <table mat-table [dataSource]="dataSourceBlackboard">
             <ng-container matColumnDef="datetime">
                 <th mat-header-cell *matHeaderCellDef> Blackboard Login History </th>
@@ -12,10 +12,10 @@
 
         <mat-paginator #blackboardPaginator hidePageSize="true" [length]="history.blackboard.length"
             [pageSize]="10">
-        </mat-paginator>
+        </mat-paginator>        
     </div>
     
-    <div>
+    <div  *ngIf="history.spot">
         <table mat-table [dataSource]="dataSourceSpot">
             <ng-container matColumnDef="datetime">
                 <th mat-header-cell *matHeaderCellDef> Spot Login History </th>
@@ -31,7 +31,7 @@
         </mat-paginator>
     </div>
     
-    <div>
+    <div *ngIf="history.git">
         <table mat-table [dataSource]="dataSourceGit">
             <ng-container matColumnDef="datetime">
                 <th mat-header-cell *matHeaderCellDef> Git Push History </th>
