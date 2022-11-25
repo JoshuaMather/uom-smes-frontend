@@ -1,1 +1,58 @@
-<p>grades-tab works!</p>
+<div class="wrapper">
+    <div class="grade-data">
+        <div class="courses-expansion" *ngFor="let grade of courseAssignmentInfo">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    {{grade.course}}
+                  </mat-panel-title>
+                  <!-- <mat-panel-description>
+                    {{course.courseData.attendance*100}}% 
+                  </mat-panel-description> -->
+                </mat-expansion-panel-header>
+            
+                <div *ngIf="grade.assignments[0].summative.length>0">
+                    <h2 class="no-margin">Summative</h2>
+                    <mat-list role="list" *ngFor="let assignment of grade.assignments[0].summative">
+                      <mat-list-item role="listitem"><strong>{{assignment.assignmentName}}: {{assignment.grade}}%</strong></mat-list-item>
+                      
+                      <mat-list-item role="listitem" *ngIf="assignment.type.includes('assignment')">
+                        <p>
+                          Date Due: {{assignment.dueDate | date:'d MMMM y, HH:mm'}} <br>
+                          Date Submitted: {{assignment.submittedDate | date:'d MMMM y, HH:mm'}}
+                        </p>
+                      </mat-list-item>
+
+                      <mat-list-item role="listitem" *ngIf="assignment.type.includes('exam')">
+                        <p>
+                          Exam Date: {{assignment.dueDate | date:'d MMMM y, HH:mm'}}
+                        </p>
+                      </mat-list-item>
+                      
+                    </mat-list>
+                </div>
+
+                <div *ngIf="grade.assignments[0].formative.length>0">
+                  <h2 class="no-margin">Formative</h2>
+                  <mat-list role="list" *ngFor="let assignment of grade.assignments[0].formative">
+                    <mat-list-item role="listitem"><strong>{{assignment.assignmentName}}: {{assignment.grade}}%</strong></mat-list-item>
+                   
+                    <mat-list-item role="listitem" *ngIf="assignment.type.includes('assignment')">
+                      <p>
+                        Date Due: {{assignment.dueDate | date:'d MMMM y, HH:mm'}} <br>
+                        Date Submitted: <span [ngClass]="assignment.submittedDate>assignment.dueDate ? 'red-text' : ''">{{assignment.submittedDate | date:'d MMMM y, HH:mm'}}</span>
+                      </p>
+                    </mat-list-item>
+
+                    <mat-list-item role="listitem" *ngIf="assignment.type.includes('exam')">
+                      <p>
+                        Exam Date: {{assignment.dueDate | date:'d MMMM y, HH:mm'}}
+                      </p>
+                    </mat-list-item>
+                  </mat-list>
+              </div>
+            
+              </mat-expansion-panel>
+        </div>
+    </div>
+</div>

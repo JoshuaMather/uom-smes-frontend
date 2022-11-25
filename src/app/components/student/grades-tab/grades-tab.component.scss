@@ -1,0 +1,28 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+mat-expansion-panel {
+    width: 80%;
+}
+
+.mat-expansion-panel-header-description::ng-deep {
+    flex-grow: 0!important;
+}
+
+.grade-data {
+    width: 50%;
+    padding-top: 30px;
+}
+
+.courses-expansion {
+    display: flex!important;
+    justify-content: center!important;
+    padding-bottom: 20px;
+}
+
+.red-text {
+    color: red;
+    font-weight: bold;
+}

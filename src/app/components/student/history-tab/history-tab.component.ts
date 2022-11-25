@@ -56,7 +56,6 @@ export class HistoryTabComponent implements OnInit {
     this.dataSourceBlackboard = new MatTableDataSource(this.history.blackboard);
     this.dataSourceSpot = new MatTableDataSource(this.history.spot);
     this.dataSourceGit = new MatTableDataSource(this.history.git);
-    console.log(this.dataSourceBlackboard);
   }
 
   createBar() {

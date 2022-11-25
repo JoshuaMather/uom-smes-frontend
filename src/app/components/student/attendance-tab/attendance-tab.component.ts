@@ -83,7 +83,6 @@ export class AttendanceTabComponent implements OnInit {
   createChart(){
     let courseAttendanceDatsets: { label: any; data: number[]; }[] = [];
     this.studentInfo.student_course.forEach((course: any) => {
-      console.log(course.course);
       // for each week of the course get attendance 
       let attendance = [];
       let courseAttendance = this.studentInfo.student_activity.filter((activity: { activity: { course: any; }; }) => activity.activity.course === course.course.id);
@@ -137,7 +136,6 @@ export class AttendanceTabComponent implements OnInit {
 
   createRadar() {
     // get course labels 
-    console.log(this.courseAttendanceInfo);
     let labels: any[] = [];
     let studentData: number[] = [];
     let courseAverages: number[] = [];
