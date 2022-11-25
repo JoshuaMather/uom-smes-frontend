@@ -36,7 +36,7 @@ export class LoginFormComponent implements OnInit {
       this.api.post('login', this.form.value).subscribe(res => {
         this.data.setUser(res.user);
         if(res.user.student) {
-          this.data.setStudentId(res.user.id);
+          this.data.setStudentId(res.user.student.id);
         }
         this.api.setApiToken(res.token);
         console.log('RES', res);
