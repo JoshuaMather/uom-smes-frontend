@@ -26,6 +26,10 @@ mat-expansion-panel {
     width: 80%;
 }
 
+.mat-expansion-panel-header-description::ng-deep {
+    flex-grow: 0!important;
+}
+
 .red-icon {
     color: red;
 }

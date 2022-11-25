@@ -66,7 +66,7 @@ export class AttendanceTabComponent implements OnInit {
 
         // get data in required form
         let courseActivityObject = {
-          courseName: course.course.course_name,
+          courseName: course.course.course_code + ' ' + course.course.course_name,
           activity: activityData,
           attendance: courseAttendanceValue,
           averageAttendance: course.course.average_attendance
@@ -101,7 +101,7 @@ export class AttendanceTabComponent implements OnInit {
         attendance.push(weekAttendence);
       }
       courseAttendanceDatsets.push({
-        label: course.course.course_name,
+        label: course.course.course_code + ' ' + course.course.course_name,
         data: attendance,
       });
       
