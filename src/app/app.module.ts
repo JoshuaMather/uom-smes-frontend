@@ -37,6 +37,7 @@ import { AttendanceTabComponent } from './components/student/attendance-tab/atte
 import { GradesTabComponent } from './components/student/grades-tab/grades-tab.component';
 import { HistoryTabComponent } from './components/student/history-tab/history-tab.component';
 import { ConcernDialogComponent } from './components/concern-dialog/concern-dialog.component';
+import { ViewConcernComponent } from './components/view-concern/view-concern.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ConcernDialogComponent } from './components/concern-dialog/concern-dial
     GradesTabComponent,
     HistoryTabComponent,
     ConcernDialogComponent,
+    ViewConcernComponent,
   ],
   imports: [
     BrowserModule,

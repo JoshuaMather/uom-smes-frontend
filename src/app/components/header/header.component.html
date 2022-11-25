@@ -13,7 +13,11 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="reportConcern()">
+        <button *ngIf="studentPageTutor" mat-menu-item (click)="viewConcerns()">
+          <mat-icon>info</mat-icon>
+          <span class="blackText">View Concerns</span>
+        </button>
+        <button *ngIf="studentPageTutor" mat-menu-item (click)="reportConcern()">
           <mat-icon>report</mat-icon>
           <span class="blackText">Report Concern</span>
         </button>

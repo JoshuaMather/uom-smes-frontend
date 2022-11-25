@@ -1,0 +1,28 @@
+<div *ngIf="loading" class="top-padding">
+    <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!loading" class="center-text">
+    <h1 mat-dialog-title>Concerns</h1>
+    <div mat-dialog-content>
+      <p><strong>Student: {{data.name}}</strong></p>
+      <div *ngIf="concerns['length']>0">
+          <div *ngFor="let concern of concerns">
+            <mat-card class="card">
+                <mat-card-content>
+                    <p>{{concern['concern']}}</p> <br>
+                    <p><strong>Reported by: {{concern['tutor']['user']['name']}}</strong></p>
+                </mat-card-content>
+            </mat-card>
+          </div>
+      </div>
+      <div *ngIf="concerns['length']==0">
+        <h2>
+            No Concerns for Student
+        </h2>
+      </div>
+    </div>
+    <div mat-dialog-actions class="center">
+      <button mat-button (click)="close()">Close</button>
+    </div>
+</div>

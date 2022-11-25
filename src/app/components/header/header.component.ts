@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/api/api.service';
 import { DataService } from 'src/app/services/data/data.service';
 import { ConcernDialogComponent } from '../concern-dialog/concern-dialog.component';
+import { ViewConcernComponent } from '../view-concern/view-concern.component';
 
 @Component({
   selector: 'app-header',
@@ -52,11 +53,28 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  viewConcerns() {
+    if(!this.studentPageTutor) {
+      return;
+    }
+    let student = this.data.getStudentData();
+    const dialogRef = this.dialog.open(ViewConcernComponent, {
+      panelClass: 'concern-list-class',
+      data: {
+        id: student.id,
+        name: student.user.name
+      }
+    });
+
+  }
+
   reportConcern() {
+    if(!this.studentPageTutor) {
+      return;
+    }
     let student = this.data.getStudentData();
     console.log(student);
     const dialogRef = this.dialog.open(ConcernDialogComponent, {
-      // width: '20%',
       data: {name: student.user.name}
     });
 
