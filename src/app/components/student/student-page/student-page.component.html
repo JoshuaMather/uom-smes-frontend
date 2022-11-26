@@ -7,8 +7,20 @@
     <app-engagement-info [studentInfo]="student.student" class="engagement-info"></app-engagement-info>
 
     <mat-tab-group mat-align-tabs="center" mat-stretch-tabs>
-        <mat-tab label="Attendance"><app-attendance-tab [studentInfo]="student.student"></app-attendance-tab></mat-tab>
-        <mat-tab label="Grades"><app-grades-tab [studentInfo]="student.student"></app-grades-tab></mat-tab>
-        <mat-tab label="History"><app-history-tab [studentInfo]="student.student"></app-history-tab></mat-tab>
+        <mat-tab label="Attendance">
+            <ng-template matTabContent>
+                <app-attendance-tab [studentInfo]="student.student"></app-attendance-tab>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Grades">
+            <ng-template matTabContent>
+                <app-grades-tab [studentInfo]="student.student"></app-grades-tab>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="History">
+            <ng-template matTabContent>
+                <app-history-tab [studentInfo]="student.student"></app-history-tab>
+            </ng-template>
+        </mat-tab>
     </mat-tab-group>
 </div>
