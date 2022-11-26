@@ -38,6 +38,7 @@ import { GradesTabComponent } from './components/student/grades-tab/grades-tab.c
 import { HistoryTabComponent } from './components/student/history-tab/history-tab.component';
 import { ConcernDialogComponent } from './components/concern-dialog/concern-dialog.component';
 import { ViewConcernComponent } from './components/view-concern/view-concern.component';
+import { TutorInfoComponent } from './components/tutor/tutor-info/tutor-info/tutor-info.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ViewConcernComponent } from './components/view-concern/view-concern.com
     HistoryTabComponent,
     ConcernDialogComponent,
     ViewConcernComponent,
+    TutorInfoComponent,
   ],
   imports: [
     BrowserModule,

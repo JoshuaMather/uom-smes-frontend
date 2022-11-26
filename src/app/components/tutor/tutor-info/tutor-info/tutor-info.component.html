@@ -1,0 +1,20 @@
+<mat-card class="info-card">
+    <mat-card-content>
+        <mat-grid-list cols="3">
+            <mat-grid-tile [colspan]="1">
+                <div>
+                    <p class="center"><strong>{{tutor.name}}</strong></p>
+                    <img src="../../assets/pngfind.com-placeholder-png-6104451.png" class="image"/>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                <p>
+                    {{tutor.username}}<br>
+                    {{tutor.email}}<br>
+                    <span *ngIf="tutor.tutor.role=='admin'">Administrator</span>
+                    <span *ngIf="tutor.tutor.role=='year_tutor'">Year {{tutor.tutor.year}} Tutor</span>
+                </p> 
+            </mat-grid-tile>
+          </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
