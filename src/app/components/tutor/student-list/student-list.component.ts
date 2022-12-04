@@ -24,7 +24,7 @@ export class StudentListComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'averageGrade', 'concerns'];
+  displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'predictedGrade', 'concerns'];
 
   years: any = [
     {value: '', viewValue: 'All'},
@@ -67,7 +67,7 @@ export class StudentListComponent implements OnInit {
           case 'name': return  item.user.name;
           case 'email': return  item.user.email;
           case 'personalTutor': return  item.personal_tutor.user.name;
-          case 'averageGrade': return  item.average_grade;
+          case 'predictedGrade': return  item.predicted_grade;
           case 'concerns': return  item.concerns_count;
           default: return item[property];
           }

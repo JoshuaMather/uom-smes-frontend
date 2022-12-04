@@ -12,8 +12,8 @@
             <mat-grid-tile [colspan]="1">
                 <p>
                     <strong>Engagement Data</strong> <br>
-                    Attendance: <span [ngClass]="studentInfo.attendance < 0.5 ? 'red-text' : ''">{{attendance}}%</span><br>
-                    Average Grade: <span [ngClass]="studentInfo.average_grade < 0.5 ? 'red-text' : ''">{{averageGrade}}%</span><br>
+                    Attendance: <span [ngClass]="attendance/100 < 0.5 ? 'red-text' : ''">{{attendance}}%</span><br>
+                    Predicted Grade: <span [ngClass]="predictedGrade/100 < 0.5 ? 'red-text' : ''">{{predictedGrade}}%</span><br>
                     <span *ngIf="this.user.tutor" >Concerns: <span [ngClass]="studentInfo.concerns.length > 0 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span></span>
                 </p> 
             </mat-grid-tile>

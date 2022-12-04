@@ -6,9 +6,9 @@
                   <mat-panel-title>
                     {{grade.course}}
                   </mat-panel-title>
-                  <!-- <mat-panel-description>
-                    {{course.courseData.attendance*100}}% 
-                  </mat-panel-description> -->
+                  <mat-panel-description>
+                    Predicted Grade: {{grade.predictedGrade*100}}% 
+                  </mat-panel-description>
                 </mat-expansion-panel-header>
             
                 <div *ngIf="grade.assignments[0].summative.length>0">
