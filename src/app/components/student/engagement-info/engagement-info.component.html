@@ -13,14 +13,17 @@
                 <p>
                     <strong>Engagement Data</strong> <br>
                     Attendance: <span [ngClass]="attendance/100 < 0.5 ? 'red-text' : ''">{{attendance}}%</span><br>
+                    Current Grade: <span>{{currentGrade}}%</span><br>
                     Predicted Grade: <span [ngClass]="predictedGrade/100 < 0.5 ? 'red-text' : ''">{{predictedGrade}}%</span><br>
-                    <span *ngIf="this.user.tutor" >Concerns: <span [ngClass]="studentInfo.concerns.length > 0 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span></span>
+                   
                 </p> 
             </mat-grid-tile>
             <mat-grid-tile [colspan]="2">
                 <h3>
                     <strong>Engagement Score</strong> <br>
                     <span class="center" [ngClass]="0 > 1 ? 'red-text' : ''">0.72</span>
+                    <span class="center" *ngIf="this.user.tutor" >Concerns:&nbsp; <span [ngClass]="studentInfo.concerns.length > 0 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span></span>
+
                 </h3> 
             </mat-grid-tile>
           </mat-grid-list>

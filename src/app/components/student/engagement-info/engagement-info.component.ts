@@ -15,6 +15,7 @@ export class EngagementInfoComponent implements OnInit {
   public lastBlackboard: any = 'Null';
   public lastGit: any = 'Null';
 
+  public currentGrade = 0;
   public predictedGrade = 0;
   public attendance = 0;
 
@@ -26,6 +27,7 @@ export class EngagementInfoComponent implements OnInit {
     this.user = this.data.getUser();
 
     this.attendance = Math.round(this.studentInfo.attendance * 100);
+    this.currentGrade = Math.round(this.studentInfo.current_grade * 100);
     this.predictedGrade = Math.round(this.studentInfo.predicted_grade * 100);
 
     // get last logins: SPOT, Blackboard, Git push

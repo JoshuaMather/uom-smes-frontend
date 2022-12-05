@@ -23,7 +23,7 @@ export class GradesTabComponent implements OnInit {
 
   getGradeData() {
     let courseAssignmentData: any = [];
-    this.studentInfo.student_course.forEach((course: { course: { id: any; course_name: any; }; predicted_grade: any; }) => {
+    this.studentInfo.student_course.forEach((course: { course: { id: any; course_name: any; }; current_grade: any; predicted_grade: any; }) => {
       let courseAssignments = this.studentInfo.student_assignment.filter((assignment: { assignment: { course: { id: any; }; }; }) => assignment.assignment.course.id === course.course.id);
 
       let assignmentData: any = [];
@@ -56,6 +56,7 @@ export class GradesTabComponent implements OnInit {
 
       courseAssignmentData.push({
         course: course.course.course_name,
+        currentGrade: course.current_grade,
         predictedGrade: course.predicted_grade,
         assignments: assignmentData,
       });
