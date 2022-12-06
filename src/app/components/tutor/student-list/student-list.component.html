@@ -57,12 +57,12 @@
 
             <ng-container matColumnDef="currentGrade">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Current Grade </th>
-                <td mat-cell *matCellDef="let student"> {{student.current_grade}} </td>
+                <td mat-cell *matCellDef="let student"> {{student.grades.current}} </td>
             </ng-container>
 
             <ng-container matColumnDef="predictedGrade">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Predicted Grade </th>
-                <td mat-cell *matCellDef="let student" [ngClass]="student.predicted_grade < 0.5 ? 'red-text' : ''"> {{student.predicted_grade}} </td>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.predicted_grade < 0.5 ? 'red-text' : ''"> {{student.grades.predict}} </td>
             </ng-container>
 
             <ng-container matColumnDef="concerns">

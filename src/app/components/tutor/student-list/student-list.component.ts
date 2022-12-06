@@ -67,8 +67,8 @@ export class StudentListComponent implements OnInit {
           case 'name': return  item.user.name;
           case 'email': return  item.user.email;
           case 'personalTutor': return  item.personal_tutor.user.name;
-          case 'currentGrade': return  item.current_grade;
-          case 'predictedGrade': return  item.predicted_grade;
+          case 'currentGrade': return  item.grades.current;
+          case 'predictedGrade': return  item.grades.predict;
           case 'concerns': return  item.concerns_count;
           default: return item[property];
           }
