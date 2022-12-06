@@ -4,7 +4,7 @@
 }
 
 mat-expansion-panel {
-    width: 80%;
+    width: 90%;
 }
 
 // .mat-expansion-panel-header-description::ng-deep {
@@ -12,7 +12,7 @@ mat-expansion-panel {
 // }
 
 .grade-data {
-    width: 100%;
+    width: 50%;
     padding-top: 30px;
 }
 
@@ -25,4 +25,11 @@ mat-expansion-panel {
 .red-text {
     color: red;
     font-weight: bold;
+}
+
+.bar-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;;
+    width: 50%;
 }
