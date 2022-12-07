@@ -18,6 +18,7 @@ export class EngagementInfoComponent implements OnInit {
   public currentGrade = 0;
   public predictedGrade = 0;
   public attendance = 0;
+  public engagement = 0;
 
   constructor(
     private data: DataService,
@@ -29,6 +30,7 @@ export class EngagementInfoComponent implements OnInit {
     this.attendance = Math.round(this.studentInfo.attendance * 100);
     this.currentGrade = Math.round(this.studentInfo.grades.current * 100);
     this.predictedGrade = Math.round(this.studentInfo.grades.predict * 100);
+    this.engagement = Math.round(this.studentInfo.grades.engagement * 100);
 
     // get last logins: SPOT, Blackboard, Git push
     let history = this.studentInfo.student_last;

@@ -10,6 +10,7 @@ import { DataService } from 'src/app/services/data/data.service';
 })
 export class StudentPageComponent implements OnInit {
   private studentId: number = 0;
+  private userId: number = 0;
   public student: any;
   public loading: Boolean = true;
 
@@ -20,11 +21,12 @@ export class StudentPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.studentId = this.data.getStudentId();
+    this.userId = this.data.getUser().id;
     this.loadStudent();
   }
 
   loadStudent() {
-    this.api.get(`student/${this.studentId}`).subscribe(res => {
+    this.api.get(`student/${this.studentId}/${this.userId}`).subscribe(res => {
       console.log('student data', res.student);
       this.student = res;
       this.data.setStudentData(res.student);

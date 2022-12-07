@@ -65,6 +65,11 @@
                 <td mat-cell *matCellDef="let student" [ngClass]="student.predicted_grade < 0.5 ? 'red-text' : ''"> {{student.grades.predict}} </td>
             </ng-container>
 
+            <ng-container matColumnDef="engagement">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Engagement </th>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement < 0.5 ? 'red-text' : ''"> {{student.grades.engagement}} </td>
+            </ng-container>
+
             <ng-container matColumnDef="concerns">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Concerns </th>
                 <td mat-cell *matCellDef="let student" [ngClass]="student.concerns_count > 0 ? 'red-text' : ''"> {{student.concerns_count}} </td>

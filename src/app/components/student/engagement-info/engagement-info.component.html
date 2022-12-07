@@ -21,7 +21,7 @@
             <mat-grid-tile [colspan]="2">
                 <h3>
                     <strong>Engagement Score</strong> <br>
-                    <span class="center" [ngClass]="0 > 1 ? 'red-text' : ''">0.72</span>
+                    <span class="center" [ngClass]="engagement/100 < 0.5 ? 'red-text' : ''">{{engagement}}%</span>
                     <span class="center" *ngIf="this.user.tutor" >Concerns:&nbsp; <span [ngClass]="studentInfo.concerns.length > 0 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span></span>
 
                 </h3> 
