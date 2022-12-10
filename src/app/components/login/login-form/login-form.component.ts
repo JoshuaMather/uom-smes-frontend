@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ApiService } from 'src/app/services/api/api.service';
 import { DataService } from 'src/app/services/data/data.service';
+import { RegisterTutorComponent } from '../../register-tutor/register-tutor.component';
 
 @Component({
   selector: 'app-login-form',
@@ -23,6 +25,7 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private api: ApiService,
     private data: DataService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -51,6 +54,13 @@ export class LoginFormComponent implements OnInit {
       this.error = "Incorrect Login Details";
       this.loggingIn = true;
     }
+  }
+
+  registerTutor() {
+    console.log('aaaa');
+    const dialogRef = this.dialog.open(RegisterTutorComponent, {
+      panelClass: 'concern-list-class',
+    });
   }
 
   

@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
     }
     let student = this.data.getStudentData();
     const dialogRef = this.dialog.open(ViewConcernComponent, {
-      panelClass: 'concern-list-class',
+      // panelClass: 'concern-list-class',
       data: {
         id: student.id,
         name: student.user.name

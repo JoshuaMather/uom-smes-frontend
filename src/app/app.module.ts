@@ -39,6 +39,7 @@ import { HistoryTabComponent } from './components/student/history-tab/history-ta
 import { ConcernDialogComponent } from './components/concern-dialog/concern-dialog.component';
 import { ViewConcernComponent } from './components/view-concern/view-concern.component';
 import { TutorInfoComponent } from './components/tutor/tutor-info/tutor-info/tutor-info.component';
+import { RegisterTutorComponent } from './components/register-tutor/register-tutor.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { TutorInfoComponent } from './components/tutor/tutor-info/tutor-info/tut
     ConcernDialogComponent,
     ViewConcernComponent,
     TutorInfoComponent,
+    RegisterTutorComponent,
   ],
   imports: [
     BrowserModule,
