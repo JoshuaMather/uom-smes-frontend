@@ -57,7 +57,6 @@ export class LoginFormComponent implements OnInit {
   }
 
   registerTutor() {
-    console.log('aaaa');
     const dialogRef = this.dialog.open(RegisterTutorComponent, {
       panelClass: 'concern-list-class',
     });

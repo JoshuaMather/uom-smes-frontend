@@ -1,49 +1,68 @@
+<h2 class="center">
+    Enter details to request a new tutor user
+</h2>
 <div class="center">
+    <!-- say this is a request -->
+
     <form [formGroup]="form" (ngSubmit)="register()">
-        <mat-form-field appearance="outline">
-            <mat-label>Username</mat-label>
-            <input type="text" matInput placeholder="Username" formControlName="username">
-            <mat-error *ngIf="form.get('username')?.invalid && (form.get('username')?.dirty || form.get('username')?.touched)">Username must not be empty</mat-error>
-        </mat-form-field>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input type="text" matInput placeholder="Username" formControlName="username">
+                <mat-error *ngIf="form.get('username')?.invalid && (form.get('username')?.dirty || form.get('username')?.touched)">Username must not be empty</mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="text" matInput placeholder="Password" formControlName="password">
+                <mat-error *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)">Password must not be empty</mat-error>
+            </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Password</mat-label>
-            <input type="text" matInput placeholder="Password" formControlName="password">
-            <mat-error *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched)">Password must not be empty</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input type="text" matInput placeholder="Email" formControlName="email">
-            <mat-error *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)">Email must not be empty & of the correct format</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
-            <input type="text" matInput placeholder="Name" formControlName="name">
-            <mat-error *ngIf="form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)">Name must not be empty</mat-error>
-        </mat-form-field>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="text" matInput placeholder="Email" formControlName="email">
+                <mat-error *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)">Email must not be empty & of the correct format</mat-error>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input type="text" matInput placeholder="Name" formControlName="name">
+                <mat-error *ngIf="form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)">Name must not be empty</mat-error>
+            </mat-form-field>
+        </div>
         
-        <mat-form-field appearance="outline">
-            <mat-label>Role</mat-label>
-            <mat-select formControlName="role">
-                <mat-option *ngFor="let role of roles" [value]="role.value">
-                  {{role.viewValue}}
-                </mat-option>
-              </mat-select>
-        </mat-form-field>
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="role">
+                    <mat-option *ngFor="let role of roles" [value]="role.value">
+                      {{role.viewValue}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Year</mat-label>
+                <mat-select formControlName="year">
+                    <mat-option *ngFor="let year of years" [value]="year.value">
+                      {{year.viewValue}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Year</mat-label>
-            <mat-select formControlName="year">
-                <mat-option *ngFor="let year of years" [value]="year.value">
-                  {{year.viewValue}}
-                </mat-option>
-              </mat-select>
-        </mat-form-field>
+        <p *ngIf="error" class="error">
+            {{ error }}
+        </p>
 
         <div class="center">
-            <button class="login-button" type="submit" mat-raised-button>Reigtser</button>
+            <button class="login-button" type="submit" mat-raised-button>Register</button>
         </div>
+
+        <div mat-dialog-actions class="center">
+            <button mat-button (click)="close()">Close</button>
+          </div>
     </form>
 </div>
