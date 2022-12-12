@@ -57,6 +57,10 @@ export class RegisterTutorComponent implements OnInit {
     if (this.form.valid) {
       this.api.post('request-register-tutor', this.form.value).subscribe(res => {
         console.log(res);
+        if(res.success==400){
+          this.error = res.error;
+          return;
+        }
         this.close()
       })
     }
