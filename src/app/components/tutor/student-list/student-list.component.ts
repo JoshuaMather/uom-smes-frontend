@@ -58,7 +58,7 @@ export class StudentListComponent implements OnInit {
       });
     });
 
-    this.api.get(`students/${this.tutor.id}`).subscribe(res => {
+    this.api.get(`students/${this.tutor.tutor.id}`).subscribe(res => {
       console.log(res);
       this.dataSource = new MatTableDataSource(res.students);
       this.dataSource.paginator = this.paginator;

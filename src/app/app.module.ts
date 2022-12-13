@@ -40,6 +40,7 @@ import { ConcernDialogComponent } from './components/concern-dialog/concern-dial
 import { ViewConcernComponent } from './components/view-concern/view-concern.component';
 import { TutorInfoComponent } from './components/tutor/tutor-info/tutor-info/tutor-info.component';
 import { RegisterTutorComponent } from './components/register-tutor/register-tutor.component';
+import { TutorRequestsComponent } from './components/tutor/tutor-requests/tutor-requests.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { RegisterTutorComponent } from './components/register-tutor/register-tut
     ViewConcernComponent,
     TutorInfoComponent,
     RegisterTutorComponent,
+    TutorRequestsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,6 @@
-<app-tutor-info [tutor]="tutor" class="tutor-info"></app-tutor-info>
+<div class="wrapper">
+    <app-tutor-info [tutor]="tutor" class="tutor-info"></app-tutor-info>
+    <app-tutor-requests *ngIf="tutor.tutor.role==='admin'" [tutor]="tutor" class="tutor-requests"></app-tutor-requests>
+</div>
 
 <app-student-list [tutor]="tutor" class="student-list"></app-student-list>
