@@ -24,6 +24,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 
+import {ScrollingModule} from '@angular/cdk/scrolling';
+
 import { HeaderComponent } from './components/header/header.component';
 import { StudentPageComponent } from './components/student/student-page/student-page.component';
 import { TutorPageComponent } from './components/tutor/tutor-page/tutor-page.component';
@@ -86,6 +88,7 @@ import { TutorRequestsComponent } from './components/tutor/tutor-requests/tutor-
     MatExpansionModule,
     MatListModule,
     MatDialogModule,
+    ScrollingModule,
   ],
   providers: [],
   bootstrap: [

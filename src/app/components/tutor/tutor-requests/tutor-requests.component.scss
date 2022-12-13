@@ -1,7 +1,3 @@
-// :host {
-//     height: 200px;
-// }
-
 mat-list {
     flex-grow: 1;
     overflow: auto;
@@ -9,4 +5,24 @@ mat-list {
 
 .test {
     height: 200px;
+}
+
+.example-viewport {
+    height: 105px;
+  }
+  
+.example-item {
+    height: 50px;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.buttons {
+    
 }

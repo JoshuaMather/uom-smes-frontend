@@ -1,7 +1,7 @@
 <div class="test">
     <mat-card>
         <mat-card-content>
-            <h2>
+            <h2 class="no-margin">
                 New Tutor Requests
             </h2>
             <div *ngIf="loading" class="center">
@@ -9,19 +9,18 @@
             </div>
     
             <div *ngIf="!loading">
-                <mat-list role="list">
-                    <mat-list-item role="listitem" *ngFor="let request of requests">
-                        {{request.name}} {{request.username}} {{request.email}} {{request.role}} {{request.year}}
-                        <div>
-                            <button mat-button (click)="decline(request.id)">Decline</button>
-                        </div>
-                        <div>
-                            <button mat-button (click)="accept(request.id)">Accept</button>
-                        </div>
-                    </mat-list-item>
+                <mat-list role="list" class="no-padding">
+                    <cdk-virtual-scroll-viewport itemSize="5" class="example-viewport">
+                        <mat-list-item role="listitem" *cdkVirtualFor="let request of requests" class="example-item">
+                            Name: {{request.name}} &nbsp;&nbsp;&nbsp; Username: {{request.username}} &nbsp;&nbsp;&nbsp; Email: {{request.email}} &nbsp;&nbsp;&nbsp; {{request.role}} &nbsp;&nbsp;&nbsp; {{request.year}}
+                            <div class="buttons">
+                                <button mat-button (click)="decline(request.id)" class="red">Decline</button>
+                                <button mat-button (click)="accept(request.id)" class="green">Accept</button>
+                            </div>
+                        </mat-list-item>
+                      </cdk-virtual-scroll-viewport>
                 </mat-list>
             </div>
         </mat-card-content>
     </mat-card>
-
 </div>
