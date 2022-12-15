@@ -43,6 +43,7 @@ import { ViewConcernComponent } from './components/view-concern/view-concern.com
 import { TutorInfoComponent } from './components/tutor/tutor-info/tutor-info/tutor-info.component';
 import { RegisterTutorComponent } from './components/register-tutor/register-tutor.component';
 import { TutorRequestsComponent } from './components/tutor/tutor-requests/tutor-requests.component';
+import { TutorCoursesComponent } from './components/tutor/tutor-courses/tutor-courses.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { TutorRequestsComponent } from './components/tutor/tutor-requests/tutor-
     TutorInfoComponent,
     RegisterTutorComponent,
     TutorRequestsComponent,
+    TutorCoursesComponent,
   ],
   imports: [
     BrowserModule,
