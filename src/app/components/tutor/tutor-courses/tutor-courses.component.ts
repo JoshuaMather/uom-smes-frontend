@@ -12,6 +12,9 @@ export class TutorCoursesComponent implements OnInit {
   selectedCourse: any;
   loading = false;
 
+  course: any = [];
+  students: any;
+
 
   constructor(
     private api: ApiService,
@@ -24,11 +27,19 @@ export class TutorCoursesComponent implements OnInit {
   }
 
   loadCourseInfo() {
+    console.log(this.selectedCourse);
     this.api.get(`tutor-course/${this.tutor.tutor.id}/${this.selectedCourse}`).subscribe(res => {
       console.log(res);
+      this.course = res.course;
+      this.students = res.students;
       
       this.loading = false;
     });
+  }
+
+  courseChanged() {
+    this.loading = true;
+    this.loadCourseInfo();
   }
 
 }

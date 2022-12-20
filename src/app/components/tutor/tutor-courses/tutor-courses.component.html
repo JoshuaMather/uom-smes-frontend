@@ -1,6 +1,6 @@
 <div class="center">
   <mat-form-field appearance="standard">
-      <mat-select [(ngModel)]="selectedCourse">
+      <mat-select [(ngModel)]="selectedCourse" (selectionChange)="courseChanged()">
           <mat-option *ngFor="let course of tutor.tutor.course" [value]="course.id">
             {{course.course_code}} {{course.course_name}}
           </mat-option>
@@ -10,4 +10,31 @@
 
 <div *ngIf="loading" class="top-padding center">
   <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!loading">
+  <mat-card class="averages">
+    <mat-card-content>
+      <mat-grid-list cols="3" rowHeight="100px">
+        <mat-grid-tile>
+          <h2>
+            Average Attendance <br>
+            <span *ngIf="course" class="center">{{course.average_attendance}}</span>
+          </h2>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <h2>
+            Average Current Grade <br>
+            <span *ngIf="course.average_grades" class="center">{{course.average_grades.current}}</span>
+          </h2>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <h2>
+            Average Predicted Grade <br>
+            <span *ngIf="course.average_grades" class="center">{{course.average_grades.predict}}</span>
+          </h2>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
 </div>
