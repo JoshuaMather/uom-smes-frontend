@@ -12,7 +12,7 @@
   <mat-spinner></mat-spinner>
 </div>
 
-<div *ngIf="!loading">
+<div [hidden]="loading">
   <mat-card class="averages">
     <mat-card-content>
       <mat-grid-list cols="3" rowHeight="100px">
@@ -37,4 +37,61 @@
       </mat-grid-list>
     </mat-card-content>
   </mat-card>
+
+  <div class="center">
+    <mat-form-field appearance="standard">
+      <mat-label>Search</mat-label>
+      <input matInput [(ngModel)]="searchValue" (keyup)="filter()" placeholder="Search" #input>
+    </mat-form-field>
+  </div>
+  
+  <div class="center">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let student"> {{student.user.name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+          <td mat-cell *matCellDef="let student"> {{student.user.email}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="year">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
+          <td mat-cell *matCellDef="let student"> {{student.year}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="personalTutor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Personal Tutor </th>
+          <td mat-cell *matCellDef="let student"> {{student.personal_tutor.user.name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="attendance">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Attendance </th>
+          <td mat-cell *matCellDef="let student" [ngClass]="student.attendance < 0.5 ? 'red-text' : ''"> {{student.attendance}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="currentGrade">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Current Grade </th>
+          <td mat-cell *matCellDef="let student"> {{student.grades.current}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="predictedGrade">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Predicted Grade </th>
+          <td mat-cell *matCellDef="let student" [ngClass]="student.grades.predict < 0.5 ? 'red-text' : ''"> {{student.grades.predict}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div class="center">
+    <mat-paginator [length]="students.length"
+          [pageSize]="25"
+          [pageSizeOptions]="[10, 25, 50, 100]"
+          aria-label="Select page">
+    </mat-paginator>
+  </div>
 </div>

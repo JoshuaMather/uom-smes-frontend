@@ -6,3 +6,28 @@ mat-form-field {
     width: 80%;
     margin-left: 10%;
 }
+
+.mat-column-name {
+    font-weight: bold;
+}
+
+td, th {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding-left: 24px!important;
+    padding-right: 24px!important;
+}
+
+::ng-deep .mat-sort-header-container {
+    display:flex;
+    justify-content: center !important;
+}
+
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
+
+.red-text {
+    color: red;
+    font-weight: bold;
+}
