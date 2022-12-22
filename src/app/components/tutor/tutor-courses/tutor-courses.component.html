@@ -115,8 +115,8 @@
               </div>
 
               <div class="grades-data">
-                <div *ngIf="student.courseAssignments.summative.length>0" class="test">
-                  <h2 class="no-margin">Summative</h2>
+                <div *ngIf="student.courseAssignments.summative.length>0">
+                  <h2 class="no-margin center">Summative</h2>
                   <mat-list role="list" *ngFor="let assignment of student.courseAssignments.summative">
                     <mat-list-item role="listitem"><strong>{{assignment.assignment_name}}: {{assignment.grade*100}}%</strong></mat-list-item>
                     

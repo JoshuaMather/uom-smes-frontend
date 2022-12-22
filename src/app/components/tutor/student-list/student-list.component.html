@@ -19,7 +19,7 @@
                 </mat-select>
             </mat-form-field>
     
-            <mat-form-field appearance="standard">
+            <mat-form-field appearance="standard" *ngIf="tutor.tutor.role!=''">
                 <mat-label>Tutor</mat-label>
                 <mat-select [(ngModel)]="selectedTutor" name="tutor" (selectionChange)="filter()">
                   <mat-option *ngFor="let tutor of tutors" [value]="tutor.id">
