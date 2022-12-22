@@ -53,7 +53,7 @@ export class TutorCoursesComponent implements OnInit {
 
      
 
-      this.students.forEach((student: { courseActivity: any; }) => {
+      this.students.forEach((student: { courseActivity: { activity: { activity: any; attendance: string; weekAttended: any; }; }[]; courseAssignments: any[]; }) => {
         let activityData: { activity: { activity: any; attendance: string; weekAttended: any; }; }[] = [];
         const groupBy = (array: any[]) => {
           return array.reduce((result, currentValue) => {
@@ -88,6 +88,24 @@ export class TutorCoursesComponent implements OnInit {
         });
 
         student.courseActivity = activityData;
+
+        let assignmentData: any = [];
+        let formative: any[] = [];
+        let summative: any[] = [];
+        student.courseAssignments.forEach(assignment => {
+          if(assignment.type.includes('_f')){
+            formative.push(assignment);
+          }else if(assignment.type.includes('_s')){
+            summative.push(assignment);
+          }
+        });
+
+        assignmentData.push({
+          summative: summative,
+          formative: formative,
+        });
+
+        student.courseAssignments = assignmentData[0];
       });
 
 
@@ -113,6 +131,7 @@ export class TutorCoursesComponent implements OnInit {
 
       this.loading = false;
     });
+    console.log(this.students)
   }
 
   filter() {

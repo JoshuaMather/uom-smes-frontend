@@ -19,7 +19,7 @@
                       <mat-list-item role="listitem" *ngIf="assignment.type.includes('assignment')">
                         <p>
                           Date Due: {{assignment.dueDate | date:'d MMMM y, HH:mm'}} <br>
-                          Date Submitted: {{assignment.submittedDate | date:'d MMMM y, HH:mm'}}
+                          Date Submitted: <span [ngClass]="assignment.submittedDate>assignment.dueDate ? 'red-text' : ''">{{assignment.submittedDate | date:'d MMMM y, HH:mm'}}</span>
                         </p>
                       </mat-list-item>
 

@@ -56,4 +56,19 @@ tr.detail-row {
 .green-icon {
     color: lightgreen;
 }
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.grades-data {
+    padding-left: 100px;
+    display: flex!important;
+    justify-content: center!important;
+}
+
+.test {
+    width:300px;
+}
   
