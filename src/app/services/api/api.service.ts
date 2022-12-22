@@ -38,7 +38,7 @@ export class ApiService {
   public get(request: string): Observable<any> {
     return this.http.get<any>(`${this.url}/${request}`, this.httpOptions)
       .pipe(
-        timeout(20000),
+        // timeout(20000),
         catchError(this.errorHandle),
         map(this.getData)
       );
@@ -47,7 +47,7 @@ export class ApiService {
   public post(request: string, data = {}): Observable<any> {
     return this.http.post<any>(`${this.url}/${request}`, data, this.httpOptions)
       .pipe(
-        timeout(20000),
+        // timeout(20000),
         catchError(this.errorHandle),
         map(this.getData)
       );

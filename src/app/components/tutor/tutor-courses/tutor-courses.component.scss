@@ -23,11 +23,37 @@ td, th {
     justify-content: center !important;
 }
 
-.mat-row:hover .mat-cell {
+.mat-row:not(.expanded-row):hover .mat-cell {
     border-color: currentColor;
 }
+
+// tr.example-element-row:not(.example-expanded-row):hover {
+//     background: whitesmoke;
+//   }
+  
+//   tr.example-element-row:not(.example-expanded-row):active {
+//     background: #efefef;
+//   }
 
 .red-text {
     color: red;
     font-weight: bold;
 }
+
+.student-detail {
+    overflow: hidden;
+    display: flex;
+}
+
+tr.detail-row {
+    height: 0;
+}
+
+.red-icon {
+    color: red;
+}
+
+.green-icon {
+    color: lightgreen;
+}
+  
