@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api/api.service';
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-tutor-courses',
@@ -19,6 +20,9 @@ import { ApiService } from 'src/app/services/api/api.service';
 })
 export class TutorCoursesComponent implements OnInit {
   @Input() tutor: any;
+  @ViewChild('barGraph', {static: true}) barGraph!: any;
+
+  chart: any;
   
   selectedCourse: any;
   loading = false;
@@ -26,6 +30,7 @@ export class TutorCoursesComponent implements OnInit {
 
   course: any = [];
   students: any = [];
+  distribution: any = [];
   expandedStudent: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -50,8 +55,9 @@ export class TutorCoursesComponent implements OnInit {
       console.log(res);
       this.course = res.course;
       this.students = res.students;
+      this.distribution = res.distribution;
+      this.createBar();
 
-     
 
       this.students.forEach((student: { courseActivity: { activity: { activity: any; attendance: string; weekAttended: any; }; }[]; courseAssignments: any[]; }) => {
         let activityData: { activity: { activity: any; attendance: string; weekAttended: any; }; }[] = [];
@@ -115,9 +121,10 @@ export class TutorCoursesComponent implements OnInit {
         switch (property) {
           case 'name': return  item.user.name;
           case 'email': return  item.user.email;
-          case 'personalTutor': return  item.personal_tutor.user.name;
-          case 'currentGrade': return  item.grades.current;
-          case 'predictedGrade': return  item.grades.predict;
+          case 'personalTutor': return item.personal_tutor.user.name;
+          case 'attendance': return item.studentCourse[0].attendance;
+          case 'currentGrade': return  item.studentCourse[0].grades.current;
+          case 'predictedGrade': return  item.studentCourse[0].grades.predict;
           default: return item[property];
           }
         }
@@ -140,6 +147,60 @@ export class TutorCoursesComponent implements OnInit {
 
   courseChanged() {
     this.loading = true;
+    this.chart.destroy();
     this.loadCourseInfo();
+  }
+
+  createBar() {
+    let labels: string[] = [];
+    let currentGrades: any[] = [];
+    let predictedGrades: any[] = [];
+    let gradeDatasets = [];
+
+    this.distribution.forEach((dist: { label: string; current: any; predicted: any; }) => {
+      labels.push(dist.label);
+      currentGrades.push(dist.current);
+      predictedGrades.push(dist.predicted);
+    });
+
+    console.log(labels, currentGrades, predictedGrades)
+
+    gradeDatasets.push(
+      {
+        label: 'Current Grades',
+        data: currentGrades
+      }, 
+      {
+        label: 'Predicted Grades',
+        data: predictedGrades
+      }
+    );
+
+    this.chart = new Chart(this.barGraph.nativeElement, {
+      type: 'bar',
+
+      data: {
+        labels: labels, // courses 
+	       datasets: gradeDatasets, // predicted and average data
+      },
+      options: {
+        scales: {
+          y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Amount'
+              }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Grade Distribution'
+            }
+        }
+      }
+      }
+      
+    });
   }
 }
