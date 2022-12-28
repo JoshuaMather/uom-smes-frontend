@@ -9,12 +9,12 @@
                     {{course.courseData.courseName}}
                   </mat-panel-title>
                   <mat-panel-description>
-                    {{course.courseData.attendance*100}}% 
+                    {{course.courseData.attendance*100 | number:'1.0-0'}}% 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
             
                 <mat-list role="list" *ngFor="let activity of course.courseData.activity">
-                  <mat-list-item role="listitem"><strong>{{activity.activity}}: {{activity.attendance*100}}%</strong></mat-list-item>
+                  <mat-list-item role="listitem"><strong>{{activity.activity}}: {{activity.attendance*100 | number:'1.0-0'}}%</strong></mat-list-item>
                   <mat-list-item role="listitem">	
                     <p>Attended: <br>
                     Week: </p>

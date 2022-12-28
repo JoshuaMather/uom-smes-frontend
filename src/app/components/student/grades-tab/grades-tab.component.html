@@ -7,7 +7,7 @@
                     {{grade.course}}
                   </mat-panel-title>
                   <mat-panel-description>
-                    Current Grade: {{grade.currentGrade*100}}% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Predicted Grade: {{grade.predictedGrade*100}}% 
+                    Current Grade: {{grade.currentGrade*100 | number:'1.0-0'}}% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Predicted Grade: {{grade.predictedGrade*100 | number:'1.0-0'}}% 
                   </mat-panel-description>
                 </mat-expansion-panel-header>
             

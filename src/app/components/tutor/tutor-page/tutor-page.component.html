@@ -4,14 +4,14 @@
 </div>
 
 <mat-tab-group mat-stretch-tabs="true" mat-align-tabs="start" class="tabs">
-    <mat-tab label="Courses" *ngIf="tutor.tutor.course.length>0">
-        <ng-template matTabContent>
-            <app-tutor-courses [tutor]="tutor"></app-tutor-courses>
-        </ng-template>
-    </mat-tab>
     <mat-tab label="Personal Tutee List">
         <ng-template matTabContent>
             <app-student-list [tutor]="tutor" class="no-margin"></app-student-list>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Courses" *ngIf="tutor.tutor.course.length>0">
+        <ng-template matTabContent>
+            <app-tutor-courses [tutor]="tutor"></app-tutor-courses>
         </ng-template>
     </mat-tab>
 </mat-tab-group>
