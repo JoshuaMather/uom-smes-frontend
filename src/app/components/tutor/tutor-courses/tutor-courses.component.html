@@ -161,6 +161,9 @@
                 </div>
               </div>
             </div>
+            <div class="center" *ngIf="tutor.tutor.role=='admin'">
+              <button class="info-button" mat-button (click)="studentInfo(student)">See Student Info</button>
+            </div>
           </div>
         </td>
       </ng-container>

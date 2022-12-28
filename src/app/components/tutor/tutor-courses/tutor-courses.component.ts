@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Chart } from 'chart.js/auto';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-tutor-courses',
@@ -41,6 +43,8 @@ export class TutorCoursesComponent implements OnInit {
 
   constructor(
     private api: ApiService,
+    private router: Router,
+    private data: DataService,
   ) { }
 
   ngOnInit(): void {
@@ -202,5 +206,11 @@ export class TutorCoursesComponent implements OnInit {
       }
       
     });
+  }
+
+  studentInfo(student: any) {
+    console.log(student);
+    this.data.setStudentId(student.id);
+    this.router.navigate(['/student']);
   }
 }
