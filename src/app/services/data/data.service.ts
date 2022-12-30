@@ -31,6 +31,13 @@ export class DataService {
     localStorage.setItem('student_data', JSON.stringify(value));
   }
 
+  public getCourses() {
+    return JSON.parse(localStorage.getItem('courses') || '');
+  }
+  public setCourses(value: any) {
+    localStorage.setItem('courses', JSON.stringify(value));
+  }
+
   public logout() {
     this.clearData();
     this.router.navigateByUrl('login');

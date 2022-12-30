@@ -41,6 +41,8 @@ export class TutorCoursesComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'currentGrade', 'predictedGrade', 'expand'];
 
+  courseList: any;
+
   constructor(
     private api: ApiService,
     private router: Router,
@@ -49,6 +51,11 @@ export class TutorCoursesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
+    if(this.tutor.tutor.role==='admin'){
+      this.courseList = this.data.getCourses();
+    } else {
+      this.courseList = this.tutor.tutor.course;
+    }
     this.selectedCourse = this.tutor.tutor.course[0].id;
     this.loadCourseInfo();
   }

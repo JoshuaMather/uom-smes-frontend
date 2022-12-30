@@ -3,7 +3,7 @@
 <div class="center">
   <mat-form-field appearance="standard">
       <mat-select [(ngModel)]="selectedCourse" (selectionChange)="courseChanged()">
-          <mat-option *ngFor="let course of tutor.tutor.course" [value]="course.id">
+          <mat-option *ngFor="let course of courseList" [value]="course.id">
             {{course.course_code}} {{course.course_name}}
           </mat-option>
       </mat-select>
