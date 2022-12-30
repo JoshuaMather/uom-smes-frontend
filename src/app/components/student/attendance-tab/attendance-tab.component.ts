@@ -95,8 +95,12 @@ export class AttendanceTabComponent implements OnInit {
         var attended = week.map(function(activity: { attended: any; }){
           return activity.attended;
         });
-        let weekAttendence = attended.reduce((a: any, b: any) => a + b) / parseFloat(attended.length);
-
+        let weekAttendence;
+        if(attended.length==0){
+          weekAttendence = -100;
+        } else {
+          weekAttendence = attended.reduce((a: any, b: any) => a + b) / parseFloat(attended.length);
+        }
         attendance.push(weekAttendence);
       }
       courseAttendanceDatsets.push({
@@ -116,6 +120,7 @@ export class AttendanceTabComponent implements OnInit {
       options: {
         scales: {
           y: {
+              min: 0,
               beginAtZero: true,
               title: {
                 display: true,

@@ -31,25 +31,34 @@ export class GradesTabComponent implements OnInit {
     this.studentInfo.student_course.forEach((course: { course: {
       average_grades: any; id: any; tutor: any; course_code: string; course_name: string; 
 }; grades: { current: any; predict: any; }; }) => {
-      let courseAssignments = this.studentInfo.student_assignment.filter((assignment: { assignment: { course: { id: any; }; }; }) => assignment.assignment.course.id === course.course.id);
+      let courseAssignments = this.studentInfo.student_assignment.filter((assignment: { assignment: { course: { id: any; }; }; }) => assignment.assignment.course === course.course.id);
 
       let assignmentData: any = [];
-      let formative: { assignmentName: any; type: any; grade: any; dueDate: any; submittedDate: any; }[] = [];
-      let summative: { assignmentName: any; type: any; grade: any; dueDate: any; submittedDate: any; }[] = []
-      courseAssignments.forEach((element: { assignment: { assignment_name: any; type: any; due_date: any; }; grade: any; date_submitted: any; }) => {
+      let formative: { assignmentName: any; type: string | string[]; grade: string | null; dueDate: any; submittedDate: any; }[] = [];
+      let summative: { assignmentWeight: number; assignmentName: any; type: string | string[]; grade: string | null; dueDate: any; submittedDate: any; }[] = []
+      let summativeWeight = 0;
+      courseAssignments.forEach((element: { assignment: { type: string | string[]; assignment_name: any; due_date: any; engagement_weight: number; }; grade: number; date_submitted: any; }) => {
+        let grade;
+        if(element.grade===null){ 
+          grade = null;
+        } else {
+          grade = (element.grade*100).toFixed(0)
+        }
         if(element.assignment.type.includes('_f')){
           formative.push({
             assignmentName: element.assignment.assignment_name,
             type: element.assignment.type,
-            grade: (element.grade*100).toFixed(0),
+            grade: grade,
             dueDate: element.assignment.due_date,
             submittedDate: element.date_submitted,
           });
         } else if(element.assignment.type.includes('_s')) {
+          summativeWeight += element.assignment.engagement_weight;
           summative.push({
+            assignmentWeight: element.assignment.engagement_weight,
             assignmentName: element.assignment.assignment_name,
             type: element.assignment.type,
-            grade: (element.grade*100).toFixed(0),
+            grade: grade,
             dueDate: element.assignment.due_date,
             submittedDate: element.date_submitted,
           });
@@ -59,6 +68,7 @@ export class GradesTabComponent implements OnInit {
       assignmentData.push({
         summative: summative,
         formative: formative,
+        summativeWeight: summativeWeight,
       })
 
       if(this.user.tutor.role==='admin'){

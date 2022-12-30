@@ -125,7 +125,6 @@ export class TutorCoursesComponent implements OnInit {
           summativeWeight: summativeWeight,
         });
 
-        console.log('assdf', assignmentData, student.courseAssignments);
         student.courseAssignments = assignmentData[0];
       });
 
