@@ -109,19 +109,23 @@ export class TutorCoursesComponent implements OnInit {
         let assignmentData: any = [];
         let formative: any[] = [];
         let summative: any[] = [];
+        let summativeWeight = 0;
         student.courseAssignments.forEach(assignment => {
           if(assignment.type.includes('_f')){
             formative.push(assignment);
           }else if(assignment.type.includes('_s')){
             summative.push(assignment);
+            summativeWeight += assignment.engagement_weight;
           }
         });
 
         assignmentData.push({
           summative: summative,
           formative: formative,
+          summativeWeight: summativeWeight,
         });
 
+        console.log('assdf', assignmentData, student.courseAssignments);
         student.courseAssignments = assignmentData[0];
       });
 
