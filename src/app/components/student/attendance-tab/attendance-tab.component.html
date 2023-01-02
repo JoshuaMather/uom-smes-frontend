@@ -33,7 +33,7 @@
     <div class="line-graph-container">
         <canvas #lineGraph></canvas>
         <div class="radar-container">
-          <canvas #radarGraph [hidden]="!user.tutor"></canvas>
+          <canvas #radarGraph [hidden]="user.tutor.role!='admin'"></canvas>
         </div>
     </div>
 </div>

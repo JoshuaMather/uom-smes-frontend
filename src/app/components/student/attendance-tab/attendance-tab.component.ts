@@ -25,7 +25,7 @@ export class AttendanceTabComponent implements OnInit {
     this.user = this.data.getUser();
     this.courseAttendanceCalculate();
     this.createChart();
-    if(this.user.tutor){
+    if(this.user.tutor.role=='admin'){
       this.createRadar();
     }
   }
