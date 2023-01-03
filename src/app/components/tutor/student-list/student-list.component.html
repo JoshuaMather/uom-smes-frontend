@@ -52,22 +52,22 @@
 
             <ng-container matColumnDef="attendance">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Attendance </th>
-                <td mat-cell *matCellDef="let student" [ngClass]="student.attendance < 0.5 ? 'red-text' : ''"> {{student.attendance*100 | number:'1.0-0'}}% </td>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.attendance < 0.5 ? 'red-text' : ''"> {{student.engagement.attendance*100 | number:'1.0-0'}}% </td>
             </ng-container>
 
             <ng-container matColumnDef="currentGrade">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Current Grade </th>
-                <td mat-cell *matCellDef="let student"> {{student.grades.current*100 | number:'1.0-0'}}% </td>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.current/student.engagement.max_current < 0.5 ? 'red-text' : ''"> {{student.engagement.current*100 | number:'1.0-0'}}% </td>
             </ng-container>
 
             <ng-container matColumnDef="predictedGrade">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Predicted Grade </th>
-                <td mat-cell *matCellDef="let student" [ngClass]="student.grades.predict < 0.5 ? 'red-text' : ''"> {{student.grades.predict*100 | number:'1.0-0'}}% </td>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.predict < 0.5 ? 'red-text' : ''"> {{student.engagement.predict*100 | number:'1.0-0'}}% </td>
             </ng-container>
 
             <ng-container matColumnDef="engagement">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Engagement </th>
-                <td mat-cell *matCellDef="let student" [ngClass]="student.grades.engagement < 0.5 ? 'red-text' : ''"> {{student.grades.engagement*100 | number:'1.0-0'}}% </td>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.engagement < 0.5 ? 'red-text' : ''"> {{student.engagement.engagement*100 | number:'1.0-0'}}% </td>
             </ng-container>
 
             <ng-container matColumnDef="concerns">

@@ -27,10 +27,10 @@ export class EngagementInfoComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.data.getUser();
 
-    this.attendance = Math.round(this.studentInfo.attendance * 100);
-    this.currentGrade = Math.round(this.studentInfo.grades.current * 100);
-    this.predictedGrade = Math.round(this.studentInfo.grades.predict * 100);
-    this.engagement = Math.round(this.studentInfo.grades.engagement * 100);
+    this.attendance = Math.round(this.studentInfo.engagement.attendance * 100);
+    this.currentGrade = Math.round(this.studentInfo.engagement.current * 100);
+    this.predictedGrade = Math.round(this.studentInfo.engagement.predict * 100);
+    this.engagement = Math.round(this.studentInfo.engagement.engagement * 100);
 
     // get last logins: SPOT, Blackboard, Git push
     let history = this.studentInfo.student_last;
