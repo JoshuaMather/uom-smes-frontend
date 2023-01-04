@@ -39,7 +39,7 @@ export class TutorCoursesComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'currentGrade', 'predictedGrade', 'engagement', 'expand'];
+  displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'currentGrade', 'maxCurrentGrade', 'predictedGrade', 'engagement', 'expand'];
 
   courseList: any;
 
@@ -138,6 +138,7 @@ export class TutorCoursesComponent implements OnInit {
           case 'personalTutor': return item.personal_tutor.user.name;
           case 'attendance': return item.studentCourse[0].attendance.attendance;
           case 'currentGrade': return  item.studentCourse[0].grades.current;
+          case 'maxCurrentGrade': return  item.studentCourse[0].grades.max_current;
           case 'predictedGrade': return  item.studentCourse[0].grades.predict;
           case 'engagement': return item.studentCourse[0].engagement;
           default: return item[property];
