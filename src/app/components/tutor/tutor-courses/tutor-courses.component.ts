@@ -27,6 +27,7 @@ export class TutorCoursesComponent implements OnInit {
   chart: any;
   
   selectedCourse: any;
+  selectedView: any = -1;
   loading = false;
   public searchValue: string = '';
 
@@ -34,14 +35,19 @@ export class TutorCoursesComponent implements OnInit {
   students: any = [];
   distribution: any = [];
   expandedStudent: any;
+  assignment: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   
   dataSource!: MatTableDataSource<any>;
+  dataSourceAssignment!: MatTableDataSource<any>;
   displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'currentGrade', 'maxCurrentGrade', 'predictedGrade', 'engagement', 'expand'];
+  assignmentCColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'dateSubmitted', 'grade',];
+  assignmentEColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'grade',];
 
   courseList: any;
+  viewList: any;
 
   constructor(
     private api: ApiService,
@@ -56,7 +62,7 @@ export class TutorCoursesComponent implements OnInit {
       this.courseList = this.tutor.tutor.course;
     }
     this.courseList.unshift({
-      id: 0,
+      id: -1,
       course_code: '',
       course_name: 'Select Course' 
     })
@@ -65,7 +71,6 @@ export class TutorCoursesComponent implements OnInit {
   }
 
   loadCourseInfo() {
-    console.log(this.selectedCourse);
     this.api.post(`tutor-course/${this.tutor.tutor.id}/${this.selectedCourse}`).subscribe(res => {
       console.log(res);
       this.course = res.course;
@@ -158,22 +163,82 @@ export class TutorCoursesComponent implements OnInit {
 
       this.loading = false;
     });
-    console.log(this.students)
+  }
+
+  loadAssignmentInfo() {
+    this.api.post(`tutor-course-assignment/${this.tutor.tutor.id}/${this.selectedView}`).subscribe(res => {
+      console.log(res);
+      this.assignment = res.assignment;
+      this.students = res.students;
+
+      this.dataSourceAssignment = new MatTableDataSource(this.students);
+      this.dataSourceAssignment.paginator = this.paginator;
+      this.dataSourceAssignment.sortingDataAccessor = (item, property) => {
+        switch (property) {
+          case 'name': return  item.user.name;
+          case 'email': return  item.user.email;
+          case 'personalTutor': return item.personal_tutor.user.name;
+          case 'dateSubmitted': return  item.dateSubmitted;
+          case 'grade': return  item.grade;
+          default: return item[property];
+          }
+        }
+      this.dataSourceAssignment.sort = this.sort;
+      this.dataSourceAssignment.filterPredicate = (data: any, filterA: string) => {
+        let searchFilter = (data.user.name.toLowerCase().indexOf(this.searchValue) != -1 ||
+                            data.user.email.toLowerCase().indexOf(filterA) != -1 ||
+                            data.personal_tutor.user.name.toLowerCase().indexOf(filterA) != -1);
+        return searchFilter;
+      }
+      this.loading = false;
+    });
+      
   }
 
   filter() {
     this.dataSource.filter = 'filter'; // trigger filter
   }
 
+  filterA() {
+    this.dataSourceAssignment.filter = 'filter'; // trigger filter
+  }
+
   courseChanged() {
-    if(this.selectedCourse===0){
+    this.selectedView = -1;
+    if(this.selectedCourse===-1){
+      this.viewList = [];
+      return;
+    }
+    if(this.chart){
+      this.chart.destroy();
+    }
+
+    this.viewList = this.courseList.filter( (course: { id: any; }) => { return course.id === this.selectedCourse; }).map((course: { assignments: any; }) => course.assignments);
+    this.viewList[0].unshift({
+      id: 0,
+      assignment_name: 'Overall' 
+    });
+    this.viewList[0].unshift({
+      id: -1,
+      assignment_name: 'Select View' 
+    });
+    this.viewList = this.viewList[0];
+    console.log(this.viewList);
+    console.log(this.selectedView);
+  }
+
+  viewChanged() {
+    if(this.selectedView===-1){
       return;
     }
     this.loading = true;
     if(this.chart){
       this.chart.destroy();
     }
-    this.loadCourseInfo();
+    if(this.selectedView===0){
+      this.loadCourseInfo();
+    }
+    this.loadAssignmentInfo();
   }
 
   createBar() {

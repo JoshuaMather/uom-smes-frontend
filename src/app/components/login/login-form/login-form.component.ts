@@ -45,15 +45,15 @@ export class LoginFormComponent implements OnInit {
         this.api.setApiToken(res.token);
         console.log('RES', res);
         this.loginEv.emit(this.form.value);
-        this.loggingIn = true;
+        this.loggingIn = false;
       }, error => {
         console.log(error);
         this.error = "Incorrect Login Details";
-        this.loggingIn = true;
+        this.loggingIn = false;
       });
     } else {
       this.error = "Incorrect Login Details";
-      this.loggingIn = true;
+      this.loggingIn = false;
     }
   }
 

@@ -61,6 +61,7 @@ tr.detail-row {
     display: flex;
     flex-direction: row;
     padding-top: 20px;
+    padding-bottom: 40px;
 }
 
 .grades-data {
@@ -81,6 +82,10 @@ tr.detail-row {
 
 .info-button {
     color: #6b2c91;
+}
+
+.list-pad {
+    padding-bottom: 20px;
 }
 
   

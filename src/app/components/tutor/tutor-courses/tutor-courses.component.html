@@ -10,12 +10,23 @@
   </mat-form-field>
 </div>
 
+<div class="center">
+  <mat-form-field appearance="standard">
+      <mat-select [(ngModel)]="selectedView" (selectionChange)="viewChanged()" [disabled]="loading || selectedCourse===-1">
+          <mat-option *ngFor="let view of viewList" [value]="view.id">
+            {{view.assignment_name}} 
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+</div>
+
+
 <div *ngIf="loading" class="top-padding center">
   <mat-spinner></mat-spinner>
 </div>
 
-<div [hidden]="loading || selectedCourse===0">
-  <div [hidden]="">
+<div [hidden]="loading || selectedCourse===-1 || selectedView === -1">
+  <div [hidden]="selectedView != 0">
     <mat-card class="averages">
       <mat-card-content>
         <mat-grid-list cols="3" rowHeight="100px">
@@ -132,7 +143,7 @@
                 <div class="grades-data">
                   <div *ngIf="student.courseAssignments.summative.length>0">
                     <h2 class="no-margin center">Summative</h2>
-                    <mat-list role="list" *ngFor="let assignment of student.courseAssignments.summative">
+                    <mat-list role="list" *ngFor="let assignment of student.courseAssignments.summative" class="list-pad">
                       <mat-list-item role="listitem" *ngIf="assignment.grade!=null"><strong>{{assignment.assignment_name}}: {{assignment.grade*100 | number:'1.0-0'}}%</strong></mat-list-item>
                       <mat-list-item role="listitem" *ngIf="assignment.grade===null"><strong>{{assignment.assignment_name}}: Not Due</strong></mat-list-item>
   
@@ -158,7 +169,7 @@
   
                   <div *ngIf="student.courseAssignments.formative.length>0">
                     <h2 class="no-margin">Formative</h2>
-                    <mat-list role="list" *ngFor="let assignment of student.courseAssignments.formative">
+                    <mat-list role="list" *ngFor="let assignment of student.courseAssignments.formative"  class="list-pad">
                       <mat-list-item role="listitem" *ngIf="assignment.grade!=null"><strong>{{assignment.assignment_name}}: {{assignment.grade*100 | number:'1.0-0'}}%</strong></mat-list-item>
                       <mat-list-item role="listitem" *ngIf="assignment.grade===null"><strong>{{assignment.assignment_name}}: Not Due</strong></mat-list-item>
   
@@ -188,6 +199,90 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.expanded-row]="expandedStudent === row" (click)="expandedStudent = expandedStudent === row ? null : row"></tr>
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+      </table>
+    </div>
+  
+    <div class="center">
+      <mat-paginator [length]="students.length"
+            [pageSize]="25"
+            [pageSizeOptions]="[10, 25, 50, 100]"
+            aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="loading || selectedCourse===-1 || selectedView === -1">
+  <div [hidden]="selectedView === 0">
+    <mat-card class="averages">
+      <mat-card-content>
+        <mat-grid-list cols="3" rowHeight="100px">
+          <mat-grid-tile>
+            <h2 class="center-text">
+              Due Date <br>
+              <span *ngIf="assignment" class="center">{{assignment.due_date | date:'d MMMM y, HH:mm'}}</span>
+            </h2>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <h2 *ngIf="assignment && assignment.type.includes('_s')">
+              Weight <br>
+              <span *ngIf="assignment" class="center">{{(assignment.gradeWeight)*100 | number:'1.0-0'}}%</span>
+            </h2>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <h2 class="center-text">
+              Type <br>
+              <span *ngIf="assignment && assignment.type.includes('_f')" class="center">Formative</span>
+              <span *ngIf="assignment && assignment.type.includes('_s')" class="center">Summative</span>
+            </h2>
+          </mat-grid-tile>
+          
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="center">
+      <mat-form-field appearance="standard">
+        <mat-label>Search</mat-label>
+        <input matInput [(ngModel)]="searchValue" (keyup)="filter()" placeholder="Search" #input>
+      </mat-form-field>
+    </div>
+    
+    <div class="center">
+      <table mat-table [dataSource]="dataSourceAssignment" matSort multiTemplateDataRows>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let student"> {{student.user.name}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let student"> {{student.user.email}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
+            <td mat-cell *matCellDef="let student"> {{student.year}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="personalTutor">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Personal Tutor </th>
+            <td mat-cell *matCellDef="let student"> {{student.personal_tutor.user.name}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="dateSubmitted">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date Submitted </th>
+            <td mat-cell *matCellDef="let student" [ngClass]="student.date_submitted > assignment.due_date ? 'red-text' : ''"> {{student.date_submitted | date:'d MMMM y, HH:mm'}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="grade">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Grade </th>
+            <td mat-cell *matCellDef="let student" [ngClass]="student.grade < 0.5 ? 'red-text' : ''"> {{student.grade | number:'1.0-0'}}% </td>
+        </ng-container>
+      
+
+        <tr mat-header-row *matHeaderRowDef="assignmentCColumns" class="header"></tr>
+        <tr mat-row *matRowDef="let row; columns: assignmentCColumns;"></tr>
       </table>
     </div>
   
