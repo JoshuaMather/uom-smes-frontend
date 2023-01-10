@@ -50,14 +50,18 @@ export class TutorCoursesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loading = true;
     if(this.tutor.tutor.role==='admin'){
       this.courseList = this.data.getCourses();
     } else {
       this.courseList = this.tutor.tutor.course;
     }
-    this.selectedCourse = this.tutor.tutor.course[0].id;
-    this.loadCourseInfo();
+    this.courseList.unshift({
+      id: 0,
+      course_code: '',
+      course_name: 'Select Course' 
+    })
+
+    this.selectedCourse = this.courseList[0].id;
   }
 
   loadCourseInfo() {
@@ -162,8 +166,13 @@ export class TutorCoursesComponent implements OnInit {
   }
 
   courseChanged() {
+    if(this.selectedCourse===0){
+      return;
+    }
     this.loading = true;
-    this.chart.destroy();
+    if(this.chart){
+      this.chart.destroy();
+    }
     this.loadCourseInfo();
   }
 
