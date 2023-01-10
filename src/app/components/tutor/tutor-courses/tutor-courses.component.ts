@@ -39,12 +39,12 @@ export class TutorCoursesComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('SortA') SortA!: MatSort;
   
   dataSource!: MatTableDataSource<any>;
   dataSourceAssignment!: MatTableDataSource<any>;
   displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'currentGrade', 'maxCurrentGrade', 'predictedGrade', 'engagement', 'expand'];
-  assignmentCColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'dateSubmitted', 'grade',];
-  assignmentEColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'grade',];
+  assignmentColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'dateSubmitted', 'grade',];
 
   courseList: any;
   viewList: any;
@@ -178,12 +178,12 @@ export class TutorCoursesComponent implements OnInit {
           case 'name': return  item.user.name;
           case 'email': return  item.user.email;
           case 'personalTutor': return item.personal_tutor.user.name;
-          case 'dateSubmitted': return  item.dateSubmitted;
+          case 'dateSubmitted': return  item.date_submitted;
           case 'grade': return  item.grade;
           default: return item[property];
           }
         }
-      this.dataSourceAssignment.sort = this.sort;
+      this.dataSourceAssignment.sort = this.SortA;
       this.dataSourceAssignment.filterPredicate = (data: any, filterA: string) => {
         let searchFilter = (data.user.name.toLowerCase().indexOf(this.searchValue) != -1 ||
                             data.user.email.toLowerCase().indexOf(filterA) != -1 ||
