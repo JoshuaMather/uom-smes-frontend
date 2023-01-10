@@ -216,7 +216,7 @@
   <div [hidden]="selectedView === 0">
     <mat-card class="averages">
       <mat-card-content>
-        <mat-grid-list cols="3" rowHeight="100px">
+        <mat-grid-list cols="4" rowHeight="100px">
           <mat-grid-tile>
             <h2 class="center-text">
               Due Date <br>
@@ -224,9 +224,9 @@
             </h2>
           </mat-grid-tile>
           <mat-grid-tile>
-            <h2 *ngIf="assignment && assignment.type.includes('_s')">
-              Weight <br>
-              <span *ngIf="assignment" class="center">{{(assignment.gradeWeight)*100 | number:'1.0-0'}}%</span>
+            <h2 class="center-text">
+              Average Grade <br>
+              <span *ngIf="assignment" class="center">{{(assignment.averageGrade)*100 | number:'1.0-0'}}%</span>
             </h2>
           </mat-grid-tile>
           <mat-grid-tile>
@@ -236,10 +236,20 @@
               <span *ngIf="assignment && assignment.type.includes('_s')" class="center">Summative</span>
             </h2>
           </mat-grid-tile>
+          <mat-grid-tile>
+            <h2 *ngIf="assignment && assignment.type.includes('_s')">
+              Weight <br>
+              <span *ngIf="assignment" class="center">{{(assignment.gradeWeight)*100 | number:'1.0-0'}}%</span>
+            </h2>
+          </mat-grid-tile>
           
         </mat-grid-list>
       </mat-card-content>
     </mat-card>
+
+    <div class="bar-container">
+      <canvas #barGraphA class="bar"></canvas>
+    </div>
 
     <div class="center">
       <mat-form-field appearance="standard">

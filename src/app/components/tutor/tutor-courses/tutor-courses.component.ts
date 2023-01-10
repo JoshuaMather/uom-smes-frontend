@@ -23,8 +23,10 @@ import { DataService } from 'src/app/services/data/data.service';
 export class TutorCoursesComponent implements OnInit {
   @Input() tutor: any;
   @ViewChild('barGraph', {static: true}) barGraph!: any;
+  @ViewChild('barGraphA', {static: true}) barGraphA!: any;
 
   chart: any;
+  chartA: any;
   
   selectedCourse: any;
   selectedView: any = -1;
@@ -170,6 +172,8 @@ export class TutorCoursesComponent implements OnInit {
       console.log(res);
       this.assignment = res.assignment;
       this.students = res.students;
+      this.distribution = res.distribution
+      this.createBarAssignment();
 
       this.dataSourceAssignment = new MatTableDataSource(this.students);
       this.dataSourceAssignment.paginator = this.paginator;
@@ -212,6 +216,9 @@ export class TutorCoursesComponent implements OnInit {
     if(this.chart){
       this.chart.destroy();
     }
+    if(this.chartA){
+      this.chartA.destroy();
+    }
 
     this.viewList = this.courseList.filter( (course: { id: any; }) => { return course.id === this.selectedCourse; }).map((course: { assignments: any; }) => course.assignments);
     this.viewList[0].unshift({
@@ -235,6 +242,9 @@ export class TutorCoursesComponent implements OnInit {
     if(this.chart){
       this.chart.destroy();
     }
+    if(this.chartA){
+      this.chartA.destroy();
+    }
     if(this.selectedView===0){
       this.loadCourseInfo();
     }
@@ -253,8 +263,6 @@ export class TutorCoursesComponent implements OnInit {
       predictedGrades.push(dist.predicted);
     });
 
-    console.log(labels, currentGrades, predictedGrades)
-
     gradeDatasets.push(
       {
         label: 'Current Grades',
@@ -267,6 +275,51 @@ export class TutorCoursesComponent implements OnInit {
     );
 
     this.chart = new Chart(this.barGraph.nativeElement, {
+      type: 'bar',
+
+      data: {
+        labels: labels, // courses 
+	       datasets: gradeDatasets, // predicted and average data
+      },
+      options: {
+        scales: {
+          y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Amount'
+              }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Grade Distribution'
+            }
+        }
+      }
+      }
+      
+    });
+  }
+
+  createBarAssignment() {
+    let labels: string[] = [];
+    let grades: any[] = [];
+    let gradeDatasets = [];
+
+    this.distribution.forEach((dist: { label: string; grade: any; }) => {
+      labels.push(dist.label);
+      grades.push(dist.grade);
+    });
+
+    gradeDatasets.push(
+      {
+        label: 'Grades',
+        data: grades
+      }, 
+    );
+
+    this.chartA = new Chart(this.barGraphA.nativeElement, {
       type: 'bar',
 
       data: {
