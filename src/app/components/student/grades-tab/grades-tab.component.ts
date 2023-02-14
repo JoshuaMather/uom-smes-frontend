@@ -71,7 +71,7 @@ export class GradesTabComponent implements OnInit {
         summativeWeight: summativeWeight,
       })
 
-      if(this.user.tutor.role==='admin'){
+      if(this.user.tutor && this.user.tutor.role==='admin'){
         courseAssignmentData.push({
           course: course.course.course_code + ' ' + course.course.course_name,
           currentGrade: course.grades.current,
@@ -108,16 +108,16 @@ export class GradesTabComponent implements OnInit {
 }) => {
       courseLabel.push(courseInfo.course);
       currentGrades.push(courseInfo.currentGrade);
-      if(this.user.tutor.role==='admin'){
+      if(this.user.tutor && this.user.tutor.role==='admin'){
         currentGradesAverage.push(courseInfo.averageCurrent);
       }
       predictedGrades.push(courseInfo.predictedGrade);
-      if(this.user.tutor.role==='admin'){
+      if(this.user.tutor && this.user.tutor.role==='admin'){
         predictedGradesAverage.push(courseInfo.averagePredicted);
       }
     });
 
-    if(this.user.tutor.role==='admin'){
+    if(this.user.tutor && this.user.tutor.role==='admin'){
       gradeDatasets.push(
         {
           label: 'Current Grades',
