@@ -172,6 +172,19 @@ export class TutorCoursesComponent implements OnInit {
       console.log(res);
       this.assignment = res.assignment;
       this.students = res.students;
+      this.students.forEach((student: { date_submitted: string | number | Date; grade: any; }) => {
+        let submit = new Date(student.date_submitted);
+        let due = new Date(this.assignment.due_date);
+        if(submit > due){
+          let diff = Math.abs(submit.getTime() - due.getTime());
+          let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+
+          student.grade = (student.grade) - (student.grade * ((diffDays*10)/100));
+          if(student.grade < 0) {
+            student.grade = 0;
+          }
+        }
+      });
       this.distribution = res.distribution
       this.createBarAssignment();
 
