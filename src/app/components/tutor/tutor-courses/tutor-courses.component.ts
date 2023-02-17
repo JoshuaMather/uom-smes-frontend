@@ -247,8 +247,9 @@ export class TutorCoursesComponent implements OnInit {
     }
     if(this.selectedView===0){
       this.loadCourseInfo();
+    } else {
+      this.loadAssignmentInfo();
     }
-    this.loadAssignmentInfo();
   }
 
   createBar() {
