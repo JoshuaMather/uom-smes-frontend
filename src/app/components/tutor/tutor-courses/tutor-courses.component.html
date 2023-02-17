@@ -152,7 +152,7 @@
                           <br>
                           Weight: {{(assignment.engagement_weight / student.courseAssignments.summativeWeight)*100 | number:'1.0-0'}}% <br>
                           Date Due: {{assignment.due_date | date:'d MMMM y, HH:mm'}} <br>
-                          Date Submitted: <span *ngIf="assignment.grade!=null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'red-text' : ''">{{assignment.date_submitted | date:'d MMMM y, HH:mm'}}</span> <span *ngIf="assignment.grade===null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'red-text' : ''"></span><br>
+                          Date Submitted: <span *ngIf="assignment.grade!=null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''">{{assignment.date_submitted | date:'d MMMM y, HH:mm'}}</span> <span *ngIf="assignment.grade===null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''"></span><br>
                         </p>
                       </mat-list-item>
   
@@ -176,7 +176,7 @@
                       <mat-list-item role="listitem" *ngIf="assignment.type.includes('assignment')">
                         <p>
                           Date Due: {{assignment.due_date | date:'d MMMM y, HH:mm'}} <br>
-                          Date Submitted: <span *ngIf="assignment.grade!=null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'red-text' : ''">{{assignment.date_submitted | date:'d MMMM y, HH:mm'}}</span> <span *ngIf="assignment.grade===null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'red-text' : ''"></span><br>
+                          Date Submitted: <span *ngIf="assignment.grade!=null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''">{{assignment.date_submitted | date:'d MMMM y, HH:mm'}}</span> <span *ngIf="assignment.grade===null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''"></span><br>
                         </p>
                       </mat-list-item>
   
@@ -282,7 +282,7 @@
     
         <ng-container matColumnDef="dateSubmitted" >
             <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="assignment && assignment.type.includes('exam')"> Date Submitted </th>
-            <td mat-cell *matCellDef="let student" [ngClass]="student.date_submitted > assignment.due_date ? 'red-text' : ''" [hidden]="assignment && assignment.type.includes('exam')"> {{student.date_submitted | date:'d MMMM y, HH:mm'}} </td>
+            <td mat-cell *matCellDef="let student" [ngClass]="student.date_submitted > assignment.due_date ? 'blue-text' : ''" [hidden]="assignment && assignment.type.includes('exam')"> {{student.date_submitted | date:'d MMMM y, HH:mm'}} </td>
         </ng-container>
     
         <ng-container matColumnDef="grade">
