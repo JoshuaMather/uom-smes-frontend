@@ -40,6 +40,7 @@ export class TutorCoursesComponent implements OnInit {
   assignment: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('paginatorA') paginatorA!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild('SortA') SortA!: MatSort;
   
@@ -189,7 +190,7 @@ export class TutorCoursesComponent implements OnInit {
       this.createBarAssignment();
 
       this.dataSourceAssignment = new MatTableDataSource(this.students);
-      this.dataSourceAssignment.paginator = this.paginator;
+      this.dataSourceAssignment.paginator = this.paginatorA;
       this.dataSourceAssignment.sortingDataAccessor = (item, property) => {
         switch (property) {
           case 'name': return  item.user.name;
