@@ -38,6 +38,9 @@ export class TutorCoursesComponent implements OnInit {
   distribution: any = [];
   expandedStudent: any;
   assignment: any;
+  stats: any;
+  statsPredicted: any;
+  statsCurrent: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('paginatorA') paginatorA!: MatPaginator;
@@ -79,6 +82,8 @@ export class TutorCoursesComponent implements OnInit {
       this.course = res.course;
       this.students = res.students;
       this.distribution = res.distribution;
+      this.statsPredicted = res.statsPredicted;
+      this.statsCurrent = res.statsCurrent;
       this.createBar();
 
 
@@ -173,6 +178,7 @@ export class TutorCoursesComponent implements OnInit {
       console.log(res);
       this.assignment = res.assignment;
       this.students = res.students;
+      this.stats = res.stats;
       this.students.forEach((student: { date_submitted: string | number | Date; grade: any; }) => {
         let submit = new Date(student.date_submitted);
         let due = new Date(this.assignment.due_date);

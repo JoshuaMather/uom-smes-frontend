@@ -55,6 +55,45 @@
     <div class="bar-container">
       <canvas #barGraph class="bar"></canvas>
     </div>
+
+    <mat-card *ngIf="statsCurrent && statsPredicted" class="averages">
+      <mat-card-content>
+        <mat-grid-list cols="4" rowHeight="120px">
+          <mat-grid-tile>
+            <h3 class="center-text">
+              <strong>Current Stats</strong> <br>
+              Max: {{statsCurrent.maxCurrent*100 | number:'1.0-0'}}% <br>
+              Median: {{statsCurrent.medianCurrent*100 | number:'1.0-0'}}% <br>
+              Min: {{statsCurrent.minCurrent*100 | number:'1.0-0'}}%
+            </h3>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <h3 class="center-text">
+              Mode: {{statsCurrent.modeCurrent*100 | number:'1.0-0'}}% <br>
+              Mean: {{statsCurrent.meanCurrent*100 | number:'1.0-0'}}% <br>
+              Standard Deviation: {{statsCurrent.sdCurrent}}% <br> 
+              Variance: {{statsCurrent.varianceCurrent}}%
+            </h3>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <h3 class="center-text">
+              <strong>Predicted Stats</strong> <br>
+              Max: {{statsPredicted.maxPredicted*100 | number:'1.0-0'}}% <br>
+              Median: {{statsPredicted.medianPredicted*100 | number:'1.0-0'}}% <br>
+              Min: {{statsPredicted.minPredicted*100 | number:'1.0-0'}}%
+            </h3>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <h3 class="center-text">
+              Mode: {{statsPredicted.modePredicted*100 | number:'1.0-0'}}% <br>
+              Mean: {{statsPredicted.meanPredicted*100 | number:'1.0-0'}}% <br>
+              Standard Deviation: {{statsPredicted.sdPredicted}}% <br> 
+              Variance: {{statsPredicted.variancePredicted}}%
+            </h3>
+          </mat-grid-tile>        
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
   
     <div class="center">
       <mat-form-field appearance="standard">
@@ -250,6 +289,29 @@
     <div class="bar-container">
       <canvas #barGraphA class="bar"></canvas>
     </div>
+
+    <mat-card *ngIf="stats" class="averages">
+      <mat-card-content>
+        <mat-grid-list cols="2" rowHeight="120px">
+          <mat-grid-tile>
+            <h3 class="center-text">
+              <strong>Stats</strong> <br>
+              Max: {{stats.max*100 | number:'1.0-0'}}% <br>
+              Median: {{stats.median*100 | number:'1.0-0'}}% <br>
+              Min: {{stats.min*100 | number:'1.0-0'}}%
+            </h3>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <h3 class="center-text">
+              Mode: {{stats.mode*100 | number:'1.0-0'}}% <br>
+              Mean: {{stats.mean*100 | number:'1.0-0'}}% <br>
+              Standard Deviation: {{stats.sd}}% <br> 
+              Variance: {{stats.variance}}%
+            </h3>
+          </mat-grid-tile>        
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
 
     <div class="center">
       <mat-form-field appearance="standard">
