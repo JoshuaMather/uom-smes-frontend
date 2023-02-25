@@ -12,6 +12,7 @@
                 <mat-card-content>
                     <p>{{concern['concern']}}</p> <br>
                     <p><strong>Reported by: {{concern['tutor']['user']['name']}}</strong></p>
+                    <p><strong>Date reported: {{concern['date_reported'] | date:'d MMMM y, HH:mm'}}</strong></p>
                 </mat-card-content>
             </mat-card>
           </div>

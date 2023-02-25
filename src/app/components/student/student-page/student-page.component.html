@@ -7,14 +7,14 @@
     <app-engagement-info [studentInfo]="student.student" class="engagement-info"></app-engagement-info>
 
     <mat-tab-group mat-align-tabs="center" mat-stretch-tabs>
-        <mat-tab label="Attendance">
-            <ng-template matTabContent>
-                <app-attendance-tab [studentInfo]="student.student"></app-attendance-tab>
-            </ng-template>
-        </mat-tab>
         <mat-tab label="Grades">
             <ng-template matTabContent>
                 <app-grades-tab [studentInfo]="student.student"></app-grades-tab>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Attendance">
+            <ng-template matTabContent>
+                <app-attendance-tab [studentInfo]="student.student"></app-attendance-tab>
             </ng-template>
         </mat-tab>
         <mat-tab label="History">
