@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/api/api.service';
 import { DataService } from 'src/app/services/data/data.service';
 import { ConcernDialogComponent } from '../concern-dialog/concern-dialog.component';
+import { ReportIssueComponent } from '../student/report-issue/report-issue.component';
 import { ViewConcernComponent } from '../view-concern/view-concern.component';
 
 @Component({
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit {
   subscriptionRoute!: Subscription;
   public showMenu = false;
   public studentPageTutor = false;
+  public studentPageStudent = false;
 
   constructor(
     private router: Router,
@@ -36,8 +38,10 @@ export class HeaderComponent implements OnInit {
         }
         if(event.url === '/student' && this.data.getUser().tutor) {
           this.studentPageTutor = true;
+          this.studentPageStudent = false;
         } else {
           this.studentPageTutor = false;
+          this.studentPageStudent = true;
         }
       }
     });
@@ -73,7 +77,6 @@ export class HeaderComponent implements OnInit {
       return;
     }
     let student = this.data.getStudentData();
-    console.log(student);
     const dialogRef = this.dialog.open(ConcernDialogComponent, {
       data: {name: student.user.name}
     });
@@ -82,7 +85,6 @@ export class HeaderComponent implements OnInit {
       console.log('Dialog closed with concern:', result);
 
       let tutor = this.data.getUser();
-      console.log(tutor);
 
       let concernData = {
         student: student.id,
@@ -90,7 +92,27 @@ export class HeaderComponent implements OnInit {
         concern: result,
       }
       this.api.post('concern', concernData).subscribe(res => {
-        console.log(res);
+      });
+    });
+  }
+
+  reportIssue() {
+    if(!this.studentPageStudent) {
+      return;
+    }
+
+    let student = this.data.getStudentData();
+    const dialogRef = this.dialog.open(ReportIssueComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with concern:', result);
+
+      let issueData = {
+        student: student.id,
+        issue: result,
+      }
+      this.api.post('issue', issueData).subscribe(res => {
       });
     });
   }

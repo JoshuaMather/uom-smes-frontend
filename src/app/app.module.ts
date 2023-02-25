@@ -44,6 +44,7 @@ import { TutorInfoComponent } from './components/tutor/tutor-info/tutor-info/tut
 import { RegisterTutorComponent } from './components/register-tutor/register-tutor.component';
 import { TutorRequestsComponent } from './components/tutor/tutor-requests/tutor-requests.component';
 import { TutorCoursesComponent } from './components/tutor/tutor-courses/tutor-courses.component';
+import { ReportIssueComponent } from './components/student/report-issue/report-issue.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { TutorCoursesComponent } from './components/tutor/tutor-courses/tutor-co
     RegisterTutorComponent,
     TutorRequestsComponent,
     TutorCoursesComponent,
+    ReportIssueComponent,
   ],
   imports: [
     BrowserModule,
