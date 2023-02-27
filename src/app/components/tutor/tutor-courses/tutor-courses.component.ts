@@ -164,8 +164,8 @@ export class TutorCoursesComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.filterPredicate = (data: any, filter: string) => {
         let searchFilter = (data.user.name.toLowerCase().indexOf(this.searchValue) != -1 ||
-                            data.user.email.toLowerCase().indexOf(filter) != -1 ||
-                            data.personal_tutor.user.name.toLowerCase().indexOf(filter) != -1);
+                            data.user.email.toLowerCase().indexOf(this.searchValue) != -1 ||
+                            data.personal_tutor.user.name.toLowerCase().indexOf(this.searchValue) != -1);
         return searchFilter;
       }
 
@@ -210,8 +210,8 @@ export class TutorCoursesComponent implements OnInit {
       this.dataSourceAssignment.sort = this.SortA;
       this.dataSourceAssignment.filterPredicate = (data: any, filterA: string) => {
         let searchFilter = (data.user.name.toLowerCase().indexOf(this.searchValue) != -1 ||
-                            data.user.email.toLowerCase().indexOf(filterA) != -1 ||
-                            data.personal_tutor.user.name.toLowerCase().indexOf(filterA) != -1);
+                            data.user.email.toLowerCase().indexOf(this.searchValue) != -1 ||
+                            data.personal_tutor.user.name.toLowerCase().indexOf(this.searchValue) != -1);
         return searchFilter;
       }
       this.loading = false;

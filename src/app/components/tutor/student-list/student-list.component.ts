@@ -79,8 +79,8 @@ export class StudentListComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.filterPredicate = (data: any, filter: string) => {
         let searchFilter = (data.user.name.toLowerCase().indexOf(this.searchValue) != -1 ||
-                            data.user.email.toLowerCase().indexOf(filter) != -1 ||
-                            data.personal_tutor.user.name.toLowerCase().indexOf(filter) != -1);
+                            data.user.email.toLowerCase().indexOf(this.searchValue) != -1 ||
+                            data.personal_tutor.user.name.toLowerCase().indexOf(this.searchValue) != -1);
 
         let yearFilter = data.year == this.selectedYear;
 
