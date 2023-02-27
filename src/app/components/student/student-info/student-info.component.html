@@ -10,7 +10,7 @@
             <mat-grid-tile [colspan]="2">
                 <p>
                     {{studentInfo.user.username}}<br>
-                    {{studentInfo.user.email}}<br>
+                    <a href="{{'mailto:' + studentInfo.user.email }}">{{studentInfo.user.email}}</a><br>
                     Year {{studentInfo.year}} <br>
                     {{studentInfo.degree}}
                 </p> 
@@ -19,7 +19,7 @@
                 <p>
                     <span class="center"><strong>Personal Tutor</strong></span>
                     <span class="center">{{studentInfo.personal_tutor.user.name}}</span>
-                    <span class="center">{{studentInfo.personal_tutor.user.email}}</span>
+                    <span class="center"><a href="{{'mailto:' + studentInfo.personal_tutor.user.email }}">{{studentInfo.personal_tutor.user.email}}</a></span>
                 </p> 
             </mat-grid-tile>
           </mat-grid-list>

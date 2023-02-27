@@ -111,7 +111,7 @@
     
         <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-            <td mat-cell *matCellDef="let student"> {{student.user.email}} </td>
+            <td mat-cell *matCellDef="let student"> <a href="{{'mailto:' + student.user.email }}">{{student.user.email}}</a> </td>
         </ng-container>
     
         <ng-container matColumnDef="year">
@@ -329,7 +329,7 @@
     
         <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-            <td mat-cell *matCellDef="let student"> {{student.user.email}} </td>
+            <td mat-cell *matCellDef="let student"> <a href="{{'mailto:' + student.user.email }}">{{student.user.email}}</a> </td>
         </ng-container>
     
         <ng-container matColumnDef="year">
