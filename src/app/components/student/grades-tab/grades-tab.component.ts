@@ -34,21 +34,39 @@ export class GradesTabComponent implements OnInit {
       let courseAssignments = this.studentInfo.student_assignment.filter((assignment: { assignment: { course: { id: any; }; }; }) => assignment.assignment.course === course.course.id);
 
       let assignmentData: any = [];
-      let formative: { assignmentName: any; type: string | string[]; grade: string | null; dueDate: any; submittedDate: any; }[] = [];
-      let summative: { assignmentWeight: number; assignmentName: any; type: string | string[]; grade: string | null; dueDate: any; submittedDate: any; }[] = []
+      let formative: { assignmentName: any; type: string | string[]; grade: number | null; final_grade: number | null; dueDate: any; submittedDate: any; }[]  = [];
+      let summative: { assignmentWeight: number; assignmentName: any; type: string | string[]; grade: number | null; final_grade: number | null; dueDate: any; submittedDate: any; }[] = []
       let summativeWeight = 0;
       courseAssignments.forEach((element: { assignment: { type: string | string[]; assignment_name: any; due_date: any; engagement_weight: number; }; grade: number; date_submitted: any; }) => {
         let grade;
+        let final_grade;
+
         if(element.grade===null){ 
           grade = null;
+          final_grade = null;
         } else {
-          grade = (element.grade*100).toFixed(0)
+          grade = (element.grade*100);
+          let submit = new Date(element.date_submitted);
+          let due = new Date(element.assignment.due_date);
+          if(submit > due){
+            let diff = Math.abs(submit.getTime() - due.getTime());
+            let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+  
+            final_grade = (grade) - (grade * ((diffDays*10)/100));
+            if(final_grade < 0) {
+              final_grade = 0;
+            }
+          } else {
+            final_grade = grade;
+          }
         }
+
         if(element.assignment.type.includes('_f')){
           formative.push({
             assignmentName: element.assignment.assignment_name,
             type: element.assignment.type,
             grade: grade,
+            final_grade: final_grade,
             dueDate: element.assignment.due_date,
             submittedDate: element.date_submitted,
           });
@@ -59,6 +77,7 @@ export class GradesTabComponent implements OnInit {
             assignmentName: element.assignment.assignment_name,
             type: element.assignment.type,
             grade: grade,
+            final_grade: final_grade,
             dueDate: element.assignment.due_date,
             submittedDate: element.date_submitted,
           });

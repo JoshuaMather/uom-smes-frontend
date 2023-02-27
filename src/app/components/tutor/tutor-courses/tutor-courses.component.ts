@@ -50,7 +50,7 @@ export class TutorCoursesComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   dataSourceAssignment!: MatTableDataSource<any>;
   displayedColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'attendance', 'currentGrade', 'maxCurrentGrade', 'predictedGrade', 'engagement', 'expand'];
-  assignmentColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'dateSubmitted', 'grade',];
+  assignmentColumns: string[] = ['name', 'email', 'year', 'personalTutor', 'dateSubmitted', 'grade', 'final_grade'];
 
   courseList: any;
   viewList: any;
@@ -134,6 +134,19 @@ export class TutorCoursesComponent implements OnInit {
             summative.push(assignment);
             summativeWeight += assignment.engagement_weight;
           }
+          let submit = new Date(assignment.date_submitted);
+          let due = new Date(assignment.due_date);
+          if(submit > due){
+            let diff = Math.abs(submit.getTime() - due.getTime());
+            let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+  
+            assignment.final_grade = (assignment.grade) - (assignment.grade * ((diffDays*10)/100));
+            if(assignment.grade < 0) {
+              assignment.grade = 0;
+            }
+          } else {
+            assignment.final_grade = assignment.grade;
+          }
         });
 
         assignmentData.push({
@@ -179,17 +192,19 @@ export class TutorCoursesComponent implements OnInit {
       this.assignment = res.assignment;
       this.students = res.students;
       this.stats = res.stats;
-      this.students.forEach((student: { date_submitted: string | number | Date; grade: any; }) => {
+      this.students.forEach((student: { date_submitted: string | number | Date; final_grade: number; grade: number; }) => {
         let submit = new Date(student.date_submitted);
         let due = new Date(this.assignment.due_date);
         if(submit > due){
           let diff = Math.abs(submit.getTime() - due.getTime());
           let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
 
-          student.grade = (student.grade) - (student.grade * ((diffDays*10)/100));
-          if(student.grade < 0) {
-            student.grade = 0;
+          student.final_grade = (student.grade) - (student.grade * ((diffDays*10)/100));
+          if(student.final_grade < 0) {
+            student.final_grade = 0;
           }
+        } else {
+          student.final_grade = student.grade;
         }
       });
       this.distribution = res.distribution
@@ -204,6 +219,7 @@ export class TutorCoursesComponent implements OnInit {
           case 'personalTutor': return item.personal_tutor.user.name;
           case 'dateSubmitted': return  item.date_submitted;
           case 'grade': return  item.grade;
+          case 'final_grade': return  item.final_grade;
           default: return item[property];
           }
         }
