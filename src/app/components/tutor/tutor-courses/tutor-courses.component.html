@@ -312,6 +312,14 @@
             </h3>
           </mat-grid-tile>        
         </mat-grid-list>
+
+        <mat-grid-list cols="1" rowHeight="40px">
+          <mat-grid-tile>
+            <h3 class="center-text">
+              Marked: {{marked}} students out of {{total}} ({{(marked/total*100 | number:'1.2-2')}}%)
+            </h3>
+          </mat-grid-tile>       
+        </mat-grid-list>
       </mat-card-content>
     </mat-card>
 

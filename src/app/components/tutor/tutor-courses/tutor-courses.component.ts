@@ -41,6 +41,8 @@ export class TutorCoursesComponent implements OnInit {
   stats: any;
   statsPredicted: any;
   statsCurrent: any;
+  total = 0;
+  marked = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('paginatorA') paginatorA!: MatPaginator;
@@ -192,6 +194,8 @@ export class TutorCoursesComponent implements OnInit {
       this.assignment = res.assignment;
       this.students = res.students;
       this.stats = res.stats;
+      this.total = res.total;
+      this. marked = res.marked;
       this.students.forEach((student: { date_submitted: string | number | Date; final_grade: number; grade: number; }) => {
         let submit = new Date(student.date_submitted);
         let due = new Date(this.assignment.due_date);
@@ -244,6 +248,7 @@ export class TutorCoursesComponent implements OnInit {
   }
 
   courseChanged() {
+    this.searchValue = '';
     this.selectedView = -1;
     if(this.selectedCourse===-1){
       this.viewList = [];
@@ -271,6 +276,7 @@ export class TutorCoursesComponent implements OnInit {
   }
 
   viewChanged() {
+    this.searchValue = '';
     if(this.selectedView===-1){
       return;
     }
