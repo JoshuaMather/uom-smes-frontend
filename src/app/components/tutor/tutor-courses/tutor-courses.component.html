@@ -182,22 +182,23 @@
                 <div class="grades-data">
                   <div *ngIf="student.courseAssignments.summative.length>0">
                     <h2 class="no-margin center">Summative</h2>
-                    <mat-list role="list" *ngFor="let assignment of student.courseAssignments.summative" class="list-pad">
-                      <mat-list-item role="listitem" *ngIf="assignment.grade!=null"><strong>{{assignment.assignment_name}}: {{assignment.final_grade*100 | number:'1.0-0'}}%</strong></mat-list-item>
-                      <mat-list-item role="listitem" *ngIf="assignment.grade===null"><strong>{{assignment.assignment_name}}: Not Due</strong></mat-list-item>
+                    <mat-list role="list" *ngFor="let assignment of student.courseAssignments.summative" class="bot-pad">
+                      <mat-list-item role="listitem" *ngIf="assignment.final_grade!=null"><strong>{{assignment.assignment_name}}: {{assignment.final_grade*100 | number:'1.0-0'}}%</strong></mat-list-item>
+                      <mat-list-item role="listitem" *ngIf="assignment.final_grade===null && assignment.date_submitted!=null"><strong>{{assignment.assignment_name}}: Not Graded</strong></mat-list-item>
+                      <mat-list-item role="listitem" *ngIf="assignment.final_grade===null && assignment.date_submitted===null"><strong>{{assignment.assignment_name}}: Not Submitted</strong></mat-list-item>
   
                       <mat-list-item role="listitem" *ngIf="assignment.type.includes('assignment')">
                         <p>
                           <br>
-                          Raw Grade: {{assignment.grade*100 | number:'1.0-0'}}% <br>
+                          Raw Grade: <span *ngIf="assignment.grade!=null">{{assignment.grade*100 | number:'1.0-0'}}% </span><br>
                           Weight: {{(assignment.engagement_weight / student.courseAssignments.summativeWeight)*100 | number:'1.0-0'}}% <br>
                           Date Due: {{assignment.due_date | date:'d MMMM y, HH:mm'}} <br>
-                          Date Submitted: <span *ngIf="assignment.grade!=null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''">{{assignment.date_submitted | date:'d MMMM y, HH:mm'}}</span> <span *ngIf="assignment.grade===null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''"></span><br>
+                          Date Submitted: <span *ngIf="assignment.date_submitted!=null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''">{{assignment.date_submitted | date:'d MMMM y, HH:mm'}}</span> <span *ngIf="assignment.date_submitted===null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''"></span><br>
                         </p>
                       </mat-list-item>
   
                       <mat-list-item role="listitem" *ngIf="assignment.type.includes('exam')">
-                        <p>
+                        <p class="less-top">
                           <br>
                           Weight: {{(assignment.engagement_weight / student.courseAssignments.summativeWeight)*100 | number:'1.0-0'}}% <br>
                           Exam Date: {{assignment.due_date | date:'d MMMM y, HH:mm'}} <br>
@@ -209,20 +210,24 @@
   
                   <div *ngIf="student.courseAssignments.formative.length>0">
                     <h2 class="no-margin">Formative</h2>
-                    <mat-list role="list" *ngFor="let assignment of student.courseAssignments.formative"  class="list-pad">
-                      <mat-list-item role="listitem" *ngIf="assignment.grade!=null"><strong>{{assignment.assignment_name}}: {{assignment.final_grade*100 | number:'1.0-0'}}%</strong></mat-list-item>
-                      <mat-list-item role="listitem" *ngIf="assignment.grade===null"><strong>{{assignment.assignment_name}}: Not Due</strong></mat-list-item>
+                    <mat-list role="list" *ngFor="let assignment of student.courseAssignments.formative"  class="bot-pad">
+                      <mat-list-item role="listitem" *ngIf="assignment.final_grade!=null"><strong>{{assignment.assignment_name}}: {{assignment.final_grade*100 | number:'1.0-0'}}%</strong></mat-list-item>
+                      <mat-list-item role="listitem" *ngIf="assignment.final_grade===null && assignment.date_submitted!=null"><strong>{{assignment.assignment_name}}: Not Graded</strong></mat-list-item>
+                      <mat-list-item role="listitem" *ngIf="assignment.final_grade===null && assignment.date_submitted===null"><strong>{{assignment.assignment_name}}: Not Submitted</strong></mat-list-item>
+  
   
                       <mat-list-item role="listitem" *ngIf="assignment.type.includes('assignment')">
                         <p>
-                          Raw Grade: {{assignment.grade*100 | number:'1.0-0'}}% <br>
+                          <br>
+                          Raw Grade: <span *ngIf="assignment.grade!=null">{{assignment.grade*100 | number:'1.0-0'}}% </span><br>
                           Date Due: {{assignment.due_date | date:'d MMMM y, HH:mm'}} <br>
-                          Date Submitted: <span *ngIf="assignment.grade!=null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''">{{assignment.date_submitted | date:'d MMMM y, HH:mm'}}</span> <span *ngIf="assignment.grade===null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''"></span><br>
+                          Date Submitted: <span *ngIf="assignment.date_submitted!=null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''">{{assignment.date_submitted | date:'d MMMM y, HH:mm'}}</span> <span *ngIf="assignment.date_submitted===null" [ngClass]="assignment.date_submitted>assignment.due_date ? 'blue-text' : ''"></span><br>
                         </p>
                       </mat-list-item>
   
                       <mat-list-item role="listitem" *ngIf="assignment.type.includes('exam')">
-                        <p>
+                        <p class="less-top">
+                          <br>
                           Exam Date: {{assignment.due_date | date:'d MMMM y, HH:mm'}}<br>
                         </p>
                       </mat-list-item>

@@ -136,18 +136,23 @@ export class TutorCoursesComponent implements OnInit {
             summative.push(assignment);
             summativeWeight += assignment.engagement_weight;
           }
-          let submit = new Date(assignment.date_submitted);
-          let due = new Date(assignment.due_date);
-          if(submit > due){
-            let diff = Math.abs(submit.getTime() - due.getTime());
-            let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-  
-            assignment.final_grade = (assignment.grade) - (assignment.grade * ((diffDays*10)/100));
-            if(assignment.grade < 0) {
-              assignment.grade = 0;
+
+          if(assignment.grade == null){
+            assignment.final_grade = null;
+          } else{
+            let submit = new Date(assignment.date_submitted);
+            let due = new Date(assignment.due_date);
+            if(submit > due){
+              let diff = Math.abs(submit.getTime() - due.getTime());
+              let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+    
+              assignment.final_grade = (assignment.grade) - (assignment.grade * ((diffDays*10)/100));
+              if(assignment.grade < 0) {
+                assignment.grade = 0;
+              }
+            } else {
+              assignment.final_grade = assignment.grade;
             }
-          } else {
-            assignment.final_grade = assignment.grade;
           }
         });
 
