@@ -201,19 +201,23 @@ export class TutorCoursesComponent implements OnInit {
       this.stats = res.stats;
       this.total = res.total;
       this. marked = res.marked;
-      this.students.forEach((student: { date_submitted: string | number | Date; final_grade: number; grade: number; }) => {
-        let submit = new Date(student.date_submitted);
-        let due = new Date(this.assignment.due_date);
-        if(submit > due){
-          let diff = Math.abs(submit.getTime() - due.getTime());
-          let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-
-          student.final_grade = (student.grade) - (student.grade * ((diffDays*10)/100));
-          if(student.final_grade < 0) {
-            student.final_grade = 0;
+      this.students.forEach((student: { date_submitted: string | number | Date; final_grade: number | null; grade: number; }) => {
+        if(student.grade == null){
+          student.final_grade = null;
+        } else{
+          let submit = new Date(student.date_submitted);
+          let due = new Date(this.assignment.due_date);
+          if(submit > due){
+            let diff = Math.abs(submit.getTime() - due.getTime());
+            let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+  
+            student.final_grade = (student.grade) - (student.grade * ((diffDays*10)/100));
+            if(student.final_grade < 0) {
+              student.final_grade = 0;
+            }
+          } else {
+            student.final_grade = student.grade;
           }
-        } else {
-          student.final_grade = student.grade;
         }
       });
       this.distribution = res.distribution
