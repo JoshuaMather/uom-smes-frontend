@@ -115,8 +115,8 @@
         </ng-container>
     
         <ng-container matColumnDef="year">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
-            <td mat-cell *matCellDef="let student"> {{student.year}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Year </th>
+            <td mat-cell *matCellDef="let student" class="center-table"> {{student.year}} </td>
         </ng-container>
     
         <ng-container matColumnDef="personalTutor">
@@ -125,28 +125,28 @@
         </ng-container>
     
         <ng-container matColumnDef="attendance">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Attendance </th>
-            <td mat-cell *matCellDef="let student" [ngClass]="student.studentCourse[0].attendance.attendance < 0.4 ? 'red-text' : ''"> {{student.studentCourse[0].attendance.attendance*100 | number:'1.0-0'}}% </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Attendance </th>
+            <td mat-cell *matCellDef="let student" [ngClass]="student.studentCourse[0].attendance.attendance < 0.4 ? 'red-text' : ''" class="center-table"> {{student.studentCourse[0].attendance.attendance*100 | number:'1.0-0'}}% </td>
         </ng-container>
     
         <ng-container matColumnDef="currentGrade">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Current Grade </th>
-            <td mat-cell *matCellDef="let student" [ngClass]="student.studentCourse[0].grades.current/student.studentCourse[0].grades.max_current < 0.4 ? 'red-text' : ''"> {{student.studentCourse[0].grades.current*100 | number:'1.0-0'}}% </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Current Grade </th>
+            <td mat-cell *matCellDef="let student" [ngClass]="student.studentCourse[0].grades.current/student.studentCourse[0].grades.max_current < 0.4 ? 'red-text' : ''" class="center-table"> {{student.studentCourse[0].grades.current*100 | number:'1.0-0'}}% </td>
         </ng-container>
   
         <ng-container matColumnDef="maxCurrentGrade">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Max Current Grade </th>
-          <td mat-cell *matCellDef="let student"> {{student.studentCourse[0].grades.max_current*100 | number:'1.0-0'}}% </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Max Current Grade </th>
+          <td mat-cell *matCellDef="let student" class="center-table"> {{student.studentCourse[0].grades.max_current*100 | number:'1.0-0'}}% </td>
       </ng-container>
     
         <ng-container matColumnDef="predictedGrade">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Predicted Grade </th>
-            <td mat-cell *matCellDef="let student" [ngClass]="student.studentCourse[0].grades.predict < 0.4 ? 'red-text' : ''"> {{student.studentCourse[0].grades.predict*100 | number:'1.0-0'}}% </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Predicted Grade </th>
+            <td mat-cell *matCellDef="let student" [ngClass]="student.studentCourse[0].grades.predict < 0.4 ? 'red-text' : ''" class="center-table"> {{student.studentCourse[0].grades.predict*100 | number:'1.0-0'}}% </td>
         </ng-container>
   
         <ng-container matColumnDef="engagement">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Engagement </th>
-          <td mat-cell *matCellDef="let student" [ngClass]="student.studentCourse[0].engagement < 0.4 ? 'red-text' : ''"> {{student.studentCourse[0].engagement*100 | number:'1.0-0'}}% </td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Engagement </th>
+          <td mat-cell *matCellDef="let student" [ngClass]="student.studentCourse[0].engagement < 0.4 ? 'red-text' : ''" class="center-table"> {{student.studentCourse[0].engagement*100 | number:'1.0-0'}}% </td>
       </ng-container>
   
         <ng-container matColumnDef="expand">
@@ -348,8 +348,8 @@
         </ng-container>
     
         <ng-container matColumnDef="year">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
-            <td mat-cell *matCellDef="let student"> {{student.year}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Year </th>
+            <td mat-cell *matCellDef="let student" class="center-table"> {{student.year}} </td>
         </ng-container>
     
         <ng-container matColumnDef="personalTutor">
@@ -358,18 +358,18 @@
         </ng-container>
     
         <ng-container matColumnDef="dateSubmitted" >
-            <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="assignment && assignment.type.includes('exam')"> Date Submitted </th>
-            <td mat-cell *matCellDef="let student" [ngClass]="student.date_submitted > assignment.due_date ? 'blue-text' : ''" [hidden]="assignment && assignment.type.includes('exam')"> {{student.date_submitted | date:'d MMMM y, HH:mm'}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="assignment && assignment.type.includes('exam')" class="center-table"> Date Submitted </th>
+            <td mat-cell *matCellDef="let student" [ngClass]="student.date_submitted > assignment.due_date ? 'blue-text' : ''" [hidden]="assignment && assignment.type.includes('exam')" class="center-table"> {{student.date_submitted | date:'d MMMM y, HH:mm'}} </td>
         </ng-container>
     
         <ng-container matColumnDef="grade">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Raw Grade </th>
-            <td mat-cell *matCellDef="let student" [ngClass]="(student.grade!=null && student.grade < 0.4) ? 'red-text' : ''"><span *ngIf="student.grade!=null"> {{student.grade*100 | number:'1.0-0'}}% </span> <span *ngIf="student.grade===null">Null</span></td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Raw Grade </th>
+            <td mat-cell *matCellDef="let student" [ngClass]="(student.grade!=null && student.grade < 0.4) ? 'red-text' : ''" class="center-table"><span *ngIf="student.grade!=null"> {{student.grade*100 | number:'1.0-0'}}% </span> <span *ngIf="student.grade===null">Null</span></td>
         </ng-container>
 
         <ng-container matColumnDef="final_grade">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Final Grade </th>
-          <td mat-cell *matCellDef="let student" [ngClass]="(student.final_grade!=null && student.final_grade < 0.4) ? 'red-text' : ''"><span *ngIf="student.final_grade!=null"> {{student.final_grade*100 | number:'1.0-0'}}% </span> <span *ngIf="student.final_grade==null">Null</span></td>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Final Grade </th>
+          <td mat-cell *matCellDef="let student" [ngClass]="(student.final_grade!=null && student.final_grade < 0.4) ? 'red-text' : ''" class="center-table"><span *ngIf="student.final_grade!=null"> {{student.final_grade*100 | number:'1.0-0'}}% </span> <span *ngIf="student.final_grade==null">Null</span></td>
       </ng-container>
       
 

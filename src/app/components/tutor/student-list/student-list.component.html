@@ -41,8 +41,8 @@
             </ng-container>
 
             <ng-container matColumnDef="year">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
-                <td mat-cell *matCellDef="let student"> {{student.year}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Year </th>
+                <td mat-cell *matCellDef="let student" class="center-table"> {{student.year}} </td>
             </ng-container>
 
             <ng-container matColumnDef="personalTutor">
@@ -51,33 +51,33 @@
             </ng-container>
 
             <ng-container matColumnDef="attendance">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Attendance </th>
-                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.attendance < 0.4 ? 'red-text' : ''"> {{student.engagement.attendance*100 | number:'1.0-0'}}% </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Attendance </th>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.attendance < 0.4 ? 'red-text' : ''"class="center-table"> {{student.engagement.attendance*100 | number:'1.0-0'}}% </td>
             </ng-container>
 
             <ng-container matColumnDef="currentGrade">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Current Grade </th>
-                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.current/student.engagement.max_current < 0.4 ? 'red-text' : ''"> {{student.engagement.current*100 | number:'1.0-0'}}% </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Current Grade </th>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.current/student.engagement.max_current < 0.4 ? 'red-text' : ''" class="center-table"> {{student.engagement.current*100 | number:'1.0-0'}}% </td>
             </ng-container>
 
             <ng-container matColumnDef="maxCurrentGrade">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Max Current Grade </th>
-                <td mat-cell *matCellDef="let student"> {{student.engagement.max_current*100 | number:'1.0-0'}}% </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Max Current Grade </th>
+                <td mat-cell *matCellDef="let student" class="center-table"> {{student.engagement.max_current*100 | number:'1.0-0'}}% </td>
             </ng-container>
 
             <ng-container matColumnDef="predictedGrade">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Predicted Grade </th>
-                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.predict < 0.4 ? 'red-text' : ''"> {{student.engagement.predict*100 | number:'1.0-0'}}% </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Predicted Grade </th>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.predict < 0.4 ? 'red-text' : ''" class="center-table"> {{student.engagement.predict*100 | number:'1.0-0'}}% </td>
             </ng-container>
 
             <ng-container matColumnDef="engagement">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Engagement </th>
-                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.engagement < 0.4 ? 'red-text' : ''"> {{student.engagement.engagement*100 | number:'1.0-0'}}% </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Engagement </th>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.engagement.engagement < 0.4 ? 'red-text' : ''" class="center-table"> {{student.engagement.engagement*100 | number:'1.0-0'}}% </td>
             </ng-container>
 
             <ng-container matColumnDef="concerns">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Concerns </th>
-                <td mat-cell *matCellDef="let student" [ngClass]="student.concerns_count > 0 ? 'red-text' : ''"> {{student.concerns_count}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header class="center-table"> Concerns </th>
+                <td mat-cell *matCellDef="let student" [ngClass]="student.concerns_count > 0 ? 'red-text' : ''" class="center-table"> {{student.concerns_count}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
