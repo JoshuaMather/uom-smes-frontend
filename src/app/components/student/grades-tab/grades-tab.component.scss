@@ -44,9 +44,17 @@ mat-expansion-panel {
 }
 
 .bot-pad {
-    padding-bottom: 15px;
+    padding-bottom: 25px;
+}
+
+.bot-pad-less {
+    padding-bottom: 10px;
 }
 
 .less-top {
     margin-top: -50px;
 }
+
+.mat-list-item{
+    max-height: 20px;
+  }
