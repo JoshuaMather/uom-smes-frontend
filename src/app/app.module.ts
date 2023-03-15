@@ -23,6 +23,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
@@ -93,6 +94,7 @@ import { ReportIssueComponent } from './components/student/report-issue/report-i
     MatListModule,
     MatDialogModule,
     ScrollingModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [

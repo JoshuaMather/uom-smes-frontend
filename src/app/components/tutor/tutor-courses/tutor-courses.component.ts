@@ -201,7 +201,9 @@ export class TutorCoursesComponent implements OnInit {
       this.stats = res.stats;
       this.total = res.total;
       this. marked = res.marked;
-      this.students.forEach((student: { date_submitted: string | number | Date; final_grade: number | null; grade: number; }) => {
+      this.students.forEach((student: {
+        diffDays: number; date_submitted: string | number | Date; final_grade: number | null; grade: number; 
+}) => {
         if(student.grade == null){
           student.final_grade = null;
         } else{
@@ -210,6 +212,7 @@ export class TutorCoursesComponent implements OnInit {
           if(submit > due){
             let diff = Math.abs(submit.getTime() - due.getTime());
             let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+            student.diffDays = diffDays;
   
             student.final_grade = (student.grade) - (student.grade * ((diffDays*10)/100));
             if(student.final_grade < 0) {
@@ -403,5 +406,20 @@ export class TutorCoursesComponent implements OnInit {
     console.log(student);
     this.data.setStudentId(student.id);
     this.router.navigate(['/student']);
+  }
+
+  lateDaysText(days: string){
+    return "Late Submission: " + days + " Days";
+  }
+
+  assignmentGradeTooltip(grade:any, submit:any, due:any, days:any){
+    if((grade!=null && grade < 0.4) && submit > due) {
+      return "Grade is a fail - Grade reduced due to late submission: " + days*10+"%";
+    } else if((grade!=null && grade < 0.4)){
+      return "Grade is a fail"
+    }else if(submit > due){
+      return "Grade reduced due to late submission: " + days*10+"%";
+    }
+    return "";
   }
 }
