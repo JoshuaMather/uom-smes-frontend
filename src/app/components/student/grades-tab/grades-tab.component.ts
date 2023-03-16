@@ -199,4 +199,12 @@ export class GradesTabComponent implements OnInit {
       
     });
   }
+
+  lateDaysTextCalc(submit:any,due:any){
+    let submitDate = new Date(submit);
+    let dueData = new Date(due);
+    let diff = Math.abs(submitDate.getTime() - dueData.getTime());
+    let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+    return "Late Submission: " + diffDays + " Days";
+  }
 }

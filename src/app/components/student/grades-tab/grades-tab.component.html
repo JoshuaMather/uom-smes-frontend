@@ -22,7 +22,7 @@
                           <mat-list-item>Raw Grade: <span *ngIf="assignment.grade!=null"> {{assignment.grade | number:'1.0-0'}}% </span></mat-list-item>
                           <mat-list-item>Weight: {{(assignment.assignmentWeight / grade.assignments[0].summativeWeight)*100 | number:'1.0-0'}}%</mat-list-item>
                           <mat-list-item>Date Due: {{assignment.dueDate | date:'d MMMM y, HH:mm'}} </mat-list-item>
-                          <mat-list-item> Date Submitted: <span *ngIf="assignment.submittedDate!=null" [ngClass]="assignment.submittedDate>assignment.dueDate ? 'blue-text' : ''">{{assignment.submittedDate | date:'d MMMM y, HH:mm'}}</span><span *ngIf="assignment.submittedDate===null"></span></mat-list-item>
+                          <mat-list-item> Date Submitted: <span *ngIf="assignment.submittedDate!=null" [matTooltip]="assignment.submittedDate>assignment.dueDate ? lateDaysTextCalc(assignment.submittedDate,assignment.dueDate) : ''" [ngClass]="assignment.submittedDate>assignment.dueDate ? 'blue-text' : ''">{{assignment.submittedDate | date:'d MMMM y, HH:mm'}}</span><span *ngIf="assignment.submittedDate===null"></span></mat-list-item>
                         </div>
 
                         <div *ngIf="assignment.type.includes('exam')">
@@ -45,7 +45,7 @@
                     <div *ngIf="assignment.type.includes('assignment')">
                       <mat-list-item>Raw Grade: <span *ngIf="assignment.grade!=null">{{assignment.grade | number:'1.0-0'}}% </span></mat-list-item>
                       <mat-list-item>Date Due: {{assignment.dueDate | date:'d MMMM y, HH:mm'}} </mat-list-item>
-                      <mat-list-item>Date Submitted: <span *ngIf="assignment.submittedDate!=null" [ngClass]="assignment.submittedDate>assignment.dueDate ? 'blue-text' : ''">{{assignment.submittedDate | date:'d MMMM y, HH:mm'}}</span><span *ngIf="assignment.submittedDate===null"></span></mat-list-item>
+                      <mat-list-item>Date Submitted: <span *ngIf="assignment.submittedDate!=null" [matTooltip]="assignment.submittedDate>assignment.dueDate ? lateDaysTextCalc(assignment.submittedDate,assignment.dueDate) : ''" [ngClass]="assignment.submittedDate>assignment.dueDate ? 'blue-text' : ''">{{assignment.submittedDate | date:'d MMMM y, HH:mm'}}</span><span *ngIf="assignment.submittedDate===null"></span></mat-list-item>
                     </div>
                 
                     <div *ngIf="assignment.type.includes('exam')">

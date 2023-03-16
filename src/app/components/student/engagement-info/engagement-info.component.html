@@ -12,17 +12,18 @@
             <mat-grid-tile [colspan]="1">
                 <p>
                     <strong>Engagement Data</strong> <br>
-                    Attendance: <span [ngClass]="attendance/100 < 0.4 ? 'red-text' : ''">{{attendance}}%</span><br>
-                    Current Grade: <span>{{currentGrade}}%</span><br>
-                    Predicted Grade: <span [ngClass]="predictedGrade/100 < 0.4 ? 'red-text' : ''">{{predictedGrade}}%</span><br>
+                    Attendance: <span [matTooltip]="attendance/100 < 0.4 ? 'Student attendance is low' : ''" [ngClass]="attendance/100 < 0.4 ? 'red-text' : ''">{{attendance}}%</span><br>
+                    Current Grade: <span [matTooltip]="((currentGrade!=null && currentGrade/maxCurrent < 0.4) || gradeReduced==true) ? gradeTooltip(currentGrade, maxCurrent, gradeReduced, unreduced) : ''" [ngClass]="[(currentGrade!=null && currentGrade/maxCurrent < 0.4) ? 'red-text' : '', gradeReduced==true ? 'blue-text' : '']">{{currentGrade}}%</span><br>
+                    Max Grade: <span>{{maxCurrent}}%</span><br>
+                    Predicted Grade: <span [matTooltip]="predictedGrade/100 < 0.4 ? 'Student predicted grade is a fail' : ''" [ngClass]="predictedGrade/100 < 0.4 ? 'red-text' : ''">{{predictedGrade}}%</span><br>
                    
                 </p> 
             </mat-grid-tile>
             <mat-grid-tile [colspan]="2">
                 <h3>
                     <strong>Engagement Score</strong> <br>
-                    <span class="center" [ngClass]="engagement/100 < 0.4 ? 'red-text' : ''">{{engagement}}%</span>
-                    <span class="center" *ngIf="this.user.tutor" >Concerns:&nbsp; <span [ngClass]="studentInfo.concerns.length > 0 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span></span>
+                    <span class="center" [matTooltip]="engagement/100 < 0.4 ? 'Student engagement is low' : ''" [ngClass]="engagement/100 < 0.4 ? 'red-text' : ''">{{engagement}}%</span>
+                    <span class="center" *ngIf="this.user.tutor" >Concerns:&nbsp; <span [matTooltip]="studentInfo.concerns.length > 0 ? 'Student has concerns reported' : ''" [ngClass]="studentInfo.concerns.length > 0 ? 'red-text' : ''">{{studentInfo.concerns.length}}</span></span>
 
                 </h3> 
             </mat-grid-tile>

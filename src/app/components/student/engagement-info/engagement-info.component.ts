@@ -19,6 +19,9 @@ export class EngagementInfoComponent implements OnInit {
   public predictedGrade = 0;
   public attendance = 0;
   public engagement = 0;
+  public gradeReduced = false;
+  public maxCurrent = 0;
+  public unreduced = 0;
 
   constructor(
     private data: DataService,
@@ -31,6 +34,9 @@ export class EngagementInfoComponent implements OnInit {
     this.currentGrade = Math.round(this.studentInfo.engagement.current * 100);
     this.predictedGrade = Math.round(this.studentInfo.engagement.predict * 100);
     this.engagement = Math.round(this.studentInfo.engagement.engagement * 100);
+    this.gradeReduced = this.studentInfo.engagement.grade_reduced;
+    this.maxCurrent = Math.round(this.studentInfo.engagement.max_current * 100);
+    this.unreduced = Math.round(this.studentInfo.engagement.grade_before_reduction * 100);
 
     // get last logins: SPOT, Blackboard, Git push
     let history = this.studentInfo.student_last;
@@ -46,6 +52,19 @@ export class EngagementInfoComponent implements OnInit {
     if(lastGit) {
       this.lastGit = lastGit.datetime;
     }
+  }
+
+  gradeTooltip(grade:any, max:any, reduced:any, unreducedGrade:any){
+    if(grade/max < 0.4 && reduced==true) {
+      let g = (unreducedGrade);
+      return "Grade is a fail - Grade reduced due to late submissions: " + g + "% before reduction";
+    } else if(grade/max < 0.4){
+      return "Grade is a fail"
+    }else if(reduced){
+      let g = (unreducedGrade);
+      return "Grade reduced due to late submissions: " + g + "% before reduction";
+    }
+    return "";
   }
 
 }

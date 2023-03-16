@@ -412,6 +412,14 @@ export class TutorCoursesComponent implements OnInit {
     return "Late Submission: " + days + " Days";
   }
 
+  lateDaysTextCalc(submit:any,due:any){
+    let submitDate = new Date(submit);
+    let dueData = new Date(due);
+    let diff = Math.abs(submitDate.getTime() - dueData.getTime());
+    let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+    return "Late Submission: " + diffDays + " Days";
+  }
+
   assignmentGradeTooltip(grade:any, submit:any, due:any, days:any){
     if((grade!=null && grade < 0.4) && submit > due) {
       return "Grade is a fail - Grade reduced due to late submission: " + days*10+"%";
@@ -419,6 +427,19 @@ export class TutorCoursesComponent implements OnInit {
       return "Grade is a fail"
     }else if(submit > due){
       return "Grade reduced due to late submission: " + days*10+"%";
+    }
+    return "";
+  }
+
+  courseGradeTooltip(grade:any, max:any, reduced:any, unreducedGrade:any){
+    if(grade/max < 0.4 && reduced==true) {
+      let g = (unreducedGrade*100).toFixed(0);
+      return "Grade is a fail - Grade reduced due to late submissions: " + g + "% before reduction";
+    } else if(grade/max < 0.4){
+      return "Grade is a fail"
+    }else if(reduced){
+      let g = (unreducedGrade*100).toFixed(0);
+      return "Grade reduced due to late submissions: " + g + "% before reduction";
     }
     return "";
   }
