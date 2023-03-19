@@ -262,8 +262,8 @@ export class TutorCoursesComponent implements OnInit {
   courseChanged() {
     this.searchValue = '';
     this.selectedView = -1;
+    this.viewList=[];
     if(this.selectedCourse===-1){
-      this.viewList = [];
       return;
     }
     if(this.chart){
@@ -273,17 +273,21 @@ export class TutorCoursesComponent implements OnInit {
       this.chartA.destroy();
     }
 
-    this.viewList = this.courseList.filter( (course: { id: any; }) => { return course.id === this.selectedCourse; }).map((course: { assignments: any; }) => course.assignments);
-    this.viewList[0].unshift({
+    let course = this.courseList.filter( (course: { id: any; }) => { return course.id === this.selectedCourse;});
+    course[0].assignments.forEach((assignment: any) => {
+      this.viewList.push(assignment)
+    });
+    console.log(this.courseList)
+    console.log('1 ',this.viewList);
+    this.viewList.unshift({
       id: 0,
       assignment_name: 'Overall' 
     });
-    this.viewList[0].unshift({
+    this.viewList.unshift({
       id: -1,
       assignment_name: 'Select View' 
     });
-    this.viewList = this.viewList[0];
-    console.log(this.viewList);
+    console.log('2 ',this.viewList);
     console.log(this.selectedView);
   }
 
