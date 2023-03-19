@@ -27,8 +27,15 @@ mat-expansion-panel {
     width: 80%;
 }
 
-.mat-expansion-panel-header-description::ng-deep {
+// .mat-expansion-panel-header-description::ng-deep {
+//     flex-grow: 0!important;
+// }
+
+.mat-expansion-panel-header-description {
+    display: flex;
+    justify-content: flex-end;
     flex-grow: 0!important;
+    flex-basis: auto!important;
 }
 
 .red-icon {

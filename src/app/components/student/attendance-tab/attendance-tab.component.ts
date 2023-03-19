@@ -81,7 +81,7 @@ export class AttendanceTabComponent implements OnInit {
   }
 
   createChart(){
-    let courseAttendanceDatsets: { label: any; data: number[]; }[] = [];
+    let courseAttendanceDatsets: { label: any; data: (number|null)[]; }[] = [];
     this.studentInfo.student_course.forEach((course: any) => {
       // for each week of the course get attendance 
       let attendance = [];
@@ -97,7 +97,7 @@ export class AttendanceTabComponent implements OnInit {
         });
         let weekAttendence;
         if(attended.length==0){
-          weekAttendence = -100;
+          weekAttendence = null;
         } else {
           weekAttendence = attended.reduce((a: any, b: any) => a + b) / parseFloat(attended.length);
         }
@@ -107,7 +107,6 @@ export class AttendanceTabComponent implements OnInit {
         label: course.course.course_code + ' ' + course.course.course_name,
         data: attendance,
       });
-      
     });
 
     this.chart = new Chart(this.lineGraph.nativeElement, {
