@@ -50,6 +50,14 @@ td, th {
     text-decoration: underline blue 2px;
 }
 
+.mit-circ {
+    background-color: #fcf69a;
+}
+
+::ng-deep .cdk-overlay-container, .cdk-global-overlay-wrapper {
+    white-space: pre-line;
+}
+
 .student-detail {
     overflow: hidden;
     display: flex;

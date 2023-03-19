@@ -195,13 +195,16 @@ export class TutorCoursesComponent implements OnInit {
 
   loadAssignmentInfo() {
     this.api.post(`tutor-course-assignment/${this.tutor.tutor.id}/${this.selectedView}`).subscribe(res => {
-      console.log(res);
+      console.log('res', res);
       this.assignment = res.assignment;
       this.students = res.students;
       this.stats = res.stats;
       this.total = res.total;
       this. marked = res.marked;
       this.students.forEach((student: {
+        c7: boolean;
+        c3: boolean;
+        mitcircs: any;
         diffDays: number; date_submitted: string | number | Date; final_grade: number | null; grade: number; 
 }) => {
         if(student.grade == null){
@@ -210,13 +213,28 @@ export class TutorCoursesComponent implements OnInit {
           let submit = new Date(student.date_submitted);
           let due = new Date(this.assignment.due_date);
           if(submit > due){
-            let diff = Math.abs(submit.getTime() - due.getTime());
-            let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-            student.diffDays = diffDays;
-  
-            student.final_grade = (student.grade) - (student.grade * ((diffDays*10)/100));
-            if(student.final_grade < 0) {
-              student.final_grade = 0;
+            // check mit circ c3
+            let mitcircs = student.mitcircs;
+            student.c3 = false;
+            student.c7 = false;
+            mitcircs.forEach((mitcirc:any) => {
+              if(mitcirc['type'] == 'C3'){
+                student.c3=true;
+              } else if(mitcirc['type'] == 'C7') {
+                student.c7=true;
+              }
+            });
+            if(student.c3){
+              student.final_grade = student.grade;
+            } else {
+              let diff = Math.abs(submit.getTime() - due.getTime());
+              let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+              student.diffDays = diffDays;
+    
+              student.final_grade = (student.grade) - (student.grade * ((diffDays*10)/100));
+              if(student.final_grade < 0) {
+                student.final_grade = 0;
+              }
             }
           } else {
             student.final_grade = student.grade;
@@ -277,8 +295,6 @@ export class TutorCoursesComponent implements OnInit {
     course[0].assignments.forEach((assignment: any) => {
       this.viewList.push(assignment)
     });
-    console.log(this.courseList)
-    console.log('1 ',this.viewList);
     this.viewList.unshift({
       id: 0,
       assignment_name: 'Overall' 
@@ -287,8 +303,6 @@ export class TutorCoursesComponent implements OnInit {
       id: -1,
       assignment_name: 'Select View' 
     });
-    console.log('2 ',this.viewList);
-    console.log(this.selectedView);
   }
 
   viewChanged() {
@@ -424,15 +438,20 @@ export class TutorCoursesComponent implements OnInit {
     return "Late Submission: " + diffDays + " Days";
   }
 
-  assignmentGradeTooltip(grade:any, submit:any, due:any, days:any){
-    if((grade!=null && grade < 0.4) && submit > due) {
-      return "Grade is a fail - Grade reduced due to late submission: " + days*10+"%";
-    } else if((grade!=null && grade < 0.4)){
-      return "Grade is a fail"
-    }else if(submit > due){
-      return "Grade reduced due to late submission: " + days*10+"%";
+  assignmentGradeTooltip(student:any, due:any){
+    let text = '';
+    if(student.mitcircs.length>0){
+      student.mitcircs.forEach((mitcirc: { type: string; description: string; }) => {
+        text += mitcirc.type + ' - ' + mitcirc.description + '\n';
+      });
     }
-    return "";
+    if((student.final_grade!=null && student.final_grade < 0.4)){
+      text += "Grade is a fail\n"
+    }
+    if((student.date_submitted > due) && !student.c3){
+      text += "Grade reduced due to late submission: " + student.diffDays*10+"%\n";
+    }
+    return text;
   }
 
   courseGradeTooltip(grade:any, max:any, reduced:any, unreducedGrade:any){
