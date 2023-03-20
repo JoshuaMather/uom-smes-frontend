@@ -80,7 +80,7 @@ export class TutorCoursesComponent implements OnInit {
 
   loadCourseInfo() {
     this.api.post(`tutor-course/${this.tutor.tutor.id}/${this.selectedCourse}`).subscribe(res => {
-      console.log(res);
+      console.log('RES', res);
       this.course = res.course;
       this.students = res.students;
       this.distribution = res.distribution;
@@ -137,18 +137,33 @@ export class TutorCoursesComponent implements OnInit {
             summativeWeight += assignment.engagement_weight;
           }
 
+          let mitcircs = assignment.mitcircs;
+          assignment.c3 = false;
+          assignment.c7 = false;
+          mitcircs.forEach((mitcirc:any) => {
+            if(mitcirc['type'] == 'C3'){
+              assignment.c3=true;
+            } else if(mitcirc['type'] == 'C7') {
+              assignment.c7=true;
+            }
+          });
           if(assignment.grade == null){
             assignment.final_grade = null;
           } else{
             let submit = new Date(assignment.date_submitted);
             let due = new Date(assignment.due_date);
             if(submit > due){
-              let diff = Math.abs(submit.getTime() - due.getTime());
-              let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-    
-              assignment.final_grade = (assignment.grade) - (assignment.grade * ((diffDays*10)/100));
-              if(assignment.grade < 0) {
-                assignment.grade = 0;
+              if(assignment.c3){
+                assignment.final_grade = assignment.grade;
+              } else {
+                let diff = Math.abs(submit.getTime() - due.getTime());
+                let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+                assignment.diffDays = diffDays;
+      
+                assignment.final_grade = (assignment.grade) - (assignment.grade * ((diffDays*10)/100));
+                if(assignment.grade < 0) {
+                  assignment.grade = 0;
+                }
               }
             } else {
               assignment.final_grade = assignment.grade;
@@ -207,23 +222,22 @@ export class TutorCoursesComponent implements OnInit {
         mitcircs: any;
         diffDays: number; date_submitted: string | number | Date; final_grade: number | null; grade: number; 
 }) => {
+        let mitcircs = student.mitcircs;
+        student.c3 = false;
+        student.c7 = false;
+        mitcircs.forEach((mitcirc:any) => {
+          if(mitcirc['type'] == 'C3'){
+            student.c3=true;
+          } else if(mitcirc['type'] == 'C7') {
+            student.c7=true;
+          }
+        });
         if(student.grade == null){
           student.final_grade = null;
         } else{
           let submit = new Date(student.date_submitted);
           let due = new Date(this.assignment.due_date);
           if(submit > due){
-            // check mit circ c3
-            let mitcircs = student.mitcircs;
-            student.c3 = false;
-            student.c7 = false;
-            mitcircs.forEach((mitcirc:any) => {
-              if(mitcirc['type'] == 'C3'){
-                student.c3=true;
-              } else if(mitcirc['type'] == 'C7') {
-                student.c7=true;
-              }
-            });
             if(student.c3){
               student.final_grade = student.grade;
             } else {
@@ -438,32 +452,36 @@ export class TutorCoursesComponent implements OnInit {
     return "Late Submission: " + diffDays + " Days";
   }
 
-  assignmentGradeTooltip(student:any, due:any){
+  assignmentGradeTooltip(data:any, due:any){
     let text = '';
-    if(student.mitcircs.length>0){
-      student.mitcircs.forEach((mitcirc: { type: string; description: string; }) => {
+    if(data.mitcircs.length>0){
+      data.mitcircs.forEach((mitcirc: { type: string; description: string; }) => {
         text += mitcirc.type + ' - ' + mitcirc.description + '\n';
       });
     }
-    if((student.final_grade!=null && student.final_grade < 0.4)){
+    if((data.final_grade!=null && data.final_grade < 0.4)){
       text += "Grade is a fail\n"
     }
-    if((student.date_submitted > due) && !student.c3){
-      text += "Grade reduced due to late submission: " + student.diffDays*10+"%\n";
+    if((data.date_submitted > due) && !data.c3){
+      text += "Grade reduced due to late submission: " + data.diffDays*10+"%\n";
     }
     return text;
   }
 
-  courseGradeTooltip(grade:any, max:any, reduced:any, unreducedGrade:any){
-    if(grade/max < 0.4 && reduced==true) {
-      let g = (unreducedGrade*100).toFixed(0);
-      return "Grade is a fail - Grade reduced due to late submissions: " + g + "% before reduction";
-    } else if(grade/max < 0.4){
-      return "Grade is a fail"
-    }else if(reduced){
-      let g = (unreducedGrade*100).toFixed(0);
-      return "Grade reduced due to late submissions: " + g + "% before reduction";
+  courseGradeTooltip(grades:any){
+    let text = '';
+    if(grades.mit_circs.length>0){
+      grades.mit_circs.forEach((mitcirc: { type: string; description: string; }) => {
+        text += mitcirc + '\n';
+      });
     }
-    return "";
+    if(grades.current/grades.max_current < 0.4){
+      text += "Grade is a fail\n"
+    } 
+    if(grades.grade_reduced){
+      let g = (grades.grade_before_reduction*100).toFixed(0);
+      text += "Grade reduced due to late submissions: " + g + "% before reduction\n";
+    }
+    return text;
   }
 }
