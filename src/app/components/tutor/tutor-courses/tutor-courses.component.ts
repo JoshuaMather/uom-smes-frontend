@@ -454,33 +454,35 @@ export class TutorCoursesComponent implements OnInit {
 
   assignmentGradeTooltip(data:any, due:any){
     let text = '';
-    if(data.mitcircs.length>0){
-      data.mitcircs.forEach((mitcirc: { type: string; description: string; }) => {
-        text += mitcirc.type + ' - ' + mitcirc.description + '\n';
-      });
-    }
     if((data.final_grade!=null && data.final_grade < 0.4)){
       text += "Grade is a fail\n"
     }
     if((data.date_submitted > due) && !data.c3){
       text += "Grade reduced due to late submission: " + data.diffDays*10+"%\n";
     }
+    if(data.mitcircs.length>0){
+      text += 'Mitigating circumstances applied:\n';
+      data.mitcircs.forEach((mitcirc: { type: string; description: string; }) => {
+        text += mitcirc.type + ' - ' + mitcirc.description + '\n';
+      });
+    }
     return text;
   }
 
   courseGradeTooltip(grades:any){
     let text = '';
-    if(grades.mit_circs.length>0){
-      grades.mit_circs.forEach((mitcirc: { type: string; description: string; }) => {
-        text += mitcirc + '\n';
-      });
-    }
     if(grades.current/grades.max_current < 0.4){
       text += "Grade is a fail\n"
     } 
     if(grades.grade_reduced){
       let g = (grades.grade_before_reduction*100).toFixed(0);
       text += "Grade reduced due to late submissions: " + g + "% before reduction\n";
+    }
+    if(grades.mit_circs.length>0){
+      text += 'Mitigating circumstances applied:\n';
+      grades.mit_circs.forEach((mitcirc: { type: string; description: string; }) => {
+        text += mitcirc + '\n';
+      });
     }
     return text;
   }

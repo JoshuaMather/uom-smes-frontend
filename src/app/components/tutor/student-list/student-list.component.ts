@@ -108,16 +108,20 @@ export class StudentListComponent implements OnInit {
     this.router.navigate(['/student']);
   }
   
-  gradeTooltip(grade:any, max:any, reduced:any, unreducedGrade:any){
-    if(grade/max < 0.4 && reduced==true) {
-      let g = (unreducedGrade*100).toFixed(0);
-      return "Grade is a fail - Grade reduced due to late submissions: " + g + "% before reduction";
-    } else if(grade/max < 0.4){
-      return "Grade is a fail"
-    }else if(reduced){
-      let g = (unreducedGrade*100).toFixed(0);
-      return "Grade reduced due to late submissions: " + g + "% before reduction";
+  gradeTooltip(grade:any, max:any, reduced:any, unreducedGrade:any, mit_circs:any){
+    let text = '';
+    if(grade/max < 0.4){
+      text += "Grade is a fail\n"
     }
-    return "";
+    if(reduced && grade!=unreducedGrade){
+      let g = (unreducedGrade*100).toFixed(0);
+      if(g!=grade){
+        text += "Grade reduced due to late submissions: " + g + "% before reduction\n";
+      }
+    }
+    if(mit_circs) {
+      text += 'Mitigating circumstances applied - see student for more info\n';
+    }
+    return text;
   }
 }
