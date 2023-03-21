@@ -34,12 +34,28 @@ export class GradesTabComponent implements OnInit {
       let courseAssignments = this.studentInfo.student_assignment.filter((assignment: { assignment: { course: { id: any; }; }; }) => assignment.assignment.course === course.course.id);
 
       let assignmentData: any = [];
-      let formative: { assignmentName: any; type: string | string[]; grade: number | null; final_grade: number | null; dueDate: any; submittedDate: any; }[]  = [];
-      let summative: { assignmentWeight: number; assignmentName: any; type: string | string[]; grade: number | null; final_grade: number | null; dueDate: any; submittedDate: any; }[] = []
+      let formative: { assignmentName: any; type: string | string[]; grade: number | null; final_grade: number | null; dueDate: any; submittedDate: any; mitcircs:any; diffDays:any; c3:any;}[]  = [];
+      let summative: { assignmentWeight: number; assignmentName: any; type: string | string[]; grade: number | null; final_grade: number | null; dueDate: any; submittedDate: any;  mitcircs:any; diffDays:any; c3:any;}[] = []
       let summativeWeight = 0;
-      courseAssignments.forEach((element: { assignment: { type: string | string[]; assignment_name: any; due_date: any; engagement_weight: number; }; grade: number; date_submitted: any; }) => {
+      courseAssignments.forEach((element: {
+        diffDays: number;
+        mitcircs: any;
+        c3: boolean;
+        c7: boolean; assignment: { type: string | string[]; assignment_name: any; due_date: any; engagement_weight: number; }; grade: number; date_submitted: any; 
+}) => {
         let grade;
         let final_grade;
+
+        let mitcircs = element.mitcircs;
+        element.c3 = false;
+        element.c7 = false;
+        mitcircs.forEach((mitcirc:any) => {
+          if(mitcirc['type'] == 'C3'){
+            element.c3=true;
+          } else if(mitcirc['type'] == 'C7') {
+            element.c7=true;
+          }
+        });
 
         if(element.grade===null){ 
           grade = null;
@@ -49,12 +65,17 @@ export class GradesTabComponent implements OnInit {
           let submit = new Date(element.date_submitted);
           let due = new Date(element.assignment.due_date);
           if(submit > due){
-            let diff = Math.abs(submit.getTime() - due.getTime());
-            let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-  
-            final_grade = (grade) - (grade * ((diffDays*10)/100));
-            if(final_grade < 0) {
-              final_grade = 0;
+            if(element.c3){
+              final_grade = grade;
+            } else {
+              let diff = Math.abs(submit.getTime() - due.getTime());
+              let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
+              element.diffDays = diffDays;
+    
+              final_grade = (grade) - (grade * ((diffDays*10)/100));
+              if(final_grade < 0) {
+                final_grade = 0;
+              }
             }
           } else {
             final_grade = grade;
@@ -69,6 +90,9 @@ export class GradesTabComponent implements OnInit {
             final_grade: final_grade,
             dueDate: element.assignment.due_date,
             submittedDate: element.date_submitted,
+            mitcircs: element.mitcircs,
+            diffDays: element.diffDays,
+            c3: element.c3
           });
         } else if(element.assignment.type.includes('_s')) {
           summativeWeight += element.assignment.engagement_weight;
@@ -80,6 +104,9 @@ export class GradesTabComponent implements OnInit {
             final_grade: final_grade,
             dueDate: element.assignment.due_date,
             submittedDate: element.date_submitted,
+            mitcircs: element.mitcircs,
+            diffDays: element.diffDays,
+            c3: element.c3
           });
         }
       });
@@ -206,5 +233,22 @@ export class GradesTabComponent implements OnInit {
     let diff = Math.abs(submitDate.getTime() - dueData.getTime());
     let diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
     return "Late Submission: " + diffDays + " Days";
+  }
+
+  assignmentGradeTooltip(data:any){
+    let text = '';
+    if((data.final_grade!=null && data.final_grade < 40)){
+      text += "Grade is a fail\n"
+    }
+    if((data.submittedDate > data.dueDate) && !data.c3){
+      text += "Grade reduced due to late submission: " + data.diffDays*10+"%\n";
+    }
+    if(data.mitcircs.length>0){
+      text += 'Mitigating circumstances applied:\n';
+      data.mitcircs.forEach((mitcirc: { type: string; description: string; }) => {
+        text += mitcirc.type + ' - ' + mitcirc.description + '\n';
+      });
+    }
+    return text;
   }
 }

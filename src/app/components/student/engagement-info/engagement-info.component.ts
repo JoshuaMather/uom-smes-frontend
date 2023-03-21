@@ -22,6 +22,7 @@ export class EngagementInfoComponent implements OnInit {
   public gradeReduced = false;
   public maxCurrent = 0;
   public unreduced = 0;
+  public mitCirc = false;
 
   constructor(
     private data: DataService,
@@ -37,6 +38,7 @@ export class EngagementInfoComponent implements OnInit {
     this.gradeReduced = this.studentInfo.engagement.grade_reduced;
     this.maxCurrent = Math.round(this.studentInfo.engagement.max_current * 100);
     this.unreduced = Math.round(this.studentInfo.engagement.grade_before_reduction * 100);
+    this.mitCirc = this.studentInfo.engagement.mit_circs;
 
     // get last logins: SPOT, Blackboard, Git push
     let history = this.studentInfo.student_last;
@@ -54,17 +56,19 @@ export class EngagementInfoComponent implements OnInit {
     }
   }
 
-  gradeTooltip(grade:any, max:any, reduced:any, unreducedGrade:any){
-    if(grade/max < 0.4 && reduced==true) {
-      let g = (unreducedGrade);
-      return "Grade is a fail - Grade reduced due to late submissions: " + g + "% before reduction";
-    } else if(grade/max < 0.4){
-      return "Grade is a fail"
-    }else if(reduced){
-      let g = (unreducedGrade);
-      return "Grade reduced due to late submissions: " + g + "% before reduction";
+  gradeTooltip(grade:any, max:any, reduced:any, unreducedGrade:any,mitCircs:any){
+    let text = '';
+    if(grade/max < 0.4){
+      text += "Grade is a fail\n"
     }
-    return "";
+    if(reduced  && grade!=unreducedGrade){
+      let g = (unreducedGrade);
+      text += "Grade reduced due to late submissions: " + g + "% before reduction\n";
+    }
+    if(mitCircs) {
+      text += 'Mitigating circumstances applied - see grades for more info\n';
+    }
+    return text;
   }
 
 }

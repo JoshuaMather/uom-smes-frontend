@@ -14,7 +14,7 @@
                 <div *ngIf="grade.assignments[0].summative.length>0">
                     <h2 class="no-margin">Summative</h2>
                     <mat-list *ngFor="let assignment of grade.assignments[0].summative">
-                        <mat-list-item *ngIf="assignment.final_grade!=null"><strong>{{assignment.assignmentName}}: {{assignment.final_grade | number:'1.0-0'}}%</strong></mat-list-item>
+                        <mat-list-item *ngIf="assignment.final_grade!=null"><strong>{{assignment.assignmentName}}: <span [matTooltip]="((assignment.final_grade!=null && assignment.final_grade < 40) || assignment.submittedDate > assignment.dueDate || assignment.mitcircs.length>0) ? assignmentGradeTooltip(assignment) : ''" [ngClass]="[(assignment.final_grade!=null && assignment.final_grade < 40) ? 'red-text' : '', (assignment.submittedDate > assignment.dueDate && assignment.c3==false) ? 'blue-text' : '',  assignment.mitcircs.length>0 ? 'mit-circ' : '']">{{assignment.final_grade | number:'1.0-0'}}%</span></strong></mat-list-item>
                         <mat-list-item *ngIf="assignment.final_grade===null && assignment.submittedDate!=null"><strong>{{assignment.assignmentName}}: Not Graded</strong></mat-list-item>
                         <mat-list-item *ngIf="assignment.final_grade===null && assignment.submittedDate===null"><strong>{{assignment.assignmentName}}: Not Submitted</strong></mat-list-item>
 
@@ -38,7 +38,7 @@
                 <div *ngIf="grade.assignments[0].formative.length>0">
                   <h2 class="no-margin">Formative</h2>
                   <mat-list *ngFor="let assignment of grade.assignments[0].formative">
-                    <mat-list-item *ngIf="assignment.final_grade!=null"><strong>{{assignment.assignmentName}}: {{assignment.final_grade | number:'1.0-0'}}%</strong></mat-list-item>
+                    <mat-list-item *ngIf="assignment.final_grade!=null"><strong>{{assignment.assignmentName}}: <span [matTooltip]="((assignment.final_grade!=null && assignment.final_grade < 40) || assignment.submittedDate > assignment.dueDate || assignment.mitcircs.length>0) ? assignmentGradeTooltip(assignment) : ''" [ngClass]="[(assignment.final_grade!=null && assignment.final_grade < 40) ? 'red-text' : '', (assignment.submittedDate > assignment.dueDate && assignment.c3==false) ? 'blue-text' : '',  assignment.mitcircs.length>0 ? 'mit-circ' : '']">{{assignment.final_grade | number:'1.0-0'}}%</span></strong></mat-list-item>
                     <mat-list-item *ngIf="assignment.final_grade===null && assignment.submittedDate!=null"><strong>{{assignment.assignmentName}}: Not Graded</strong></mat-list-item>
                     <mat-list-item *ngIf="assignment.final_grade===null && assignment.submittedDate===null"><strong>{{assignment.assignmentName}}: Not Submitted</strong></mat-list-item>
   

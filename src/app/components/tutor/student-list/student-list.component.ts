@@ -120,7 +120,7 @@ export class StudentListComponent implements OnInit {
       }
     }
     if(mit_circs) {
-      text += 'Mitigating circumstances applied - see student for more info\n';
+      text += 'Mitigating circumstances applied - see student grades for more info\n';
     }
     return text;
   }

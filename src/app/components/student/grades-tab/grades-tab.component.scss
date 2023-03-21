@@ -31,6 +31,10 @@ mat-expansion-panel {
     text-decoration: underline blue 2px;
 }
 
+.mit-circ {
+    background-color: #fcf69a;
+}
+
 .bar-container {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -56,4 +60,12 @@ mat-expansion-panel {
 
 .mat-list-item{
     max-height: 20px;
+}
+
+.mat-tooltip {
+    white-space: pre-line;
+}
+
+::ng-deep .mat-tooltip {
+    white-space: pre-line;
 }

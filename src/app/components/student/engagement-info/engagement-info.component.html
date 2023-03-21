@@ -13,7 +13,7 @@
                 <p>
                     <strong>Engagement Data</strong> <br>
                     Attendance: <span [matTooltip]="attendance/100 < 0.4 ? 'Student attendance is low' : ''" [ngClass]="attendance/100 < 0.4 ? 'red-text' : ''">{{attendance}}%</span><br>
-                    Current Grade: <span [matTooltip]="((currentGrade!=null && currentGrade/maxCurrent < 0.4) || gradeReduced==true) ? gradeTooltip(currentGrade, maxCurrent, gradeReduced, unreduced) : ''" [ngClass]="[(currentGrade!=null && currentGrade/maxCurrent < 0.4) ? 'red-text' : '', gradeReduced==true ? 'blue-text' : '']">{{currentGrade}}%</span><br>
+                    Current Grade: <span [matTooltip]="((currentGrade!=null && currentGrade/maxCurrent < 0.4) || (gradeReduced==true && currentGrade!=unreduced) || mitCirc==true) ? gradeTooltip(currentGrade, maxCurrent, gradeReduced, unreduced, mitCirc) : ''" [ngClass]="[(currentGrade!=null && currentGrade/maxCurrent < 0.4) ? 'red-text' : '', (gradeReduced==true && currentGrade!=unreduced) ? 'blue-text' : '', mitCirc==true ? 'mit-circ' : '']">{{currentGrade}}%</span><br>
                     Max Grade: <span>{{maxCurrent}}%</span><br>
                     Predicted Grade: <span [matTooltip]="predictedGrade/100 < 0.4 ? 'Student predicted grade is a fail' : ''" [ngClass]="predictedGrade/100 < 0.4 ? 'red-text' : ''">{{predictedGrade}}%</span><br>
                    
