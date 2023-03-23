@@ -39,9 +39,12 @@ export class HeaderComponent implements OnInit {
         if(event.url === '/student' && this.data.getUser().tutor) {
           this.studentPageTutor = true;
           this.studentPageStudent = false;
-        } else {
+        } else if(event.url === '/student' && this.data.getUser().student) {
           this.studentPageTutor = false;
           this.studentPageStudent = true;
+        } else if(event.url === '/tutor'){
+          this.studentPageTutor = false;
+          this.studentPageStudent = false;
         }
       }
     });
@@ -83,6 +86,9 @@ export class HeaderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog closed with concern:', result);
+      if(!result){
+        return;
+      }
 
       let tutor = this.data.getUser();
 
@@ -107,6 +113,9 @@ export class HeaderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog closed with concern:', result);
+      if(!result){
+        return;
+      }
 
       let issueData = {
         student: student.id,

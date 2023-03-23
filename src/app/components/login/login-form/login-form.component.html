@@ -33,7 +33,7 @@
 
                 <div class="center">
                     <div class="top-pad">
-                        <button mat-button (click)="registerTutor()">Register Tutor</button>
+                        <button mat-button (click)="registerTutor()" [disabled]="loggingIn">Register Tutor</button>
                     </div>
                 </div>
             </div>
