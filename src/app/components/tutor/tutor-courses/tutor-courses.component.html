@@ -350,7 +350,7 @@
     
         <ng-container matColumnDef="dateSubmitted" >
             <th mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="assignment && assignment.type.includes('exam')" class="center-table"> Date Submitted </th>
-            <td mat-cell *matCellDef="let student" [matTooltip]="student.date_submitted > assignment.due_date ? lateDaysText(student.diffDays) : ''" [ngClass]="student.date_submitted > assignment.due_date ? 'blue-text' : ''" [hidden]="assignment && assignment.type.includes('exam')" class="center-table"> {{student.date_submitted | date:'d MMMM y, HH:mm'}} </td>
+            <td mat-cell *matCellDef="let student" [matTooltip]="student.date_submitted > assignment.due_date ? lateDaysTextCalc(student.date_submitted, assignment.due_date) : ''" [ngClass]="student.date_submitted > assignment.due_date ? 'blue-text' : ''" [hidden]="assignment && assignment.type.includes('exam')" class="center-table"> {{student.date_submitted | date:'d MMMM y, HH:mm'}} </td>
         </ng-container>
     
         <ng-container matColumnDef="grade">

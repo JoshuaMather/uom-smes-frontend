@@ -440,10 +440,6 @@ export class TutorCoursesComponent implements OnInit {
     this.router.navigate(['/student']);
   }
 
-  lateDaysText(days: string){
-    return "Late Submission: " + days + " Days";
-  }
-
   lateDaysTextCalc(submit:any,due:any){
     let submitDate = new Date(submit);
     let dueData = new Date(due);
